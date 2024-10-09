@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pravo_client/assets/constants.dart' as constants;
 
-class Depth1AppBar extends StatelessWidget implements PreferredSizeWidget {
+class Depth2AppBarWidget extends StatelessWidget
+    implements PreferredSizeWidget {
   final String title;
+  final IconData leadingIcon;
+  final VoidCallback leadingOnPressed;
   final IconData actionIcon;
   final VoidCallback actionOnPressed;
 
-  const Depth1AppBar({
+  const Depth2AppBarWidget({
     super.key,
     required this.title,
+    required this.leadingIcon,
+    required this.leadingOnPressed,
     required this.actionIcon,
     required this.actionOnPressed,
   });
@@ -16,10 +21,18 @@ class Depth1AppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      centerTitle: false,
+      centerTitle: true,
       title: Text(
         title,
         style: Theme.of(context).appBarTheme.titleTextStyle,
+      ),
+      leading: IconButton(
+        icon: Icon(
+          leadingIcon,
+        ),
+        color: Theme.of(context).appBarTheme.iconTheme!.color,
+        iconSize: Theme.of(context).appBarTheme.iconTheme!.size,
+        onPressed: leadingOnPressed,
       ),
       actions: [
         IconButton(
