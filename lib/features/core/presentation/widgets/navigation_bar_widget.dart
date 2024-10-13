@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/provider/navigation_provider.dart';
 
 class NavigationBarWidget extends ConsumerWidget {
@@ -22,8 +23,8 @@ class NavigationBarWidget extends ConsumerWidget {
       unselectedFontSize: 0.0,
       showSelectedLabels: false,
       showUnselectedLabels: false,
-      selectedIconTheme: const IconThemeData(color: Color(0xff0cc761)),
-      unselectedIconTheme: const IconThemeData(color: Color(0xffc9c9c9)),
+      selectedIconTheme: const IconThemeData(color: kSelectedIconColor),
+      unselectedIconTheme: const IconThemeData(color: kUnselectedIconColor),
       currentIndex: selectedIndex,
       onTap: onItemTapped,
       items: const [
