@@ -17,7 +17,6 @@ class _App extends ConsumerWidget {
       routeInformationProvider: router.routeInformationProvider,
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
-      // routerConfig: PravoRouter.router(ref),
     );
   }
 }
