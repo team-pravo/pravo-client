@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/user_provider.dart';
 
-class PromiseListScreen extends StatelessWidget {
+class PromiseListScreen extends ConsumerWidget {
   const PromiseListScreen({super.key});
 
   @override
