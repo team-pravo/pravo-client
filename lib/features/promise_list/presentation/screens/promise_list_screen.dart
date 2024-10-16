@@ -1,7 +1,9 @@
+// 약속 목록 페이지
+
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class PromiseListScreen extends StatelessWidget {
+  const PromiseListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

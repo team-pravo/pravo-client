@@ -6,6 +6,9 @@ const double kAppBarFontSize = 16;
 const FontWeight kAppBarFontWeight = FontWeight.w500;
 const double kAppBarIconSize = 24;
 
+// Colors
+const Color kBackgroundColor = Color.fromRGBO(246, 246, 246, 1);
+
 // IconColor
 const Color kSelectedIconColor = Color.fromRGBO(116, 167, 57, 1);
 const Color kUnselectedIconColor = Color.fromRGBO(201, 201, 201, 1);

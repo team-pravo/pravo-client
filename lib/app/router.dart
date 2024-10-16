@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:pravo_client/features/home/presentation/home_screen.dart';
+import 'package:pravo_client/features/home/presentation/screens/home_screen.dart';
 import 'package:pravo_client/features/setting/presentation/setting_screen.dart';
 
 class PravoRouter {
@@ -7,7 +7,7 @@ class PravoRouter {
     routes: [
       GoRoute(
         path: "/",
-        builder: (_, __) => const HomeScreen(),
+        builder: (_, __) => HomeScreen(),
       ),
       GoRoute(
         path: "/setting",

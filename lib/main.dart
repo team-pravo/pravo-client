@@ -8,6 +8,8 @@ void main() {
 }
 
 class _App extends StatelessWidget {
+  Color backgroundColor = const Color.fromRGBO(246, 246, 246, 1);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
