@@ -5,6 +5,7 @@ import 'package:pravo_client/features/auth/presentation/viewmodels/router_provid
 
 void main() {
   runApp(ProviderScope(child: _App()));
+  runApp(ProviderScope(child: _App()));
 }
 
 class _App extends ConsumerWidget {
@@ -17,6 +18,7 @@ class _App extends ConsumerWidget {
       routeInformationProvider: router.routeInformationProvider,
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
+      // routerConfig: PravoRouter.router(ref),
     );
   }
 }
