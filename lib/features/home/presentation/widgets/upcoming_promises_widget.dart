@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class UpcomingWidget extends StatelessWidget {
-  const UpcomingWidget({
+class UpcomingPromisesWidget extends StatelessWidget {
+  const UpcomingPromisesWidget({
     super.key,
   });
 
