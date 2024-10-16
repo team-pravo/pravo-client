@@ -7,6 +7,7 @@ class SocialLoginButton extends StatelessWidget {
   final String text;
   final Color backgroundColor;
   final Color textColor;
+  final VoidCallback onTap;
 
   const SocialLoginButton({
     super.key,
@@ -15,11 +16,13 @@ class SocialLoginButton extends StatelessWidget {
     required this.text,
     required this.backgroundColor,
     required this.textColor,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onTap,
       child: Container(
         margin: const EdgeInsets.symmetric(
           horizontal: 20,
