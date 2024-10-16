@@ -12,5 +12,10 @@ final ThemeData appTheme = ThemeData(
       size: constants.kAppBarIconSize,
       color: Colors.black,
     ),
+    backgroundColor: constants.kBackgroundColor,
+  ),
+  scaffoldBackgroundColor: constants.kBackgroundColor,
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: constants.kBackgroundColor,
   ),
 );
