@@ -14,12 +14,6 @@ class _App extends StatelessWidget {
     return MaterialApp.router(
       theme: appTheme,
       routerConfig: PravoRouter.router,
-      theme: ThemeData(
-        scaffoldBackgroundColor: backgroundColor,
-        appBarTheme: AppBarTheme(backgroundColor: backgroundColor),
-        bottomNavigationBarTheme:
-            BottomNavigationBarThemeData(backgroundColor: backgroundColor),
-      ),
     );
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pravo_client/features/core/presentation/widgets/depth1_app_bar_widget.dart';
 import 'package:pravo_client/features/home/presentation/widgets/my_point_widget.dart';
 import 'package:pravo_client/features/home/presentation/widgets/promise_widget.dart';
-import 'package:pravo_client/features/home/presentation/widgets/upcoming_widget.dart';
+import 'package:pravo_client/features/home/presentation/widgets/upcoming_promises_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,19 +10,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "홈",
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-            Icon(Icons.notifications_none_rounded)
-          ],
-        ),
+      appBar: Depth1AppBarWidget(
+        title: "홈",
+        actionIcon: Icons.notifications_none_rounded,
+        actionOnPressed: () {},
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -43,7 +35,7 @@ class HomeScreen extends StatelessWidget {
               PromiseWidget(),
               // 현재 포유한 포인트
               MyPointWidget(),
-              const UpcomingWidget()
+              const UpcomingPromisesWidget()
               // 다가오는 약속
             ],
           ),
