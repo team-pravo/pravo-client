@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth1_app_bar_widget.dart';
+import 'package:pravo_client/features/core/presentation/widgets/navigation_bar_widget.dart';
 import 'package:pravo_client/features/home/presentation/widgets/my_point_widget.dart';
 import 'package:pravo_client/features/home/presentation/widgets/promise_widget.dart';
 import 'package:pravo_client/features/home/presentation/widgets/upcoming_promises_widget.dart';
@@ -41,6 +42,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: const NavigationBarWidget(),
     );
   }
 }
