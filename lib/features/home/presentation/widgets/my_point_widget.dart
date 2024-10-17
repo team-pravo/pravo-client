@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pravo_client/assets/constants.dart' as constants;
 
 class MyPointWidget extends StatelessWidget {
-  MyPointWidget({
+  const MyPointWidget({
     super.key,
   });
 
-  Color primaryColor = const Color.fromRGBO(116, 167, 57, 1);
+  // Color primaryColor = const Color.fromRGBO(116, 167, 57, 1);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +22,10 @@ class MyPointWidget extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
+          Text(
             "현재 보유한 포인트",
             style: TextStyle(
               fontSize: 16,
@@ -36,12 +37,12 @@ class MyPointWidget extends StatelessWidget {
               Icon(
                 Icons.wallet,
                 size: 20,
-                color: primaryColor,
+                color: constants.kPrimaryColor,
               ),
-              const SizedBox(
+              SizedBox(
                 width: 4,
               ),
-              const Text(
+              Text(
                 "10,000",
                 style: TextStyle(
                   fontSize: 14,

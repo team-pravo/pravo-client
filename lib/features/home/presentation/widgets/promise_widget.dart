@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pravo_client/assets/constants.dart' as constants;
 import 'package:pravo_client/features/promise_list/presentation/screens/promise_detail_screen.dart';
 
 class PromiseWidget extends StatelessWidget {
-  PromiseWidget({
+  const PromiseWidget({
     super.key,
   });
-
-  Color backgroundColor = const Color.fromRGBO(246, 246, 246, 1);
-  Color avatarBackgroundColor = const Color.fromRGBO(240, 240, 240, 1);
-  Color primaryColor = const Color.fromRGBO(116, 167, 57, 1);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +39,7 @@ class PromiseWidget extends StatelessWidget {
                 Row(
                   children: [
                     CircleAvatar(
-                      backgroundColor: avatarBackgroundColor,
+                      backgroundColor: constants.kAvatarBackgroundColor,
                       child: Padding(
                         padding: const EdgeInsets.all(6),
                         child: Image.asset(
@@ -80,7 +77,7 @@ class PromiseWidget extends StatelessWidget {
               margin: const EdgeInsets.only(
                 top: 16,
               ),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
@@ -88,12 +85,12 @@ class PromiseWidget extends StatelessWidget {
                       Icon(
                         Icons.calendar_today_rounded,
                         size: 20,
-                        color: primaryColor,
+                        color: constants.kPrimaryColor,
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 4,
                       ),
-                      const Text(
+                      Text(
                         "10월 1일, 12:00AM",
                         style: TextStyle(
                           fontSize: 14,
@@ -106,12 +103,12 @@ class PromiseWidget extends StatelessWidget {
                       Icon(
                         Icons.location_on_outlined,
                         size: 20,
-                        color: primaryColor,
+                        color: constants.kPrimaryColor,
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 4,
                       ),
-                      const Text(
+                      Text(
                         "아보카도 농장",
                         style: TextStyle(
                           fontSize: 14,
