@@ -75,7 +75,7 @@ class PromiseWidget extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(
-                top: 16,
+                top: 32,
               ),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
