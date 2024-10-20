@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/promise_list/presentation/screens/promise_detail_screen.dart';
 
 class PromiseWidget extends StatelessWidget {
@@ -31,7 +32,7 @@ class PromiseWidget extends StatelessWidget {
           horizontal: 20,
         ),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: kWidgetBackgroundColor,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
