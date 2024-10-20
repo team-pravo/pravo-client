@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pravo_client/assets/constants.dart';
 
 class UpcomingPromisesWidget extends StatelessWidget {
   const UpcomingPromisesWidget({
@@ -16,7 +17,7 @@ class UpcomingPromisesWidget extends StatelessWidget {
         horizontal: 20,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: kWidgetBackgroundColor,
         borderRadius: BorderRadius.circular(15),
       ),
       width: double.infinity,
