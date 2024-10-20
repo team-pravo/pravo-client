@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pravo_client/features/auth/presentation/screens/login_screen.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/user_provider.dart';
 import 'package:pravo_client/features/home/presentation/screens/home_screen.dart';
+import 'package:pravo_client/features/promise_list/presentation/screens/promise_list_screen.dart';
 import 'package:pravo_client/features/setting/presentation/screens/setting_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -58,6 +59,10 @@ class _AuthNotifier extends ChangeNotifier {
         GoRoute(
           path: '/login',
           builder: (_, __) => const LoginScreen(),
+        ),
+        GoRoute(
+          path: '/promises',
+          builder: (_, __) => const PromiseListScreen(),
         ),
         GoRoute(
           path: '/setting',
