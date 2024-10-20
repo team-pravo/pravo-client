@@ -58,7 +58,7 @@ class SocialLoginButtonWidget extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
-            )
+            ),
           ],
         ),
       ),
