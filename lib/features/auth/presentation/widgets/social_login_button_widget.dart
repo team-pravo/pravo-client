@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class SocialLoginButton extends StatelessWidget {
+class SocialLoginButtonWidget extends StatelessWidget {
   final IconData? iconData;
   final String? svgIconPath;
   final String text;
@@ -9,7 +9,7 @@ class SocialLoginButton extends StatelessWidget {
   final Color textColor;
   final VoidCallback onTap;
 
-  const SocialLoginButton({
+  const SocialLoginButtonWidget({
     super.key,
     this.iconData,
     this.svgIconPath,
