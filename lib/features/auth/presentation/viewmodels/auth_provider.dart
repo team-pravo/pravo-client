@@ -8,25 +8,25 @@ final authProvider =
 class AuthNotifier extends ChangeNotifier {
   final Ref ref;
   final _secureStorage = const FlutterSecureStorage();
-  bool _isTokenChecked = false;
+  bool _isTokenRead = false;
   String? _token;
 
-  bool get isTokenChecked => _isTokenChecked;
+  bool get isTokenRead => _isTokenRead;
 
   AuthNotifier({required this.ref}) {
-    _checkToken(); // 초기화 시 토큰 확인
+    _readTokenFromStorage(); // 초기화 시 토큰 확인
   }
 
   // 저장소에 저장된 토큰 확인
-  Future<void> _checkToken() async {
+  Future<void> _readTokenFromStorage() async {
     _token = await _secureStorage.read(key: 'token');
-    _isTokenChecked = true;
+    _isTokenRead = true;
     notifyListeners();
   }
 
   Future<bool> isTokenValid() async {
-    if (!_isTokenChecked) {
-      await _checkToken();
+    if (!_isTokenRead) {
+      await _readTokenFromStorage();
     }
     return _token != null;
   }
