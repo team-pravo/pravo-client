@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pravo_client/assets/constants.dart' as constants;
+import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/promise_list/presentation/screens/promise_detail_screen.dart';
 
 class PromiseWidget extends StatelessWidget {
@@ -28,7 +28,7 @@ class PromiseWidget extends StatelessWidget {
           horizontal: 20,
         ),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: kWidgetBackgroundColor,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
@@ -39,7 +39,7 @@ class PromiseWidget extends StatelessWidget {
                 Row(
                   children: [
                     CircleAvatar(
-                      backgroundColor: constants.kAvatarBackgroundColor,
+                      backgroundColor: kAvatarBackgroundColor,
                       child: Padding(
                         padding: const EdgeInsets.all(6),
                         child: Image.asset(
@@ -53,29 +53,29 @@ class PromiseWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "아보카도 농장 체험",
+                            '아보카도 농장 체험',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           Text(
-                            "Mr. Avocado",
+                            'Mr. Avocado',
                             style: TextStyle(
                               fontSize: 14,
                             ),
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
-                const Icon(Icons.chevron_right_rounded)
+                const Icon(Icons.chevron_right_rounded),
               ],
             ),
             Container(
               margin: const EdgeInsets.only(
-                top: 16,
+                top: 32,
               ),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,13 +85,13 @@ class PromiseWidget extends StatelessWidget {
                       Icon(
                         Icons.calendar_today_rounded,
                         size: 20,
-                        color: constants.kPrimaryColor,
+                        color: kPrimaryColor,
                       ),
                       SizedBox(
                         width: 4,
                       ),
                       Text(
-                        "10월 1일, 12:00AM",
+                        '10월 1일, 12:00AM',
                         style: TextStyle(
                           fontSize: 14,
                         ),
@@ -103,22 +103,22 @@ class PromiseWidget extends StatelessWidget {
                       Icon(
                         Icons.location_on_outlined,
                         size: 20,
-                        color: constants.kPrimaryColor,
+                        color: kPrimaryColor,
                       ),
                       SizedBox(
                         width: 4,
                       ),
                       Text(
-                        "아보카도 농장",
+                        '아보카도 농장',
                         style: TextStyle(
                           fontSize: 14,
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
