@@ -37,21 +37,16 @@ List<GoRoute> get _routes {
 
 // 로그인 상태에 따른 리디렉션 로직
 Future<String?> _redirectLogic(
-    AuthNotifier authNotifier, GoRouterState state) async {
+  AuthNotifier authNotifier,
+  GoRouterState state,
+) async {
   const loginPath = '/login';
-  final loggingIn = state.uri.toString() == loginPath; // 현재 경로가 로그인 경로인지 확인
-
-  // 토큰이 확인되지 않으면 리디렉션하지 않음
-  if (!authNotifier.isTokenChecked) return null;
-
-  // 토큰 유효성 검사
   final isTokenValid = await authNotifier.isTokenValid();
 
-  // 미로그인 상태라면 로그인 페이지로 리디렉션
-  if (!isTokenValid) return loggingIn ? null : loginPath;
+  /// 현재 경로가 로그인 경로라면
+  if (state.uri.toString() == loginPath) {
+    return isTokenValid ? '/' : null;
+  }
 
-  // 로그인 상태라면 홈으로 리디렉션
-  if (loggingIn) return '/';
-
-  return null;
+  return isTokenValid ? null : loginPath;
 }
