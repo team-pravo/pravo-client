@@ -16,3 +16,17 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
+
+buildscript {
+    ext {
+        SecretsGradlePlugin = "2.0.0"
+    }
+    repositories {
+        google()          // Google 저장소 추가
+        mavenCentral()    // Maven 중앙 저장소 추가
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:7.0.2")
+        classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:${SecretsGradlePlugin}")
+    }
+}

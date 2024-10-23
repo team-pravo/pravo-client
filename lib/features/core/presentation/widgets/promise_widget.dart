@@ -53,24 +53,24 @@ class PromiseWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "아보카도 농장 체험",
+                            '아보카도 농장 체험',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           Text(
-                            "Mr. Avocado",
+                            'Mr. Avocado',
                             style: TextStyle(
                               fontSize: 14,
                             ),
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
-                const Icon(Icons.chevron_right_rounded)
+                const Icon(Icons.chevron_right_rounded),
               ],
             ),
             Container(
@@ -91,7 +91,7 @@ class PromiseWidget extends StatelessWidget {
                         width: 4,
                       ),
                       Text(
-                        "10월 1일, 12:00AM",
+                        '10월 1일, 12:00AM',
                         style: TextStyle(
                           fontSize: 14,
                         ),
@@ -109,16 +109,16 @@ class PromiseWidget extends StatelessWidget {
                         width: 4,
                       ),
                       Text(
-                        "아보카도 농장",
+                        '아보카도 농장',
                         style: TextStyle(
                           fontSize: 14,
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -24,7 +24,7 @@ class MyPointWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "현재 보유한 포인트",
+            '현재 보유한 포인트',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -41,13 +41,13 @@ class MyPointWidget extends StatelessWidget {
                 width: 4,
               ),
               Text(
-                "10,000",
+                '10,000',
                 style: TextStyle(
                   fontSize: 14,
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
