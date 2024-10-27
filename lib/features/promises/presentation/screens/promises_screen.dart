@@ -1,12 +1,11 @@
-// 약속 목록 페이지
-
 import 'package:flutter/material.dart';
+import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth1_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/navigation_bar_widget.dart';
-import 'package:pravo_client/features/promise_list/presentation/widgets/promise_list_widget.dart';
+import 'package:pravo_client/features/promises/presentation/widgets/promise_list_widget.dart';
 
-class PromiseListScreen extends StatelessWidget {
-  const PromiseListScreen({super.key});
+class PromisesScreen extends StatelessWidget {
+  const PromisesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +13,14 @@ class PromiseListScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: Depth1AppBarWidget(
-          title: "약속 목록",
+          title: '약속 목록',
           actionIcon: Icons.notifications_none_rounded,
           actionOnPressed: () {},
         ),
         body: const Column(
           children: [
             TabBar(
-              indicatorColor: Colors.black,
+              dividerColor: kUnselectedIconColor,
               indicatorSize: TabBarIndicatorSize.tab,
               labelStyle: TextStyle(
                 color: Colors.black,

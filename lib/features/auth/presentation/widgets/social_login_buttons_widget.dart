@@ -5,8 +5,8 @@ import 'package:pravo_client/features/auth/presentation/widgets/kakao_login_butt
 
 import 'social_login_button_widget.dart';
 
-class SocialLoginButtons extends ConsumerWidget {
-  const SocialLoginButtons({super.key});
+class SocialLoginButtonsWidget extends ConsumerWidget {
+  const SocialLoginButtonsWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
