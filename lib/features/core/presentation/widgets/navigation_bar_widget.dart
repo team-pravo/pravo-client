@@ -12,7 +12,7 @@ class NavigationBarWidget extends ConsumerWidget {
     final selectedIndex = ref.watch(navigationIndexProvider);
 
     void onItemTapped(int index) {
-      final routes = ['/', '/promises', '/promises/new', '/shop', '/setting'];
+      final routes = ['/', '/promises', '/new', '/store', '/setting'];
       ref.read(navigationIndexProvider.notifier).state = index;
       context.go(routes[index]);
     }
@@ -32,31 +32,31 @@ class NavigationBarWidget extends ConsumerWidget {
           icon: Icon(
             Icons.home_outlined,
           ),
-          label: "",
+          label: '',
         ),
         BottomNavigationBarItem(
           icon: Icon(
             Icons.list_rounded,
           ),
-          label: "",
+          label: '',
         ),
         BottomNavigationBarItem(
           icon: Icon(
             Icons.post_add_rounded,
           ),
-          label: "",
+          label: '',
         ),
         BottomNavigationBarItem(
           icon: Icon(
             Icons.shopping_bag_outlined,
           ),
-          label: "",
+          label: '',
         ),
         BottomNavigationBarItem(
           icon: Icon(
             Icons.person_2_outlined,
           ),
-          label: "",
+          label: '',
         ),
       ],
     );

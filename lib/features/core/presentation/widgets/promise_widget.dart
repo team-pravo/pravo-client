@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pravo_client/assets/constants.dart';
-import 'package:pravo_client/features/promise_list/presentation/screens/promise_detail_screen.dart';
+import 'package:pravo_client/features/promises/presentation/screens/promise_detail_screen.dart';
 
 class PromiseWidget extends StatelessWidget {
   const PromiseWidget({
