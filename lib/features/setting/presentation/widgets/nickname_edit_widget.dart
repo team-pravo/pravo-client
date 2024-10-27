@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pravo_client/assets/constants.dart';
+import 'package:pravo_client/features/core/presentation/widgets/text_field_error_message_widget.dart';
 
 class NicknameEditWidget extends StatelessWidget {
   const NicknameEditWidget({
@@ -31,27 +31,9 @@ class NicknameEditWidget extends StatelessWidget {
               hintText: 'Mr. Avocado',
             ),
           ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.error_outline,
-                  size: 20,
-                  color: kSecondaryColor,
-                ),
-                SizedBox(
-                  width: 4,
-                ),
-                Text(
-                  '이미 사용 중인 닉네임이에요. 다른 닉네임을 골라볼까요?',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: kSecondaryColor,
-                  ),
-                ),
-              ],
-            ),
+          SizedBox(height: 6),
+          TextFieldErrorMessageWidget(
+            title: '이미 사용 중인 닉네임이에요. 다른 닉네임을 골라볼까요?',
           ),
         ],
       ),
