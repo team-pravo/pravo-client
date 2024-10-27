@@ -6,7 +6,7 @@ import 'package:pravo_client/features/core/presentation/widgets/alert_dialog_wid
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
 import 'package:pravo_client/features/promises/presentation/widgets/deposit_widget.dart';
-import 'package:pravo_client/features/promises/presentation/widgets/participants_widget.dart';
+import 'package:pravo_client/features/promises/presentation/widgets/participants_and_status_widget.dart';
 import 'package:pravo_client/features/promises/presentation/widgets/promise_overview_widget.dart';
 import 'package:pravo_client/features/promises/presentation/widgets/promise_status_widget.dart';
 
@@ -41,7 +41,7 @@ class PromiseDetailScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const PromiseOverviewWidget(),
-            const ParticipantsWidget(),
+            const ParticipantsAndStatusWidget(),
             const DepositWidget(),
             const PromiseStatusWidget(),
             const Spacer(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pravo_client/features/promises/presentation/widgets/participant_and_status_widget.dart';
 
-class ParticipantsWidget extends StatelessWidget {
-  const ParticipantsWidget({super.key});
+class ParticipantsAndStatusWidget extends StatelessWidget {
+  const ParticipantsAndStatusWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
