@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/text_field_error_message_widget.dart';
 
 class NicknameEditWidget extends StatelessWidget {
@@ -23,12 +24,16 @@ class NicknameEditWidget extends StatelessWidget {
           TextField(
             decoration: InputDecoration(
               enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey),
+                borderSide: BorderSide(color: kBorderColor),
               ),
               focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey),
+                borderSide: BorderSide(color: kBorderColor),
               ),
               hintText: 'Mr. Avocado',
+              hintStyle: TextStyle(
+                fontSize: 20,
+                color: Color.fromRGBO(201, 201, 201, 1),
+              ),
             ),
           ),
           SizedBox(height: 6),

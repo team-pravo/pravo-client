@@ -11,7 +11,7 @@ class SettingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Depth1AppBarWidget(
-        title: "설정",
+        title: '설정',
         actionIcon: Icons.notifications_none_outlined,
         actionOnPressed: () => {},
       ),
