@@ -6,16 +6,16 @@ class Depth2AppBarWidget extends StatelessWidget
   final String title;
   final IconData leadingIcon;
   final VoidCallback leadingOnPressed;
-  final IconData actionIcon;
-  final VoidCallback actionOnPressed;
+  final IconData? actionIcon;
+  final VoidCallback? actionOnPressed;
 
   const Depth2AppBarWidget({
     super.key,
     required this.title,
     required this.leadingIcon,
     required this.leadingOnPressed,
-    required this.actionIcon,
-    required this.actionOnPressed,
+    this.actionIcon,
+    this.actionOnPressed,
   });
 
   @override
@@ -35,14 +35,15 @@ class Depth2AppBarWidget extends StatelessWidget
         onPressed: leadingOnPressed,
       ),
       actions: [
-        IconButton(
-          icon: Icon(
-            actionIcon,
+        if (actionIcon != null && actionOnPressed != null)
+          IconButton(
+            icon: Icon(
+              actionIcon,
+            ),
+            color: Theme.of(context).appBarTheme.iconTheme!.color,
+            iconSize: Theme.of(context).appBarTheme.iconTheme!.size,
+            onPressed: actionOnPressed,
           ),
-          color: Theme.of(context).appBarTheme.iconTheme!.color,
-          iconSize: Theme.of(context).appBarTheme.iconTheme!.size,
-          onPressed: actionOnPressed,
-        ),
       ],
     );
   }
