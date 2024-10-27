@@ -8,7 +8,7 @@ class DateNotifier extends StateNotifier<DateTime?> {
   DateNotifier() : super(null);
 
   /// 날짜 업데이트
-  void updateDate(DateTime newDate) {
+  void updateDate(DateTime? newDate) {
     state = newDate;
   }
 

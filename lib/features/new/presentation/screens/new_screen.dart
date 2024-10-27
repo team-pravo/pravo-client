@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth1_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/navigation_bar_widget.dart';
+import 'package:pravo_client/features/new/presentation/viewmodels/date_provider.dart';
 import 'package:pravo_client/features/new/presentation/widgets/date_picker_widget.dart';
 import 'package:pravo_client/features/new/presentation/widgets/primary_button_widget.dart';
 
-class NewScreen extends StatelessWidget {
+class NewScreen extends ConsumerWidget {
   const NewScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedDate = ref.watch(dateProvider);
+    final isButtonEnabled = selectedDate != null;
+
     return Scaffold(
       appBar: Depth1AppBarWidget(
         title: '약속 생성',
@@ -37,17 +42,17 @@ class NewScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 8,
+                    height: 24,
                   ),
                   const DatePickerWidget(),
                   const Spacer(
                     flex: 1,
                   ),
                   PrimaryButtonWidget(
-                    onTap: () {
-                      context.push('/new/details');
-                    },
-                    buttonColor: kPrimaryColor,
+                    onTap: () =>
+                        isButtonEnabled ? context.push('/new/details') : null,
+                    buttonColor:
+                        isButtonEnabled ? kPrimaryColor : kUnselectedIconColor,
                     textColor: Colors.white,
                     buttonText: '약속 생성하기',
                     icon: Icons.chevron_right_rounded,
