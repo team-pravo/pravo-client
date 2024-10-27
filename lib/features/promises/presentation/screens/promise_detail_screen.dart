@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pravo_client/assets/constants.dart';
+import 'package:pravo_client/features/core/presentation/widgets/alert_dialog_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
 import 'package:pravo_client/features/promises/presentation/widgets/deposit_widget.dart';
@@ -19,7 +20,19 @@ class PromiseDetailScreen extends ConsumerWidget {
         leadingIcon: Icons.chevron_left_rounded,
         leadingOnPressed: () => context.pop(),
         actionIcon: Icons.delete_outline,
-        actionOnPressed: () => {},
+        actionOnPressed: () => {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialogWidget(
+                title: '약속을 정말 삭제할까요?',
+                content: '이미 만들어진 약속을 삭제하면\n참여한 사람들이 당황할 수 있어요.',
+                actionOnPressed: () {},
+                actionTitle: '삭제',
+              );
+            },
+          ),
+        },
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(27, 50, 38, 37),
