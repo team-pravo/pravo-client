@@ -10,6 +10,7 @@ const double kAppBarIconSize = 24;
 const Color kPrimaryColor = Color(0xFF74A739);
 const Color kBackgroundColor = Color.fromRGBO(255, 255, 255, 1);
 const Color kWidgetBackgroundColor = Color.fromRGBO(246, 246, 246, 1);
+const Color kBorderColor = Color.fromARGB(255, 219, 219, 219);
 
 // IconColor
 const Color kSelectedIconColor = Color.fromRGBO(116, 167, 57, 1);

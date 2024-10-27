@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:pravo_client/assets/constants.dart' as constants;
+import 'package:pravo_client/assets/constants.dart';
 
 final ThemeData appTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     titleTextStyle: TextStyle(
-      fontSize: constants.kAppBarFontSize,
-      fontWeight: constants.kAppBarFontWeight,
+      fontSize: kAppBarFontSize,
+      fontWeight: kAppBarFontWeight,
       color: Colors.black,
     ),
     iconTheme: IconThemeData(
-      size: constants.kAppBarIconSize,
+      size: kAppBarIconSize,
       color: Colors.black,
     ),
-    backgroundColor: constants.kBackgroundColor,
+    backgroundColor: kBackgroundColor,
   ),
-  scaffoldBackgroundColor: constants.kBackgroundColor,
+  scaffoldBackgroundColor: kBackgroundColor,
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    backgroundColor: constants.kBackgroundColor,
+    backgroundColor: kBackgroundColor,
+  ),
+  colorScheme: const ColorScheme.light(primary: kPrimaryColor),
+  datePickerTheme: const DatePickerThemeData(
+    backgroundColor: kBackgroundColor,
+    dividerColor: kPrimaryColor,
+    headerBackgroundColor: kBackgroundColor,
+  ),
+  timePickerTheme: const TimePickerThemeData(
+    dayPeriodColor: kPrimaryColor,
   ),
 );

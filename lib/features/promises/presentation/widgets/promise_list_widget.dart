@@ -17,7 +17,7 @@ class PromiseListWidget extends StatelessWidget {
         key: super.key,
         itemCount: 2,
         itemBuilder: (context, index) {
-          return PromiseWidget();
+          return const PromiseWidget();
         },
       ),
     );
