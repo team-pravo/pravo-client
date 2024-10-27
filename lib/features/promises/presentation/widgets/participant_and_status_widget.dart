@@ -27,11 +27,22 @@ class ParticipantAndStatusWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
-            child: const Text(
-              '참여 완료',
-              style: TextStyle(
-                fontSize: 12,
-              ),
+            child: const Row(
+              children: [
+                Text(
+                  '참여 완료',
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+                SizedBox(
+                  width: 4,
+                ),
+                Icon(
+                  Icons.check_rounded,
+                  size: 12,
+                ),
+              ],
             ),
           ),
         ],
