@@ -6,7 +6,7 @@ import 'package:pravo_client/features/core/presentation/widgets/depth1_app_bar_w
 import 'package:pravo_client/features/core/presentation/widgets/navigation_bar_widget.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/date_provider.dart';
 import 'package:pravo_client/features/new/presentation/widgets/date_picker_widget.dart';
-import 'package:pravo_client/features/new/presentation/widgets/primary_button_widget.dart';
+import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
 
 class NewScreen extends ConsumerWidget {
   const NewScreen({super.key});
