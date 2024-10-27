@@ -49,14 +49,13 @@ class NewScreen extends ConsumerWidget {
                     flex: 1,
                   ),
                   PrimaryButtonWidget(
-                    onTap: () =>
-                        isButtonEnabled ? context.push('/new/details') : null,
-                    buttonColor:
-                        isButtonEnabled ? kPrimaryColor : kUnselectedIconColor,
+                    onTap: () => context.push('/new/details'),
+                    buttonColor: kPrimaryColor,
                     textColor: Colors.white,
                     buttonText: '약속 생성하기',
                     icon: Icons.chevron_right_rounded,
                     iconBeforeText: false,
+                    isEnabled: isButtonEnabled,
                   ),
                 ],
               ),

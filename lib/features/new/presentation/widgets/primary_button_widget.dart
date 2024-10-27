@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pravo_client/assets/constants.dart';
 
 class PrimaryButtonWidget extends StatelessWidget {
-  final VoidCallback onTap;
   final String buttonText;
+  final bool isEnabled;
+  final VoidCallback? onTap;
   final Color? buttonColor;
   final Color? textColor;
   final IconData? icon;
@@ -11,8 +12,9 @@ class PrimaryButtonWidget extends StatelessWidget {
 
   const PrimaryButtonWidget({
     super.key,
-    required this.onTap,
     required this.buttonText,
+    required this.isEnabled,
+    this.onTap,
     this.buttonColor = kPrimaryColor,
     this.textColor = Colors.white,
     this.icon,
@@ -22,10 +24,10 @@ class PrimaryButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: isEnabled ? onTap : null,
       child: Container(
         decoration: BoxDecoration(
-          color: buttonColor,
+          color: isEnabled ? buttonColor : kUnselectedIconColor,
           borderRadius: BorderRadius.circular(12),
         ),
         padding: const EdgeInsets.symmetric(
