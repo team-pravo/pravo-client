@@ -8,6 +8,7 @@ import 'package:pravo_client/features/core/presentation/widgets/primary_button_w
 import 'package:pravo_client/features/promises/presentation/widgets/deposit_widget.dart';
 import 'package:pravo_client/features/promises/presentation/widgets/participants_widget.dart';
 import 'package:pravo_client/features/promises/presentation/widgets/promise_overview_widget.dart';
+import 'package:pravo_client/features/promises/presentation/widgets/promise_status_widget.dart';
 
 class PromiseDetailScreen extends ConsumerWidget {
   const PromiseDetailScreen({super.key});
@@ -42,6 +43,7 @@ class PromiseDetailScreen extends ConsumerWidget {
             const PromiseOverviewWidget(),
             const ParticipantsWidget(),
             const DepositWidget(),
+            const PromiseStatusWidget(),
             const Spacer(
               flex: 1,
             ),
