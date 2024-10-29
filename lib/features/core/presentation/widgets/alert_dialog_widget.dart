@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pravo_client/assets/constants.dart';
+import 'package:pravo_client/features/core/presentation/widgets/dialog_button_widget.dart';
 
 class AlertDialogWidget extends StatelessWidget {
   final String title;
@@ -17,12 +18,12 @@ class AlertDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      titlePadding: const EdgeInsets.fromLTRB(30, 20, 30, 12),
-      contentPadding: const EdgeInsets.fromLTRB(30, 12, 30, 12),
-      actionsPadding: const EdgeInsets.fromLTRB(30, 12, 30, 20),
+      titlePadding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+      contentPadding: const EdgeInsets.fromLTRB(30, 24, 30, 0),
+      actionsPadding: const EdgeInsets.fromLTRB(30, 24, 30, 30),
       actionsAlignment: MainAxisAlignment.spaceBetween,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(18),
       ),
       title: Text(
         title,
@@ -39,45 +40,17 @@ class AlertDialogWidget extends StatelessWidget {
         ),
       ),
       actions: [
-        ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.black,
-            backgroundColor: kWidgetBackgroundColor,
-            minimumSize: const Size(115, 30),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          child: const Text(
-            '취소',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+        DialogButtonWidget(
+          buttonText: '취소',
+          onTap: () => Navigator.of(context).pop(),
+          buttonColor: kWidgetBackgroundColor,
+          textColor: Colors.black,
         ),
-        ElevatedButton(
-          onPressed: actionOnPressed,
-          style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.white,
-            backgroundColor: kPrimaryColor,
-            minimumSize: const Size(115, 30),
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          child: Text(
-            actionTitle,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+        DialogButtonWidget(
+          buttonText: '삭제',
+          onTap: () {},
+          buttonColor: kPrimaryColor,
+          textColor: Colors.white,
         ),
       ],
     );
