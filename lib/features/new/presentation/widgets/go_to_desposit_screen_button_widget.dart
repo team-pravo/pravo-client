@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pravo_client/assets/constants.dart';
-import 'package:pravo_client/features/new/presentation/widgets/primary_button_widget.dart';
+import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
 
 class GoToDepositScreenButtonWidget extends StatelessWidget {
   const GoToDepositScreenButtonWidget({

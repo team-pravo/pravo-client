@@ -48,6 +48,7 @@ class PromiseDetailScreen extends ConsumerWidget {
               flex: 1,
             ),
             PrimaryButtonWidget(
+              isEnabled: true,
               onTap: () {},
               buttonColor: kPrimaryColor,
               textColor: Colors.white,
