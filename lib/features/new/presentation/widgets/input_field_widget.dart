@@ -40,49 +40,49 @@ class InputFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      keyboardType: inputType,
-      // inputType이 number일 경우 숫자만 입력받도록 설정
-      inputFormatters: inputType == TextInputType.number
-          ? <TextInputFormatter>[
-              FilteringTextInputFormatter.digitsOnly,
-              CurrencyInputFormatter(), // 금액 형식 추가
-            ]
-          : null,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 15,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: kBorderColor,
-            width: 1,
+    return SizedBox(
+      child: TextField(
+        keyboardType: inputType,
+        // inputType이 number일 경우 숫자만 입력받도록 설정
+        inputFormatters: inputType == TextInputType.number
+            ? <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly,
+                CurrencyInputFormatter(), // 금액 형식 추가
+              ]
+            : null,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 15,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(
+              color: kBorderColor,
+              width: 1,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(
+              color: kPrimaryColor,
+              width: 2,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(
+              color: kBorderColor,
+              width: 1,
+            ),
+          ),
+          hintText: placeholder,
+          hintStyle: const TextStyle(
+            color: kPlaceholderColor,
           ),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: kPrimaryColor,
-            width: 2,
-          ),
+        style: const TextStyle(
+          fontSize: kInputTextFontSize,
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: kBorderColor,
-            width: 1,
-          ),
-        ),
-        hintText: placeholder,
-        hintStyle: const TextStyle(
-          fontSize: 14,
-          color: kUnselectedIconColor,
-        ),
-      ),
-      style: const TextStyle(
-        fontSize: 14,
       ),
     );
   }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
-import 'package:pravo_client/features/new/presentation/widgets/input_field_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
+import 'package:pravo_client/features/new/presentation/widgets/input_field_widget.dart';
 import 'package:pravo_client/features/new/presentation/widgets/time_picker_widget.dart';
 
 class NewDetailsScreen extends StatelessWidget {
@@ -14,14 +15,11 @@ class NewDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: Depth2AppBarWidget(
         title: '약속 생성',
-        leadingIcon: Icons.chevron_left_rounded,
+        leadingIcon: PhosphorIcons.caretLeft(),
         leadingOnPressed: () => context.pop(),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 30,
-          horizontal: 20,
-        ),
+        padding: kScreenPadding,
         child: Row(
           children: [
             Expanded(

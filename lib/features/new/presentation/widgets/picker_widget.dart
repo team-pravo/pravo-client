@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 
 class PickerWidget extends StatelessWidget {
@@ -16,6 +17,7 @@ class PickerWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        height: 48,
         padding: const EdgeInsets.symmetric(
           vertical: 10,
           horizontal: 15,
@@ -30,8 +32,16 @@ class PickerWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(selectedValue),
-            const Icon(Icons.expand_more_rounded),
+            Text(
+              selectedValue,
+              style: const TextStyle(
+                fontSize: kInputTextFontSize,
+              ),
+            ),
+            PhosphorIcon(
+              PhosphorIcons.caretDown(),
+              size: 16,
+            ),
           ],
         ),
       ),

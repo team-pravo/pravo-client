@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth1_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/navigation_bar_widget.dart';
+import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/date_provider.dart';
 import 'package:pravo_client/features/new/presentation/widgets/date_picker_widget.dart';
-import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
 
 class NewScreen extends ConsumerWidget {
   const NewScreen({super.key});
@@ -19,15 +20,12 @@ class NewScreen extends ConsumerWidget {
     return Scaffold(
       appBar: Depth1AppBarWidget(
         title: '약속 생성',
-        actionIcon: Icons.notifications_none_rounded,
+        actionIcon: PhosphorIcons.bell(),
         actionOnPressed: () {},
       ),
       bottomNavigationBar: const NavigationBarWidget(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 30,
-          horizontal: 20,
-        ),
+        padding: kScreenPadding,
         child: Row(
           children: [
             Expanded(
@@ -55,7 +53,9 @@ class NewScreen extends ConsumerWidget {
                         isButtonEnabled ? kPrimaryColor : kUnselectedIconColor,
                     textColor: Colors.white,
                     buttonText: '약속 생성하기',
-                    icon: Icons.chevron_right_rounded,
+                    icon: PhosphorIcons.caretRight(
+                      PhosphorIconsStyle.bold,
+                    ),
                     iconBeforeText: false,
                   ),
                 ],
