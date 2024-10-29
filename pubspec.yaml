@@ -47,6 +47,8 @@ dependencies:
   flutter_secure_storage: ^9.2.2
   intl: ^0.19.0
   wheel_picker: ^0.1.1
+  tosspayments_widget_sdk_flutter: ^2.0.6
+  phosphor_flutter: ^2.1.0
 
 dev_dependencies:
   flutter_test:
