@@ -31,58 +31,60 @@ class CurrencyInputFormatter extends TextInputFormatter {
 class InputFieldWidget extends StatelessWidget {
   final TextInputType inputType;
   final String placeholder;
+  final ValueChanged<String> onChanged;
 
   const InputFieldWidget({
     super.key,
     required this.inputType,
     required this.placeholder,
+    required this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: TextField(
-        keyboardType: inputType,
-        // inputType이 number일 경우 숫자만 입력받도록 설정
-        inputFormatters: inputType == TextInputType.number
-            ? <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly,
-                CurrencyInputFormatter(), // 금액 형식 추가
-              ]
-            : null,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 15,
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(
-              color: kBorderColor,
-              width: 1,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(
-              color: kPrimaryColor,
-              width: 2,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(
-              color: kBorderColor,
-              width: 1,
-            ),
-          ),
-          hintText: placeholder,
-          hintStyle: const TextStyle(
-            color: kPlaceholderColor,
+    return TextField(
+      keyboardType: inputType,
+      onChanged: onChanged,
+      inputFormatters: inputType == TextInputType.number
+          ? <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly,
+              CurrencyInputFormatter(), // 금액 형식
+            ]
+          : null,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 15,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(
+            color: kBorderColor,
+            width: 1,
           ),
         ),
-        style: const TextStyle(
-          fontSize: kInputTextFontSize,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(
+            color: kPrimaryColor,
+            width: 2,
+          ),
         ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(
+            color: kBorderColor,
+            width: 1,
+          ),
+        ),
+        hintText: placeholder,
+        hintStyle: const TextStyle(
+          fontSize: 14,
+          color: kPlaceholderColor,
+        ),
+      ),
+      style: const TextStyle(
+        fontSize: kInputTextFontSize,
       ),
     );
   }
