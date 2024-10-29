@@ -79,7 +79,6 @@ class InputFieldWidget extends StatelessWidget {
         ),
         hintText: placeholder,
         hintStyle: const TextStyle(
-          fontSize: 14,
           color: kPlaceholderColor,
         ),
       ),

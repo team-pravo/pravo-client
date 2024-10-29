@@ -6,6 +6,7 @@ class DialogButtonWidget extends StatelessWidget {
   final Color buttonColor;
   final Color textColor;
   final FontWeight? fontWeight;
+  final double? width;
 
   const DialogButtonWidget({
     super.key,
@@ -13,7 +14,8 @@ class DialogButtonWidget extends StatelessWidget {
     required this.onTap,
     required this.buttonColor,
     required this.textColor,
-    this.fontWeight = FontWeight.w400,
+    this.fontWeight = FontWeight.w600,
+    this.width = 115.0,
   });
 
   @override
@@ -28,7 +30,7 @@ class DialogButtonWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
           vertical: 8,
         ),
-        width: 115,
+        width: width,
         child: Center(
           child: Text(
             buttonText,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/assets/constants.dart';
+import 'package:pravo_client/features/core/presentation/widgets/dialog_button_widget.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/time_provider.dart';
 import 'package:pravo_client/features/new/presentation/widgets/picker_widget.dart';
 import 'package:wheel_picker/wheel_picker.dart';
@@ -156,34 +157,43 @@ class TimePickerWidget extends ConsumerWidget {
   // 다이얼로그의 액션 버튼 생성
   List<Widget> _buildDialogActions(BuildContext context, WidgetRef ref) {
     return [
-      TextButton(
-        onPressed: () => Navigator.of(context).pop(),
-        child: const Text('취소'),
-      ),
-      TextButton(
-        onPressed: () {
-          // 선택한 시간과 분 가져오기
-          final selectedHour =
-              _hoursWheel.selected == 0 ? 12 : _hoursWheel.selected;
-          final selectedMinute = _minutesWheel.selected;
-          final isAm = _amPmWheel.selected == 0;
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          DialogButtonWidget(
+            buttonText: '취소',
+            onTap: () => Navigator.of(context).pop(),
+            buttonColor: kWidgetBackgroundColor,
+            textColor: Colors.black,
+          ),
+          DialogButtonWidget(
+            buttonText: '확인',
+            onTap: () {
+              // 선택한 시간과 분 가져오기
+              final selectedHour =
+                  _hoursWheel.selected == 0 ? 12 : _hoursWheel.selected;
+              final selectedMinute = _minutesWheel.selected;
+              final isAm = _amPmWheel.selected == 0;
 
-          // AM/PM에 따라 시간을 조정
-          final adjustedHour =
-              isAm ? selectedHour % 12 : (selectedHour % 12) + 12;
+              // AM/PM에 따라 시간을 조정
+              final adjustedHour =
+                  isAm ? selectedHour % 12 : (selectedHour % 12) + 12;
 
-          // TimeOfDay 객체 생성
-          final selectedTime = TimeOfDay(
-            hour: adjustedHour,
-            minute: selectedMinute,
-          );
+              // TimeOfDay 객체 생성
+              final selectedTime = TimeOfDay(
+                hour: adjustedHour,
+                minute: selectedMinute,
+              );
 
-          // timeProvider로 업데이트
-          ref.read(timeProvider.notifier).updateTime(selectedTime);
+              // timeProvider로 업데이트
+              ref.read(timeProvider.notifier).updateTime(selectedTime);
 
-          Navigator.of(context).pop();
-        },
-        child: const Text('확인'),
+              Navigator.of(context).pop();
+            },
+            buttonColor: kPrimaryColor,
+            textColor: Colors.white,
+          ),
+        ],
       ),
     ];
   }

@@ -16,7 +16,9 @@ class TodayPromisesOverviewWidget extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        // 약속 위젯
+        SizedBox(
+          height: 12,
+        ),
         PromiseWidget(),
       ],
     );

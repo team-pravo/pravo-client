@@ -29,7 +29,12 @@ class PromiseDetailScreen extends ConsumerWidget {
             builder: (context) => AlertDialogWidget(
               title: '약속을 삭제할까요?',
               content: '이미 만들어진 약속을 삭제하면\n참여한 사람들이 당황할 수 있어요.',
-              actionOnPressed: () {},
+              actionOnPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('약속이 삭제되었습니다.')),
+                );
+                Navigator.of(context).pop();
+              },
               actionTitle: '삭제',
             ),
           ),

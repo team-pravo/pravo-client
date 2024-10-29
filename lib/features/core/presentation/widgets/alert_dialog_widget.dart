@@ -7,6 +7,7 @@ class AlertDialogWidget extends StatelessWidget {
   final String content;
   final VoidCallback actionOnPressed;
   final String actionTitle;
+
   const AlertDialogWidget({
     super.key,
     required this.title,
@@ -47,8 +48,8 @@ class AlertDialogWidget extends StatelessWidget {
           textColor: Colors.black,
         ),
         DialogButtonWidget(
-          buttonText: '삭제',
-          onTap: () {},
+          buttonText: actionTitle,
+          onTap: actionOnPressed,
           buttonColor: kPrimaryColor,
           textColor: Colors.white,
         ),

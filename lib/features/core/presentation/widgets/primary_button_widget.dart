@@ -28,7 +28,7 @@ class PrimaryButtonWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: isEnabled ? buttonColor : kUnselectedIconColor,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
         ),
         padding: const EdgeInsets.symmetric(
           vertical: 16,
