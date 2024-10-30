@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/promise_widget.dart';
+import 'package:pravo_client/features/core/presentation/widgets/vertical_gap_widget.dart';
 
 class PromiseListWidget extends StatelessWidget {
   const PromiseListWidget({
@@ -9,15 +11,17 @@ class PromiseListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 20,
-      ),
-      child: ListView.builder(
+      padding: kScreenPadding,
+      child: ListView.separated(
         key: super.key,
-        itemCount: 2,
+        itemCount: 5,
         itemBuilder: (context, index) {
           return const PromiseWidget();
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return const VerticalGapWidget(
+            gapHeight: 30,
+          );
         },
       ),
     );

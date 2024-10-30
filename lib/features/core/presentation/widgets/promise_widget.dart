@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/promises/presentation/screens/promise_detail_screen.dart';
 
@@ -20,9 +21,6 @@ class PromiseWidget extends StatelessWidget {
         );
       },
       child: Container(
-        margin: const EdgeInsets.only(
-          top: 24,
-        ),
         padding: const EdgeInsets.symmetric(
           vertical: 15,
           horizontal: 20,
@@ -70,51 +68,44 @@ class PromiseWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Icon(Icons.chevron_right_rounded),
+                PhosphorIcon(
+                  PhosphorIcons.caretRight(
+                    PhosphorIconsStyle.regular,
+                  ),
+                  size: 16,
+                ),
               ],
             ),
             Container(
               margin: const EdgeInsets.only(
-                top: 32,
+                top: 16,
               ),
               child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.calendar_today_rounded,
-                        size: 20,
-                        color: kPrimaryColor,
-                      ),
-                      SizedBox(
-                        width: 4,
-                      ),
-                      Text(
-                        '10월 1일, 12:00AM',
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
+                  Text(
+                    '아보카도 농장',
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
                   ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.location_on_outlined,
-                        size: 20,
-                        color: kPrimaryColor,
-                      ),
-                      SizedBox(
-                        width: 4,
-                      ),
-                      Text(
-                        '아보카도 농장',
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
+                  SizedBox(
+                    width: 4,
+                  ),
+                  Text(
+                    '•',
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 4,
+                  ),
+                  Text(
+                    '10월 1일 12:00AM',
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),

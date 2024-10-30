@@ -16,7 +16,7 @@ class ImageAndTextWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          width: 7,
+          width: 12,
         ),
         const Text(
           'Mr. Avocado',

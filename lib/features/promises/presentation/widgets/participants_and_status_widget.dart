@@ -6,26 +6,25 @@ class ParticipantsAndStatusWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '참여중인 사람',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '참여자',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
           ),
-          SizedBox(
-            height: 10,
-          ),
-          ParticipantAndStatusWidget(),
-          ParticipantAndStatusWidget(),
-          ParticipantAndStatusWidget(),
-        ],
-      ),
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        ParticipantAndStatusWidget(),
+        SizedBox(
+          height: 12,
+        ),
+        ParticipantAndStatusWidget(),
+      ],
     );
   }
 }

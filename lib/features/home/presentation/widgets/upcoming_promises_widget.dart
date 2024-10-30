@@ -10,7 +10,7 @@ class UpcomingPromisesWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        top: 24,
+        top: 40,
       ),
       padding: const EdgeInsets.symmetric(
         vertical: 15,
@@ -25,9 +25,9 @@ class UpcomingPromisesWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "다가오는 약속",
+            '다가오는 약속',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -39,25 +39,28 @@ class UpcomingPromisesWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Text("금요일"),
+                    Text('금요일'),
                     SizedBox(
                       width: 24,
                     ),
-                    Text("아보카도 수확하기"),
+                    Text('아보카도 수확하기'),
                   ],
+                ),
+                SizedBox(
+                  height: 8,
                 ),
                 Row(
                   children: [
-                    Text("토요일"),
+                    Text('토요일'),
                     SizedBox(
                       width: 24,
                     ),
-                    Text("아보카도 저녁 파티"),
+                    Text('아보카도 저녁 파티'),
                   ],
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

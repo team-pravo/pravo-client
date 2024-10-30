@@ -31,22 +31,24 @@ class CurrencyInputFormatter extends TextInputFormatter {
 class InputFieldWidget extends StatelessWidget {
   final TextInputType inputType;
   final String placeholder;
+  final ValueChanged<String> onChanged;
 
   const InputFieldWidget({
     super.key,
     required this.inputType,
     required this.placeholder,
+    required this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       keyboardType: inputType,
-      // inputType이 number일 경우 숫자만 입력받도록 설정
+      onChanged: onChanged,
       inputFormatters: inputType == TextInputType.number
           ? <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly,
-              CurrencyInputFormatter(), // 금액 형식 추가
+              CurrencyInputFormatter(), // 금액 형식
             ]
           : null,
       decoration: InputDecoration(
@@ -77,12 +79,11 @@ class InputFieldWidget extends StatelessWidget {
         ),
         hintText: placeholder,
         hintStyle: const TextStyle(
-          fontSize: 14,
-          color: kUnselectedIconColor,
+          color: kPlaceholderColor,
         ),
       ),
       style: const TextStyle(
-        fontSize: 14,
+        fontSize: kInputTextFontSize,
       ),
     );
   }

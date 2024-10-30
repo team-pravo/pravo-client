@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pravo_client/features/core/presentation/widgets/currency_display_widget.dart';
 
 class PromiseStatusWidget extends StatelessWidget {
   const PromiseStatusWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           '정산 완료',
@@ -15,15 +16,10 @@ class PromiseStatusWidget extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-          '+333 POINT',
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
+        CurrencyDisplayWidget(
+          value: '+333',
+          unit: 'P',
+          fontWeight: FontWeight.w400,
         ),
       ],
     );

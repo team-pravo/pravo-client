@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pravo_client/features/promises/presentation/widgets/icon_and_text_widget.dart';
+import 'package:pravo_client/features/core/presentation/widgets/currency_display_widget.dart';
 
 class DepositWidget extends StatelessWidget {
   const DepositWidget({
@@ -8,27 +8,22 @@ class DepositWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '예약금',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          '예약금',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
           ),
-          SizedBox(
-            height: 10,
-          ),
-          IconAndTextWidget(
-            iconData: Icons.wallet,
-            title: '1,000',
-          ),
-        ],
-      ),
+        ),
+        CurrencyDisplayWidget(
+          value: '1,000',
+          unit: '원',
+          fontWeight: FontWeight.w400,
+        ),
+      ],
     );
   }
 }

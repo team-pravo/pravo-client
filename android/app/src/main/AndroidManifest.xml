@@ -7,8 +7,8 @@
     <application
         android:label="pravo_client"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
-
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true">
 
         <!-- 카카오 로그인 커스텀 URL 스킴 설정 -->
         <activity 
@@ -52,6 +52,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

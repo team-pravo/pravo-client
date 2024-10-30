@@ -14,13 +14,10 @@ class TextButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: actionOnTap,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-        child: Text(
-          title,
-          style: const TextStyle(
-            fontSize: 14,
-          ),
+      child: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 14,
         ),
       ),
     );
