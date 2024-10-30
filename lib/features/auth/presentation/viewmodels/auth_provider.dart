@@ -19,6 +19,10 @@ class AuthNotifier extends ChangeNotifier {
     _readTokenFromStorage(); // 초기화 시 토큰 확인
   }
 
+  Platform? getPlatform() {
+    return _platform;
+  }
+
   // 저장소에 저장된 토큰 확인
   Future<void> _readTokenFromStorage() async {
     _token = await _secureStorage.read(key: 'token');
