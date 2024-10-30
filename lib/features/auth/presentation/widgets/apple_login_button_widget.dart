@@ -9,19 +9,38 @@ class AppleLoginButtonWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ignore: unused_local_variable
     final authNotifier = ref.read(authProvider);
 
-    Future<void> signInWithApple() async {
-      final credential = await SignInWithApple.getAppleIDCredential(
-        scopes: [
-          AppleIDAuthorizationScopes.email,
-          AppleIDAuthorizationScopes.fullName,
-        ],
+    Future<void> handleLoginSuccess(
+      String identityToken,
+    ) async {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('애플 로그인 성공')),
       );
+      await authNotifier.login(identityToken); // 로그인 성공 시 토큰 저장
+    }
 
-      // ignore: avoid_print
-      print(credential);
+    void handleLoginError(
+      dynamic error,
+    ) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('애플 로그인 실패: $error')),
+      );
+    }
+
+    Future<void> signInWithApple() async {
+      try {
+        final credential = await SignInWithApple.getAppleIDCredential(
+          scopes: [
+            AppleIDAuthorizationScopes.email,
+            AppleIDAuthorizationScopes.fullName,
+          ],
+        );
+
+        await handleLoginSuccess(credential.identityToken!);
+      } catch (error) {
+        handleLoginError(error);
+      }
     }
 
     return SocialLoginButtonWidget(
