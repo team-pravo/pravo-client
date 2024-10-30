@@ -8,14 +8,6 @@ final userProvider = StateNotifierProvider<UserStateNotifer, UserModel?>(
 class UserStateNotifer extends StateNotifier<UserModel?> {
   UserStateNotifer() : super(null);
 
-  void appleLogin({required String name}) {
-    state = UserModel(name: name, platform: Platform.apple);
-  }
-
-  void kakaoLogin({required String name}) {
-    state = UserModel(name: name, platform: Platform.kakao);
-  }
-
   void logout() {
     state = null;
   }
