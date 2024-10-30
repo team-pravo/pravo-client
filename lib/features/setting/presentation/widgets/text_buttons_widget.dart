@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:pravo_client/features/auth/data/models/platform.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
 import 'package:pravo_client/features/setting/presentation/widgets/text_button_widget.dart';
 
@@ -13,16 +14,11 @@ class TextButtonsWidget extends ConsumerWidget {
     Future<void> logout() async {
       final authNotifier = ref.read(authProvider);
 
-      try {
+      if (authNotifier.getPlatform() == Platform.kakao) {
         await UserApi.instance.logout();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('로그아웃 성공, SDK에서 토큰 삭제')),
-        );
-        await authNotifier.logout(); // 로그아웃 시 AuthNotifier의 상태 업데이트
-      } catch (error) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('카카오톡으로 로그인 실패 $error')));
       }
+
+      await authNotifier.logout();
     }
 
     return Column(
