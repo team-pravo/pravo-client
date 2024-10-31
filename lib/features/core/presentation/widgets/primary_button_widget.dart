@@ -3,18 +3,18 @@ import 'package:pravo_client/assets/constants.dart';
 
 class PrimaryButtonWidget extends StatelessWidget {
   final String buttonText;
+  final VoidCallback onTap;
   final bool isEnabled;
-  final VoidCallback? onTap;
-  final Color? buttonColor;
-  final Color? textColor;
+  final Color buttonColor;
+  final Color textColor;
   final IconData? icon;
-  final bool? iconBeforeText; // 아이콘 위치 (디폴트: 텍스트 앞)
+  final bool iconBeforeText; // 아이콘 위치 (디폴트: 텍스트 앞)
 
   const PrimaryButtonWidget({
     super.key,
     required this.buttonText,
-    required this.isEnabled,
-    this.onTap,
+    required this.onTap,
+    this.isEnabled = true,
     this.buttonColor = kPrimaryColor,
     this.textColor = Colors.white,
     this.icon,
@@ -38,7 +38,7 @@ class PrimaryButtonWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // 아이콘이 존재하고, 텍스트 앞에 위치할 때
-            if (icon != null && (iconBeforeText ?? true)) ...[
+            if (icon != null && iconBeforeText) ...[
               Icon(icon, color: textColor),
               const SizedBox(width: 4),
             ],
@@ -51,7 +51,7 @@ class PrimaryButtonWidget extends StatelessWidget {
               ),
             ),
             // 아이콘이 존재하고, 아이콘이 텍스트 뒤에 위치할 때
-            if (icon != null && !(iconBeforeText ?? false)) ...[
+            if (icon != null && !iconBeforeText) ...[
               const SizedBox(width: 4),
               Icon(icon, color: textColor),
             ],

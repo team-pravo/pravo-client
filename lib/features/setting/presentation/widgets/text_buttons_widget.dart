@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
 import 'package:pravo_client/features/setting/presentation/widgets/text_button_widget.dart';
 
@@ -9,12 +8,12 @@ class TextButtonsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // 카카오톡 로그아웃
+    // 카카오톡 & 애플 로그아웃
     Future<void> logout() async {
       final authNotifier = ref.read(authProvider);
 
       try {
-        await UserApi.instance.logout();
+        // await UserApi.instance.logout();
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('로그아웃 성공, SDK에서 토큰 삭제')),
         );

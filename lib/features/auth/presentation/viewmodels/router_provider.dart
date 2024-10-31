@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pravo_client/features/auth/presentation/screens/login_screen.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
 import 'package:pravo_client/features/home/presentation/screens/home_screen.dart';
-import 'package:pravo_client/features/new/presentation/screens/deposit_screen.dart';
+import 'package:pravo_client/features/new/presentation/screens/deposit_payment_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/new_details_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/new_screen.dart';
 import 'package:pravo_client/features/promises/presentation/screens/promises_screen.dart';
@@ -36,7 +36,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         ),
         GoRoute(
           path: 'deposit',
-          builder: (_, __) => const DepositScreen(),
+          builder: (_, __) => const DepositPaymentScreen(),
         ),
       ],
     ),

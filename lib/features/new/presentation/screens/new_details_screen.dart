@@ -26,28 +26,27 @@ class NewDetailsScreen extends ConsumerWidget {
         leadingIcon: Icons.chevron_left_rounded,
         leadingOnPressed: () => context.pop(),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 30,
-          horizontal: 20,
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const PromiseDetailsInputFieldsWidget(),
-                  const Spacer(
-                    flex: 1,
-                  ),
-                  GoToDepositScreenButtonWidget(
-                    isButtonEnabled: isButtonEnabled,
-                  ),
-                ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const PromiseDetailsInputFieldsWidget(),
+                    const Spacer(
+                      flex: 1,
+                    ),
+                    GoToDepositScreenButtonWidget(
+                      isButtonEnabled: isButtonEnabled,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
