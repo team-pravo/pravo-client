@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pravo_client/assets/constants.dart';
 
 class PrimaryButtonWidget extends StatelessWidget {
-  final VoidCallback onTap;
   final String buttonText;
+  final bool isEnabled;
+  final VoidCallback? onTap;
   final Color? buttonColor;
   final Color? textColor;
   final IconData? icon;
@@ -11,8 +12,9 @@ class PrimaryButtonWidget extends StatelessWidget {
 
   const PrimaryButtonWidget({
     super.key,
-    required this.onTap,
     required this.buttonText,
+    required this.isEnabled,
+    this.onTap,
     this.buttonColor = kPrimaryColor,
     this.textColor = Colors.white,
     this.icon,
@@ -22,11 +24,11 @@ class PrimaryButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: isEnabled ? onTap : null,
       child: Container(
         decoration: BoxDecoration(
-          color: buttonColor,
-          borderRadius: BorderRadius.circular(12),
+          color: isEnabled ? buttonColor : kUnselectedIconColor,
+          borderRadius: BorderRadius.circular(16),
         ),
         padding: const EdgeInsets.symmetric(
           vertical: 16,
@@ -37,7 +39,11 @@ class PrimaryButtonWidget extends StatelessWidget {
           children: [
             // 아이콘이 존재하고, 텍스트 앞에 위치할 때
             if (icon != null && (iconBeforeText ?? true)) ...[
-              Icon(icon, color: textColor),
+              Icon(
+                icon,
+                color: textColor,
+                size: 16,
+              ),
               const SizedBox(width: 4),
             ],
             Text(
@@ -51,7 +57,11 @@ class PrimaryButtonWidget extends StatelessWidget {
             // 아이콘이 존재하고, 아이콘이 텍스트 뒤에 위치할 때
             if (icon != null && !(iconBeforeText ?? false)) ...[
               const SizedBox(width: 4),
-              Icon(icon, color: textColor),
+              Icon(
+                icon,
+                color: textColor,
+                size: 16,
+              ),
             ],
           ],
         ),

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final timeProvider =
-    StateNotifierProvider<TimeNotifier, TimeOfDay?>((ref) => TimeNotifier());
+    StateNotifierProvider.autoDispose<TimeNotifier, TimeOfDay?>(
+  (ref) => TimeNotifier(),
+);
 
 class TimeNotifier extends StateNotifier<TimeOfDay?> {
   TimeNotifier() : super(null);

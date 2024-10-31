@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/date_provider.dart';
 import 'package:pravo_client/provider/navigation_provider.dart';
@@ -32,34 +33,34 @@ class NavigationBarWidget extends ConsumerWidget {
       unselectedIconTheme: const IconThemeData(color: kUnselectedIconColor),
       currentIndex: selectedIndex,
       onTap: onItemTapped,
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(
-            Icons.home_outlined,
+          icon: PhosphorIcon(
+            PhosphorIcons.house(PhosphorIconsStyle.regular),
           ),
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(
-            Icons.list_rounded,
+          icon: PhosphorIcon(
+            PhosphorIcons.list(PhosphorIconsStyle.regular),
           ),
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(
-            Icons.post_add_rounded,
+          icon: PhosphorIcon(
+            PhosphorIcons.calendarBlank(PhosphorIconsStyle.regular),
           ),
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(
-            Icons.shopping_bag_outlined,
+          icon: PhosphorIcon(
+            PhosphorIcons.shoppingBag(PhosphorIconsStyle.regular),
           ),
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(
-            Icons.person_2_outlined,
+          icon: PhosphorIcon(
+            PhosphorIcons.user(PhosphorIconsStyle.regular),
           ),
           label: '',
         ),
