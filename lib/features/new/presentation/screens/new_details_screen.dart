@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_provider.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/time_provider.dart';
@@ -23,7 +24,7 @@ class NewDetailsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: Depth2AppBarWidget(
         title: '약속 생성',
-        leadingIcon: Icons.chevron_left_rounded,
+        leadingIcon: PhosphorIcons.caretLeft(),
         leadingOnPressed: () => context.pop(),
       ),
       body: SafeArea(

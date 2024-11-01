@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pravo_client/assets/constants.dart';
+import 'package:pravo_client/features/setting/presentation/screens/profile_edit_screen.dart';
 
 class ProfilePreviewWidget extends StatelessWidget {
   const ProfilePreviewWidget({super.key});
@@ -7,6 +8,14 @@ class ProfilePreviewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ProfileEditScreen(),
+          ),
+        );
+      },
       child: Row(
         children: [
           CircleAvatar(

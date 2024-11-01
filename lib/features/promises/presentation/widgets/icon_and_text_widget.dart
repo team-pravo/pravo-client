@@ -12,24 +12,37 @@ class IconAndTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          iconData,
-          color: kPrimaryColor,
-          size: 20,
+    return IntrinsicWidth(
+      child: Container(
+        decoration: BoxDecoration(
+          color: kWidgetBackgroundColor,
+          borderRadius: BorderRadius.circular(8),
         ),
-        const SizedBox(
-          width: 5,
+        padding: const EdgeInsets.symmetric(
+          vertical: 4,
+          horizontal: 8,
         ),
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-          ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              iconData,
+              color: kPrimaryColor,
+              size: 14,
+            ),
+            const SizedBox(
+              width: 4,
+            ),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

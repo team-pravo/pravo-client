@@ -28,7 +28,7 @@ class PrimaryButtonWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: isEnabled ? buttonColor : kUnselectedIconColor,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
         ),
         padding: const EdgeInsets.symmetric(
           vertical: 16,
@@ -39,7 +39,11 @@ class PrimaryButtonWidget extends StatelessWidget {
           children: [
             // 아이콘이 존재하고, 텍스트 앞에 위치할 때
             if (icon != null && iconBeforeText) ...[
-              Icon(icon, color: textColor),
+              Icon(
+                icon,
+                color: textColor,
+                size: 16,
+              ),
               const SizedBox(width: 4),
             ],
             Text(
@@ -53,7 +57,11 @@ class PrimaryButtonWidget extends StatelessWidget {
             // 아이콘이 존재하고, 아이콘이 텍스트 뒤에 위치할 때
             if (icon != null && !iconBeforeText) ...[
               const SizedBox(width: 4),
-              Icon(icon, color: textColor),
+              Icon(
+                icon,
+                color: textColor,
+                size: 16,
+              ),
             ],
           ],
         ),
