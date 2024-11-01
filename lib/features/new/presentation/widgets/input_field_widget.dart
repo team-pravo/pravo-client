@@ -16,9 +16,15 @@ class CurrencyInputFormatter extends TextInputFormatter {
       return newValue.copyWith(text: '');
     }
 
+    // 예약금 백만원 이하로 제한 (추후 정책에 따라 변경 예정)
+    final value = int.tryParse(newText) ?? 0;
+    if (value > 1000000) {
+      return oldValue;
+    }
+
     // 숫자를 금액 형식으로 포맷팅
     final formatter = NumberFormat('#,###');
-    final newString = formatter.format(int.parse(newText));
+    final newString = formatter.format(value);
 
     // 커서 위치 설정
     return newValue.copyWith(

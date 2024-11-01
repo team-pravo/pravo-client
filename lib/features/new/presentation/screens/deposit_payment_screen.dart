@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/deposit_payment_provider.dart';
@@ -35,6 +36,7 @@ class _DepositPaymentScreenState extends ConsumerState<DepositPaymentScreen> {
     final depositAmount = ref.watch(promiseDetailsProvider).deposit;
     final promiseName = ref.watch(promiseDetailsProvider).name;
     const orderId = 'OrderId_123'; // 수정 예정
+    final formattedDepositAmount = NumberFormat('#,###').format(depositAmount);
 
     return Scaffold(
       appBar: Depth2AppBarWidget(
@@ -70,7 +72,7 @@ class _DepositPaymentScreenState extends ConsumerState<DepositPaymentScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: PrimaryButtonWidget(
-                buttonText: '$depositAmount원 결제하기',
+                buttonText: '$formattedDepositAmount원 결제하기',
                 isEnabled: paymentState.isAgreementChecked,
                 onTap: () async {
                   await paymentNotifier.requestPayment(orderId, promiseName);
