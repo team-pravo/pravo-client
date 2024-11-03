@@ -19,11 +19,15 @@ class ParticipantsAndStatusWidget extends StatelessWidget {
         SizedBox(
           height: 16,
         ),
-        ParticipantAndStatusWidget(),
+        ParticipantAndStatusWidget(
+          isAttending: true,
+        ),
         SizedBox(
           height: 12,
         ),
-        ParticipantAndStatusWidget(),
+        ParticipantAndStatusWidget(
+          isAttending: false,
+        ),
       ],
     );
   }

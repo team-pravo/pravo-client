@@ -3,17 +3,19 @@ import 'package:pravo_client/features/promises/presentation/widgets/image_and_te
 import 'package:pravo_client/features/promises/presentation/widgets/participation_status_label_widget.dart';
 
 class ParticipantAndStatusWidget extends StatelessWidget {
-  const ParticipantAndStatusWidget({
-    super.key,
-  });
+  final bool isAttending;
+
+  const ParticipantAndStatusWidget({super.key, required this.isAttending});
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        ImageAndTextWidget(),
-        ParticipationStatusLabelWidget(),
+        const ImageAndTextWidget(),
+        ParticipationStatusLabelWidget(
+          isAttending: isAttending,
+        ),
       ],
     );
   }

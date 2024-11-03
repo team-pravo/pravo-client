@@ -2,30 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:pravo_client/assets/constants.dart';
 
 class ParticipationStatusLabelWidget extends StatelessWidget {
-  const ParticipationStatusLabelWidget({super.key});
+  final bool isAttending;
+
+  const ParticipationStatusLabelWidget({super.key, required this.isAttending});
 
   @override
   Widget build(BuildContext context) {
-    const fontSize = 12.0;
-    const fontColor = Colors.white;
+    final labelText = isAttending ? '참석' : '불참';
+    final fontColor = isAttending ? Colors.white : kBodyTextColor;
+    final backgroundColor =
+        isAttending ? kPrimaryColor : kWidgetBackgroundColor;
 
     return Container(
       decoration: BoxDecoration(
-        color: kPrimaryColor,
-        borderRadius: BorderRadius.circular(8),
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(6),
       ),
       padding: const EdgeInsets.symmetric(
         vertical: 2,
         horizontal: 8,
       ),
-      child: const Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            '참석',
+            labelText,
             style: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.w500,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
               color: fontColor,
             ),
           ),
