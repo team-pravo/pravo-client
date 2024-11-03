@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
-import 'package:pravo_client/features/setting/presentation/widgets/profile_image_edit_widget.dart';
 import 'package:pravo_client/features/setting/presentation/widgets/nickname_edit_widget.dart';
+import 'package:pravo_client/features/setting/presentation/widgets/profile_image_edit_widget.dart';
 
 class ProfileEditScreen extends StatelessWidget {
   const ProfileEditScreen({super.key});
@@ -11,27 +13,27 @@ class ProfileEditScreen extends StatelessWidget {
     return Scaffold(
       appBar: Depth2AppBarWidget(
         title: '프로필 설정',
-        actionIcon: Icons.check_rounded,
+        actionIconText: '완료',
         actionOnPressed: () {
           Navigator.pop(context);
         },
-        leadingIcon: Icons.chevron_left_rounded,
+        leadingIcon: PhosphorIcons.caretLeft(),
         leadingOnPressed: () {
           Navigator.pop(context);
         },
       ),
-      body: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 42,
-          ),
-          ProfileImageEditWidget(),
-          SizedBox(
-            height: 65,
-          ),
-          NicknameEditWidget(),
-        ],
+      body: const Padding(
+        padding: kScreenPadding,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ProfileImageEditWidget(),
+            SizedBox(
+              height: 50,
+            ),
+            NicknameEditWidget(),
+          ],
+        ),
       ),
     );
   }

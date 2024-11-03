@@ -23,7 +23,7 @@ class ProfileImageEditWidget extends StatelessWidget {
           ),
           Positioned(
             bottom: 2,
-            right: 0,
+            right: -2,
             child: Container(
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -35,12 +35,12 @@ class ProfileImageEditWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              child: InkWell(
+              child: GestureDetector(
                 onTap: () {},
                 child: const Icon(
                   Icons.add_circle_rounded,
                   color: kPrimaryColor,
-                  size: 24,
+                  size: 28,
                 ),
               ),
             ),

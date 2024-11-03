@@ -12,12 +12,12 @@ class TextButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: actionOnTap,
       child: Text(
         title,
         style: const TextStyle(
-          fontSize: 14,
+          fontSize: 16,
         ),
       ),
     );

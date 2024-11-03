@@ -57,36 +57,8 @@ class InputFieldWidget extends StatelessWidget {
               CurrencyInputFormatter(), // 금액 형식
             ]
           : null,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 15,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: kBorderColor,
-            width: 1,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: kPrimaryColor,
-            width: 2,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: kBorderColor,
-            width: 1,
-          ),
-        ),
+      decoration: kInputFieldDecoration.copyWith(
         hintText: placeholder,
-        hintStyle: const TextStyle(
-          color: kPlaceholderColor,
-        ),
       ),
       style: const TextStyle(
         fontSize: kInputTextFontSize,
