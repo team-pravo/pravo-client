@@ -13,7 +13,9 @@ import 'package:pravo_client/features/promises/presentation/widgets/promise_over
 import 'package:pravo_client/features/promises/presentation/widgets/promise_status_widget.dart';
 
 class PromiseDetailScreen extends ConsumerWidget {
-  const PromiseDetailScreen({super.key});
+  final int promiseId;
+
+  const PromiseDetailScreen({super.key, required this.promiseId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,37 +42,39 @@ class PromiseDetailScreen extends ConsumerWidget {
           ),
         },
       ),
-      body: Padding(
-        padding: kScreenPadding,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const PromiseOverviewWidget(),
-            const DividerWithPaddingWidget(
-              paddingHeight: 30,
-            ),
-            const ParticipantsAndStatusWidget(),
-            const DividerWithPaddingWidget(
-              paddingHeight: 30,
-            ),
-            const DepositWidget(),
-            const DividerWithPaddingWidget(
-              paddingHeight: 30,
-            ),
-            const PromiseStatusWidget(),
-            const Spacer(
-              flex: 1,
-            ),
-            PrimaryButtonWidget(
-              isEnabled: true,
-              onTap: () {},
-              buttonColor: kPrimaryColor,
-              textColor: Colors.white,
-              buttonText: '초대 링크 복사',
-              icon: PhosphorIcons.link(PhosphorIconsStyle.bold),
-              iconBeforeText: true,
-            ),
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: kScreenPadding,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const PromiseOverviewWidget(),
+              const DividerWithPaddingWidget(
+                paddingHeight: 30,
+              ),
+              const ParticipantsAndStatusWidget(),
+              const DividerWithPaddingWidget(
+                paddingHeight: 30,
+              ),
+              const DepositWidget(),
+              const DividerWithPaddingWidget(
+                paddingHeight: 30,
+              ),
+              const PromiseStatusWidget(),
+              const Spacer(
+                flex: 1,
+              ),
+              PrimaryButtonWidget(
+                isEnabled: true,
+                onTap: () {},
+                buttonColor: kPrimaryColor,
+                textColor: Colors.white,
+                buttonText: '초대 링크 복사',
+                icon: PhosphorIcons.link(PhosphorIconsStyle.bold),
+                iconBeforeText: true,
+              ),
+            ],
+          ),
         ),
       ),
     );

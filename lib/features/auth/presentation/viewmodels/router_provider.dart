@@ -3,9 +3,10 @@ import 'package:go_router/go_router.dart';
 import 'package:pravo_client/features/auth/presentation/screens/login_screen.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
 import 'package:pravo_client/features/home/presentation/screens/home_screen.dart';
+import 'package:pravo_client/features/new/presentation/screens/deposit_payment_complete_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/deposit_payment_screen.dart';
-import 'package:pravo_client/features/new/presentation/screens/new_details_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/new_screen.dart';
+import 'package:pravo_client/features/promises/presentation/screens/promise_detail_screen.dart';
 import 'package:pravo_client/features/promises/presentation/screens/promises_screen.dart';
 import 'package:pravo_client/features/setting/presentation/screens/profile_edit_screen.dart';
 import 'package:pravo_client/features/setting/presentation/screens/setting_screen.dart';
@@ -28,16 +29,29 @@ final routerProvider = Provider<GoRouter>((ref) {
       builder: (_, __) => const PromisesScreen(),
     ),
     GoRoute(
+      path: '/promise/:promiseId',
+      builder: (_, state) {
+        final promiseId = int.parse(state.pathParameters['promiseId']!);
+        return PromiseDetailScreen(promiseId: promiseId);
+      },
+    ),
+    GoRoute(
       path: '/new',
       builder: (_, __) => const NewScreen(),
       routes: [
         GoRoute(
           path: 'details',
-          builder: (_, __) => const NewDetailsScreen(),
+          builder: (_, __) => const DepositPaymentCompleteScreen(),
         ),
         GoRoute(
           path: 'deposit',
           builder: (_, __) => const DepositPaymentScreen(),
+          routes: [
+            GoRoute(
+              path: 'complete',
+              builder: (_, __) => const DepositPaymentCompleteScreen(),
+            ),
+          ],
         ),
       ],
     ),
