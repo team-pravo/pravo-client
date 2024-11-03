@@ -26,7 +26,13 @@ class HomeScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TodayPromisesOverviewWidget(),
+              SizedBox(
+                height: 20,
+              ),
               CurrentPointWidget(),
+              SizedBox(
+                height: 20,
+              ),
               UpcomingPromisesWidget(),
             ],
           ),
