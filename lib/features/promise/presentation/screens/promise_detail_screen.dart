@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -12,13 +13,30 @@ import 'package:pravo_client/features/promise/presentation/widgets/participants_
 import 'package:pravo_client/features/promise/presentation/widgets/promise_overview_widget.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/promise_status_widget.dart';
 
+enum ButtonState {
+  copyInvitationLink, // 초대 링크 복사 상태
+  goToAttendanceConfirmation, // 참석 확인하러 가기 상태
+  hidden, // 버튼 숨김 상태
+}
+
 class PromiseDetailScreen extends ConsumerWidget {
   final int promiseId;
+  final bool isAttendanceConfirmed;
 
-  const PromiseDetailScreen({super.key, required this.promiseId});
+  const PromiseDetailScreen({
+    super.key,
+    required this.promiseId,
+    this.isAttendanceConfirmed = false,
+  });
+
+  ButtonState getButtonState() {
+    return ButtonState.goToAttendanceConfirmation;
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final buttonState = getButtonState();
+
     return Scaffold(
       appBar: Depth2AppBarWidget(
         title: '약속 상세',
@@ -64,15 +82,30 @@ class PromiseDetailScreen extends ConsumerWidget {
               const Spacer(
                 flex: 1,
               ),
-              PrimaryButtonWidget(
-                isEnabled: true,
-                onTap: () {},
-                buttonColor: kPrimaryColor,
-                textColor: Colors.white,
-                buttonText: '초대 링크 복사',
-                icon: PhosphorIcons.link(PhosphorIconsStyle.bold),
-                iconBeforeText: true,
-              ),
+              if (buttonState != ButtonState.hidden)
+                PrimaryButtonWidget(
+                  isEnabled: true,
+                  onTap: () {
+                    if (buttonState == ButtonState.copyInvitationLink) {
+                      Clipboard.setData(const ClipboardData(text: '초대 링크'));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('초대 링크가 복사되었습니다.')),
+                      );
+                    } else if (buttonState ==
+                        ButtonState.goToAttendanceConfirmation) {
+                      context.push('/promise/$promiseId/confirm-attendance');
+                    }
+                  },
+                  buttonColor: kPrimaryColor,
+                  textColor: Colors.white,
+                  buttonText: buttonState == ButtonState.copyInvitationLink
+                      ? '초대 링크 복사'
+                      : '참석 확인하러 가기',
+                  icon: buttonState == ButtonState.copyInvitationLink
+                      ? PhosphorIcons.link(PhosphorIconsStyle.bold)
+                      : null,
+                  iconBeforeText: true,
+                ),
             ],
           ),
         ),

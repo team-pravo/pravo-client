@@ -6,6 +6,7 @@ import 'package:pravo_client/features/home/presentation/screens/home_screen.dart
 import 'package:pravo_client/features/new/presentation/screens/deposit_payment_complete_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/deposit_payment_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/new_screen.dart';
+import 'package:pravo_client/features/promise/presentation/screens/confirm_attendance_screen.dart';
 import 'package:pravo_client/features/promise/presentation/screens/promise_detail_screen.dart';
 import 'package:pravo_client/features/promises/presentation/screens/promises_screen.dart';
 import 'package:pravo_client/features/setting/presentation/screens/profile_edit_screen.dart';
@@ -34,6 +35,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         final promiseId = int.parse(state.pathParameters['promiseId']!);
         return PromiseDetailScreen(promiseId: promiseId);
       },
+      routes: [
+        GoRoute(
+          path: '/confirm-attendance',
+          builder: (_, __) => const ConfirmAttendanceScreen(),
+        ),
+      ],
     ),
     GoRoute(
       path: '/new',
