@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:pravo_client/features/promises/presentation/widgets/icon_and_text_widget.dart';
-import 'package:pravo_client/features/promises/presentation/widgets/image_and_text_widget.dart';
+import 'package:pravo_client/features/promise/presentation/widgets/icon_and_text_widget.dart';
+import 'package:pravo_client/features/promise/presentation/widgets/image_and_text_widget.dart';
 
 class PromiseOverviewWidget extends StatelessWidget {
   const PromiseOverviewWidget({
