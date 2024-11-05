@@ -8,7 +8,9 @@ import 'package:pravo_client/features/core/presentation/widgets/vertical_gap_wid
 import 'package:pravo_client/features/promise/presentation/widgets/confirm_attendance_button_widget.dart';
 
 class ConfirmAttendanceScreen extends StatelessWidget {
-  const ConfirmAttendanceScreen({super.key});
+  final int promiseId;
+
+  const ConfirmAttendanceScreen({super.key, required this.promiseId});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,8 @@ class ConfirmAttendanceScreen extends StatelessWidget {
               ),
               PrimaryButtonWidget(
                 buttonText: '정산하러 가기',
-                onTap: () {},
+                onTap: () =>
+                    context.push('/promise/$promiseId/settlement/complete'),
               ),
             ],
           ),

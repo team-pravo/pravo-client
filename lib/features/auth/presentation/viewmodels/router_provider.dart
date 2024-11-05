@@ -5,9 +5,11 @@ import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider
 import 'package:pravo_client/features/home/presentation/screens/home_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/deposit_payment_complete_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/deposit_payment_screen.dart';
+import 'package:pravo_client/features/new/presentation/screens/new_details_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/new_screen.dart';
 import 'package:pravo_client/features/promise/presentation/screens/confirm_attendance_screen.dart';
 import 'package:pravo_client/features/promise/presentation/screens/promise_detail_screen.dart';
+import 'package:pravo_client/features/promise/presentation/screens/settlement_complete_screen.dart';
 import 'package:pravo_client/features/promises/presentation/screens/promises_screen.dart';
 import 'package:pravo_client/features/setting/presentation/screens/profile_edit_screen.dart';
 import 'package:pravo_client/features/setting/presentation/screens/setting_screen.dart';
@@ -37,8 +39,18 @@ final routerProvider = Provider<GoRouter>((ref) {
       },
       routes: [
         GoRoute(
-          path: '/confirm-attendance',
-          builder: (_, __) => const ConfirmAttendanceScreen(),
+          path: 'confirm-attendance',
+          builder: (_, state) {
+            final promiseId = int.parse(state.pathParameters['promiseId']!);
+            return ConfirmAttendanceScreen(promiseId: promiseId);
+          },
+        ),
+        GoRoute(
+          path: 'settlement/complete',
+          builder: (_, state) {
+            final promiseId = int.parse(state.pathParameters['promiseId']!);
+            return SettlementCompleteScreen(promiseId: promiseId);
+          },
         ),
       ],
     ),
@@ -48,7 +60,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       routes: [
         GoRoute(
           path: 'details',
-          builder: (_, __) => const DepositPaymentCompleteScreen(),
+          builder: (_, __) => const NewDetailsScreen(),
         ),
         GoRoute(
           path: 'deposit',

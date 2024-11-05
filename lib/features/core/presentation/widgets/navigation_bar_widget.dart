@@ -11,10 +11,12 @@ class NavigationBarWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedIndex = ref.watch(navigationIndexProvider);
+    final routes = ['/', '/promises', '/new', '/store', '/setting'];
+
+    final currentLocation = GoRouterState.of(context).uri.toString();
+    final selectedIndex = routes.indexOf(currentLocation);
 
     void onItemTapped(int index) {
-      final routes = ['/', '/promises', '/new', '/store', '/setting'];
       ref.read(navigationIndexProvider.notifier).state = index;
 
       // 탭 이동 시 dateProvider 상태 초기화

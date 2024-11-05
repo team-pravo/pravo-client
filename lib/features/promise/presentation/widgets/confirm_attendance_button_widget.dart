@@ -30,7 +30,7 @@ class _ConfirmAttendanceButtonWidgetState
       child: Container(
         decoration: BoxDecoration(
           color: isSelected ? kWidgetBackgroundColor : null,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
         ),
         padding: const EdgeInsets.symmetric(
           horizontal: 12,
@@ -57,7 +57,7 @@ class _ConfirmAttendanceButtonWidgetState
               ),
             ),
             const SizedBox(
-              width: 12,
+              width: 16,
             ),
             const ImageAndTextWidget(),
           ],
