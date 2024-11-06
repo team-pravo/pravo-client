@@ -15,7 +15,7 @@ class AuthRepository {
 
   AuthRepository(this.dio, this.oAuthNotifier);
 
-  Future<TokenResponseModel> login(
+  Future<LoginResponseModel> login(
     String oauthToken,
     Platform oauthPlatform,
   ) async {
@@ -31,6 +31,12 @@ class AuthRepository {
 
     // FIXME: return TokenResponseModel.fromJson(response.data);
 
-    return TokenResponseModel(accessToken: 'sample access token');
+    return LoginResponseModel(
+      jwtTokens: TokenResponseModel(
+        accessToken: 'sample access token',
+        grantType: 'grant type',
+        expiresIn: 1000,
+      ),
+    );
   }
 }
