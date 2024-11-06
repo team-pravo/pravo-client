@@ -13,7 +13,7 @@ class TextButtonsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // 카카오톡 로그아웃
+    // 카카오톡 & 애플 로그아웃
     Future<void> logout() async {
       final authNotifier = ref.read(authProvider);
 

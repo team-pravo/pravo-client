@@ -1,33 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
-import 'package:pravo_client/features/promises/presentation/screens/promise_detail_screen.dart';
 
 class PromiseWidget extends StatelessWidget {
-  const PromiseWidget({
-    super.key,
-  });
+  final int promiseId;
+
+  const PromiseWidget({super.key, required this.promiseId});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // 약속 상세 페이지로 이동
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const PromiseDetailScreen(),
-          ),
-        );
-      },
+      onTap: () => context.push('/promise/$promiseId'),
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          vertical: 15,
-          horizontal: 20,
-        ),
+        padding: kWidgetPadding,
         decoration: BoxDecoration(
           color: kWidgetBackgroundColor,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: kWidgetBorderRadius,
         ),
         child: Column(
           children: [

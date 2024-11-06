@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 
 class TextFieldErrorMessageWidget extends StatelessWidget {
@@ -12,10 +13,11 @@ class TextFieldErrorMessageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Icon(
-          Icons.error_outline,
-          size: 20,
+        PhosphorIcon(
+          PhosphorIcons.warningCircle(PhosphorIconsStyle.bold),
+          size: 16,
           color: kSecondaryColor,
         ),
         const SizedBox(

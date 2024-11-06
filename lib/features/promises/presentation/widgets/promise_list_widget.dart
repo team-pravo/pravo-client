@@ -16,11 +16,13 @@ class PromiseListWidget extends StatelessWidget {
         key: super.key,
         itemCount: 5,
         itemBuilder: (context, index) {
-          return const PromiseWidget();
+          return const PromiseWidget(
+            promiseId: 1,
+          );
         },
         separatorBuilder: (BuildContext context, int index) {
           return const VerticalGapWidget(
-            gapHeight: 30,
+            gapHeight: 20,
           );
         },
       ),

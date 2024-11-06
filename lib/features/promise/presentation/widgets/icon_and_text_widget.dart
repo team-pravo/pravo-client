@@ -16,7 +16,7 @@ class IconAndTextWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: kWidgetBackgroundColor,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(6),
         ),
         padding: const EdgeInsets.symmetric(
           vertical: 4,

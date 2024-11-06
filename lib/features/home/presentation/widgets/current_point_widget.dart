@@ -11,16 +11,10 @@ class CurrentPointWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
-        top: 40,
-      ),
-      padding: const EdgeInsets.symmetric(
-        vertical: 15,
-        horizontal: 20,
-      ),
+      padding: kWidgetPadding,
       decoration: BoxDecoration(
         color: kWidgetBackgroundColor,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: kWidgetBorderRadius,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,

@@ -19,7 +19,9 @@ class TodayPromisesOverviewWidget extends StatelessWidget {
         SizedBox(
           height: 12,
         ),
-        PromiseWidget(),
+        PromiseWidget(
+          promiseId: 1,
+        ),
       ],
     );
   }

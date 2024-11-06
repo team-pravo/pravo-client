@@ -9,39 +9,34 @@ class NicknameEditWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '닉네임',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          '닉네임',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
           ),
-          TextField(
-            decoration: InputDecoration(
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: kBorderColor),
-              ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: kBorderColor),
-              ),
-              hintText: 'Mr. Avocado',
-              hintStyle: TextStyle(
-                fontSize: 20,
-                color: Color.fromRGBO(201, 201, 201, 1),
-              ),
-            ),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        TextField(
+          decoration: kInputFieldDecoration.copyWith(
+            hintText: '닉네임을 입력하세요',
           ),
-          SizedBox(height: 6),
-          TextFieldErrorMessageWidget(
-            title: '이미 사용 중인 닉네임이에요. 다른 닉네임을 골라볼까요?',
+          style: const TextStyle(
+            fontSize: kInputTextFontSize,
           ),
-        ],
-      ),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        const TextFieldErrorMessageWidget(
+          title: '이미 사용 중인 닉네임이에요. 다른 닉네임을 골라볼까요?',
+        ),
+      ],
     );
   }
 }

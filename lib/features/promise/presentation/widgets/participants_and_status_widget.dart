@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pravo_client/features/promises/presentation/widgets/participant_and_status_widget.dart';
+import 'package:pravo_client/features/promise/presentation/widgets/participant_and_status_widget.dart';
 
 class ParticipantsAndStatusWidget extends StatelessWidget {
   const ParticipantsAndStatusWidget({super.key});
@@ -19,11 +19,15 @@ class ParticipantsAndStatusWidget extends StatelessWidget {
         SizedBox(
           height: 16,
         ),
-        ParticipantAndStatusWidget(),
+        ParticipantAndStatusWidget(
+          isAttending: true,
+        ),
         SizedBox(
           height: 12,
         ),
-        ParticipantAndStatusWidget(),
+        ParticipantAndStatusWidget(
+          isAttending: false,
+        ),
       ],
     );
   }
