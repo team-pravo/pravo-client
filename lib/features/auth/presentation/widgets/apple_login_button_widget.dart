@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/auth/data/models/platform.dart';
+import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/oauth_provider.dart';
 import 'package:pravo_client/features/auth/presentation/widgets/social_login_button_widget.dart';
@@ -10,7 +11,8 @@ class AppleLoginButtonWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authNotifier = ref.read(oauthProvider);
+    final oauthNotifier = ref.read(oauthProvider);
+    final authNotifier = ref.read(authProvider);
 
     Future<void> handleLoginSuccess(
       String identityToken,
@@ -18,7 +20,8 @@ class AppleLoginButtonWidget extends ConsumerWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('애플 로그인 성공')),
       );
-      await authNotifier.login(identityToken, Platform.apple); // 로그인 성공 시 토큰 저장
+      await oauthNotifier.login(identityToken, Platform.apple);
+      await authNotifier.login(identityToken, Platform.apple);
     }
 
     void handleLoginError(

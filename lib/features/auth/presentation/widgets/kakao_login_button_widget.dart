@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:pravo_client/features/auth/data/models/platform.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/oauth_provider.dart';
+import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
 import 'package:pravo_client/features/auth/presentation/widgets/social_login_button_widget.dart';
 
 class KakaoLoginButtonWidget extends ConsumerWidget {
@@ -11,7 +12,8 @@ class KakaoLoginButtonWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authNotifier = ref.read(oauthProvider);
+    final oauthNotifier = ref.read(oauthProvider);
+    final authNotifier = ref.read(authProvider);
 
     // 로그인 성공 처리 함수
     Future<void> handleLoginSuccess(
@@ -21,10 +23,8 @@ class KakaoLoginButtonWidget extends ConsumerWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(successMessage)),
       );
-      await authNotifier.login(
-        token.accessToken,
-        Platform.kakao,
-      ); // 로그인 성공 시 토큰 저장
+      await oauthNotifier.login(token.accessToken, Platform.kakao);
+      await authNotifier.login(token.accessToken, Platform.apple);
     }
 
     // 로그인 오류 처리 함수
