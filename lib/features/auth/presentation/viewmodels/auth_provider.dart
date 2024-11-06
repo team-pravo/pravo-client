@@ -24,5 +24,11 @@ class AuthNotifier extends ChangeNotifier {
         await authRepository.login(oauthToken, oauthPlatform);
     final accessToken = response.accessToken;
     await _secureStorage.write(key: 'access_token', value: accessToken);
+    notifyListeners();
+  }
+
+  Future<void> logout() async {
+    await _secureStorage.delete(key: 'access_token');
+    notifyListeners();
   }
 }
