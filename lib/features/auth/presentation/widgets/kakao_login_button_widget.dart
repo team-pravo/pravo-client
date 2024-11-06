@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:pravo_client/features/auth/data/models/platform.dart';
-import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
+import 'package:pravo_client/features/auth/presentation/viewmodels/oauth_provider.dart';
 import 'package:pravo_client/features/auth/presentation/widgets/social_login_button_widget.dart';
 
 class KakaoLoginButtonWidget extends ConsumerWidget {
@@ -11,7 +11,7 @@ class KakaoLoginButtonWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authNotifier = ref.read(authProvider);
+    final authNotifier = ref.read(oauthProvider);
 
     // 로그인 성공 처리 함수
     Future<void> handleLoginSuccess(
