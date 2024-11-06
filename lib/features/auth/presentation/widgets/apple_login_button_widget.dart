@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/auth/data/models/platform.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
+import 'package:pravo_client/features/auth/presentation/viewmodels/oauth_provider.dart';
 import 'package:pravo_client/features/auth/presentation/widgets/social_login_button_widget.dart';
 
 class AppleLoginButtonWidget extends ConsumerWidget {
@@ -10,7 +10,7 @@ class AppleLoginButtonWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authNotifier = ref.read(authProvider);
+    final authNotifier = ref.read(oauthProvider);
 
     Future<void> handleLoginSuccess(
       String identityToken,
