@@ -20,9 +20,9 @@ class AuthNotifier extends ChangeNotifier {
     String oauthToken,
     Platform oauthPlatform,
   ) async {
-    TokenResponseModel response =
+    LoginResponseModel response =
         await authRepository.login(oauthToken, oauthPlatform);
-    final accessToken = response.accessToken;
+    final accessToken = response.jwtTokens.accessToken;
     await _secureStorage.write(key: 'access_token', value: accessToken);
     notifyListeners();
   }
