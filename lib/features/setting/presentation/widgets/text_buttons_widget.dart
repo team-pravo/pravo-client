@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:pravo_client/features/auth/data/models/platform.dart';
+import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/oauth_provider.dart';
 import 'package:pravo_client/features/core/presentation/widgets/alert_dialog_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/divider_with_padding_widget.dart';
@@ -15,12 +16,14 @@ class TextButtonsWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // 카카오톡 & 애플 로그아웃
     Future<void> logout() async {
-      final authNotifier = ref.read(oauthProvider);
+      final oauthNotifier = ref.read(oauthProvider);
+      final authNotifier = ref.read(authProvider);
 
-      if (authNotifier.getPlatform() == Platform.kakao) {
+      if (oauthNotifier.getPlatform() == Platform.kakao) {
         await UserApi.instance.logout();
       }
 
+      await oauthNotifier.logout();
       await authNotifier.logout();
     }
 
