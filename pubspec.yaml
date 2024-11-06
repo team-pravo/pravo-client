@@ -50,6 +50,7 @@ dependencies:
   sign_in_with_apple: ^6.1.3
   tosspayments_widget_sdk_flutter: ^2.0.6
   phosphor_flutter: ^2.1.0
+  dio: ^5.7.0
 
 dev_dependencies:
   flutter_test:
