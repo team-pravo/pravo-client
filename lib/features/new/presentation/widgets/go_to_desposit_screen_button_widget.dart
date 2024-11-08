@@ -19,6 +19,7 @@ class GoToDepositScreenButtonWidget extends StatelessWidget {
       buttonText: '예약금 결제하기',
       buttonColor: kPrimaryColor,
       textColor: Colors.white,
+      hasHorizontalMargin: true,
     );
   }
 }

@@ -9,6 +9,7 @@ class PrimaryButtonWidget extends StatelessWidget {
   final Color textColor;
   final IconData? icon;
   final bool iconBeforeText; // 아이콘 위치 (디폴트: 텍스트 앞)
+  final bool hasHorizontalMargin;
 
   const PrimaryButtonWidget({
     super.key,
@@ -19,6 +20,7 @@ class PrimaryButtonWidget extends StatelessWidget {
     this.textColor = Colors.white,
     this.icon,
     this.iconBeforeText = true,
+    this.hasHorizontalMargin = false,
   });
 
   @override
@@ -26,6 +28,9 @@ class PrimaryButtonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: isEnabled ? onTap : null,
       child: Container(
+        margin: hasHorizontalMargin
+            ? const EdgeInsets.symmetric(horizontal: kHorizontalPadding)
+            : null,
         decoration: BoxDecoration(
           color: isEnabled ? buttonColor : kUnselectedIconColor,
           borderRadius: BorderRadius.circular(16),

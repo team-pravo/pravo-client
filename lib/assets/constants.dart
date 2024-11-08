@@ -23,12 +23,16 @@ const Color kUnselectedIconColor = Color.fromRGBO(201, 201, 201, 1);
 // AvatarColor
 const Color kAvatarBackgroundColor = Color.fromRGBO(240, 240, 240, 1);
 
+// Padding values
+const double kHorizontalPadding = 24;
+const double kVerticalPadding = 30;
+
 // Layout
 const EdgeInsets kScreenPadding = EdgeInsets.fromLTRB(
-  24,
-  30,
-  24,
-  0,
+  kHorizontalPadding,
+  kVerticalPadding,
+  kHorizontalPadding,
+  kVerticalPadding,
 );
 
 // Input Style
