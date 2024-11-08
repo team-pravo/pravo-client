@@ -24,43 +24,38 @@ class NewScreen extends ConsumerWidget {
         actionOnPressed: () {},
       ),
       bottomNavigationBar: const NavigationBarWidget(),
-      body: Padding(
-        padding: kScreenPadding,
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    '약속일',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: kScreenPadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  '약속일',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
                   ),
-                  const SizedBox(
-                    height: 24,
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                const DatePickerWidget(),
+                PrimaryButtonWidget(
+                  onTap: () => context.push('/new/details'),
+                  buttonColor: kPrimaryColor,
+                  textColor: Colors.white,
+                  buttonText: '약속 생성하기',
+                  icon: PhosphorIcons.caretRight(
+                    PhosphorIconsStyle.bold,
                   ),
-                  const DatePickerWidget(),
-                  const Spacer(
-                    flex: 1,
-                  ),
-                  PrimaryButtonWidget(
-                    onTap: () => context.push('/new/details'),
-                    buttonColor: kPrimaryColor,
-                    textColor: Colors.white,
-                    buttonText: '약속 생성하기',
-                    icon: PhosphorIcons.caretRight(
-                      PhosphorIconsStyle.bold,
-                    ),
-                    iconBeforeText: false,
-                    isEnabled: isButtonEnabled,
-                  ),
-                ],
-              ),
+                  iconBeforeText: false,
+                  isEnabled: isButtonEnabled,
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

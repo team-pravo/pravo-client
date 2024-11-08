@@ -17,15 +17,19 @@ class SettingScreen extends StatelessWidget {
         actionIcon: PhosphorIcons.bell(),
         actionOnPressed: () => {},
       ),
-      body: Container(
-        padding: kScreenPadding,
-        child: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ProfilePreviewWidget(),
-            SizedBox(height: 50),
-            TextButtonsWidget(),
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: kScreenPadding,
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ProfilePreviewWidget(),
+                SizedBox(height: 50),
+                TextButtonsWidget(),
+              ],
+            ),
+          ),
         ),
       ),
       bottomNavigationBar: const NavigationBarWidget(),

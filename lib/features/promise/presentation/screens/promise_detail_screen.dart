@@ -61,53 +61,59 @@ class PromiseDetailScreen extends ConsumerWidget {
         },
       ),
       body: SafeArea(
-        child: Padding(
-          padding: kScreenPadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const PromiseOverviewWidget(),
-              const DividerWithPaddingWidget(
-                paddingHeight: 30,
-              ),
-              const ParticipantsAndStatusWidget(),
-              const DividerWithPaddingWidget(
-                paddingHeight: 30,
-              ),
-              const DepositWidget(),
-              const DividerWithPaddingWidget(
-                paddingHeight: 30,
-              ),
-              const PromiseStatusWidget(),
-              const Spacer(
-                flex: 1,
-              ),
-              if (buttonState != ButtonState.hidden)
-                PrimaryButtonWidget(
-                  isEnabled: true,
-                  onTap: () {
-                    if (buttonState == ButtonState.copyInvitationLink) {
-                      Clipboard.setData(const ClipboardData(text: '초대 링크'));
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('초대 링크가 복사되었습니다.')),
-                      );
-                    } else if (buttonState ==
-                        ButtonState.goToAttendanceConfirmation) {
-                      context.push('/promise/$promiseId/confirm-attendance');
-                    }
-                  },
-                  buttonColor: kPrimaryColor,
-                  textColor: Colors.white,
-                  buttonText: buttonState == ButtonState.copyInvitationLink
-                      ? '초대 링크 복사'
-                      : '참석 확인하러 가기',
-                  icon: buttonState == ButtonState.copyInvitationLink
-                      ? PhosphorIcons.link(PhosphorIconsStyle.bold)
-                      : null,
-                  iconBeforeText: true,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Expanded(
+              child: Padding(
+                padding: kScreenPadding,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      PromiseOverviewWidget(),
+                      DividerWithPaddingWidget(
+                        paddingHeight: 30,
+                      ),
+                      ParticipantsAndStatusWidget(),
+                      DividerWithPaddingWidget(
+                        paddingHeight: 30,
+                      ),
+                      DepositWidget(),
+                      DividerWithPaddingWidget(
+                        paddingHeight: 30,
+                      ),
+                      PromiseStatusWidget(),
+                    ],
+                  ),
                 ),
-            ],
-          ),
+              ),
+            ),
+            if (buttonState != ButtonState.hidden)
+              PrimaryButtonWidget(
+                isEnabled: true,
+                onTap: () {
+                  if (buttonState == ButtonState.copyInvitationLink) {
+                    Clipboard.setData(const ClipboardData(text: '초대 링크'));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('초대 링크가 복사되었습니다.')),
+                    );
+                  } else if (buttonState ==
+                      ButtonState.goToAttendanceConfirmation) {
+                    context.push('/promise/$promiseId/confirm-attendance');
+                  }
+                },
+                buttonColor: kPrimaryColor,
+                textColor: Colors.white,
+                buttonText: buttonState == ButtonState.copyInvitationLink
+                    ? '초대 링크 복사'
+                    : '참석 확인하러 가기',
+                icon: buttonState == ButtonState.copyInvitationLink
+                    ? PhosphorIcons.link(PhosphorIconsStyle.bold)
+                    : null,
+                iconBeforeText: true,
+                hasHorizontalMargin: true,
+              ),
+          ],
         ),
       ),
     );
