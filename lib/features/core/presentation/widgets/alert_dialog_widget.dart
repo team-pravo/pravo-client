@@ -22,7 +22,6 @@ class AlertDialogWidget extends StatelessWidget {
       titlePadding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
       contentPadding: const EdgeInsets.fromLTRB(30, 24, 30, 0),
       actionsPadding: const EdgeInsets.fromLTRB(30, 24, 30, 30),
-      actionsAlignment: MainAxisAlignment.spaceBetween,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
       ),
@@ -41,17 +40,25 @@ class AlertDialogWidget extends StatelessWidget {
         ),
       ),
       actions: [
-        DialogButtonWidget(
-          buttonText: '취소',
-          onTap: () => Navigator.of(context).pop(),
-          buttonColor: kWidgetBackgroundColor,
-          textColor: Colors.black,
-        ),
-        DialogButtonWidget(
-          buttonText: actionTitle,
-          onTap: actionOnPressed,
-          buttonColor: kPrimaryColor,
-          textColor: Colors.white,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            DialogButtonWidget(
+              buttonText: '취소',
+              onTap: () => Navigator.of(context).pop(),
+              buttonColor: kWidgetBackgroundColor,
+              textColor: Colors.black,
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            DialogButtonWidget(
+              buttonText: actionTitle,
+              onTap: actionOnPressed,
+              buttonColor: kPrimaryColor,
+              textColor: Colors.white,
+            ),
+          ],
         ),
       ],
     );
