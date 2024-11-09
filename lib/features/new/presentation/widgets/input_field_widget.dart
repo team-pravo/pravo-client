@@ -57,6 +57,7 @@ class InputFieldWidget extends StatelessWidget {
               CurrencyInputFormatter(), // 금액 형식
             ]
           : null,
+      onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
       decoration: kInputFieldDecoration.copyWith(
         hintText: placeholder,
       ),

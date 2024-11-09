@@ -70,15 +70,13 @@ class _DepositPaymentScreenState extends ConsumerState<DepositPaymentScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: PrimaryButtonWidget(
-                buttonText: '$formattedDepositAmount원 결제하기',
-                isEnabled: paymentState.isAgreementChecked,
-                onTap: () async {
-                  await paymentNotifier.requestPayment(orderId, promiseName);
-                },
-              ),
+            PrimaryButtonWidget(
+              buttonText: '$formattedDepositAmount원 결제하기',
+              isEnabled: paymentState.isAgreementChecked,
+              onTap: () async {
+                await paymentNotifier.requestPayment(orderId, promiseName);
+              },
+              hasHorizontalMargin: true,
             ),
           ],
         ),

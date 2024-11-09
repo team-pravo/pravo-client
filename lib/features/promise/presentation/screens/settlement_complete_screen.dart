@@ -20,101 +20,109 @@ class SettlementCompleteScreen extends StatelessWidget {
         actionOnPressed: () => context.go('/'),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: kScreenPadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                '약속 정산이\n완료되었습니다.',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              Container(
-                padding: kWidgetPadding,
-                decoration: BoxDecoration(
-                  color: kWidgetBackgroundColor,
-                  borderRadius: kWidgetBorderRadius,
-                ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '환불 예정 금액',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: kScreenPadding,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        '약속 정산이\n완료되었습니다.',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
                         ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          '3일 이내에 결제가 취소될 예정입니다.',
-                          style: TextStyle(color: kBodyTextColor),
-                        ),
-                      ],
-                    ),
-                    CurrencyDisplayWidget(value: '1,000', unit: '원'),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Container(
-                padding: kWidgetPadding,
-                decoration: BoxDecoration(
-                  color: kWidgetBackgroundColor,
-                  borderRadius: kWidgetBorderRadius,
-                ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Flexible(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '지급 포인트',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          Text(
-                            '참석하지 않은 1명의 예약금 1,000원이 3명한테 333P씩 분배되었습니다.',
-                            style: TextStyle(color: kBodyTextColor),
-                          ),
-                        ],
                       ),
-                    ),
-                    CurrencyDisplayWidget(value: '+333', unit: 'P'),
-                  ],
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Container(
+                        padding: kWidgetPadding,
+                        decoration: BoxDecoration(
+                          color: kWidgetBackgroundColor,
+                          borderRadius: kWidgetBorderRadius,
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '환불 예정 금액',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    '3일 이내에 결제가 취소될 예정입니다.',
+                                    style: TextStyle(color: kBodyTextColor),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            CurrencyDisplayWidget(value: '1,000', unit: '원'),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        padding: kWidgetPadding,
+                        decoration: BoxDecoration(
+                          color: kWidgetBackgroundColor,
+                          borderRadius: kWidgetBorderRadius,
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '지급 포인트',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    '참석하지 않은 1명의 예약금 1,000원이 3명한테 333P씩 분배되었습니다.',
+                                    style: TextStyle(color: kBodyTextColor),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            CurrencyDisplayWidget(value: '+333', unit: 'P'),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              const Spacer(
-                flex: 1,
-              ),
-              PrimaryButtonWidget(
-                buttonText: '확인',
-                onTap: () => context.push('/promise/$promiseId'),
-              ),
-            ],
-          ),
+            ),
+            PrimaryButtonWidget(
+              buttonText: '확인',
+              onTap: () => context.push('/promise/$promiseId'),
+              hasHorizontalMargin: true,
+            ),
+          ],
         ),
       ),
     );

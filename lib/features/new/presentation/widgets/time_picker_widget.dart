@@ -158,13 +158,16 @@ class TimePickerWidget extends ConsumerWidget {
   List<Widget> _buildDialogActions(BuildContext context, WidgetRef ref) {
     return [
       Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           DialogButtonWidget(
             buttonText: '취소',
             onTap: () => Navigator.of(context).pop(),
             buttonColor: kWidgetBackgroundColor,
             textColor: Colors.black,
+          ),
+          const SizedBox(
+            width: 8,
           ),
           DialogButtonWidget(
             buttonText: '확인',

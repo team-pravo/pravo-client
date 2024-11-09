@@ -21,37 +21,52 @@ class ConfirmAttendanceScreen extends StatelessWidget {
         leadingOnPressed: () => context.pop(),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: kScreenPadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                '참여자',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              Expanded(
-                child: ListView.separated(
-                  itemCount: 5,
-                  itemBuilder: (_, __) => const ConfirmAttendanceButtonWidget(),
-                  separatorBuilder: (_, __) => const VerticalGapWidget(
-                    gapHeight: 12,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: kScreenPadding,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        '참여자',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      Column(
+                        children: [
+                          ListView.separated(
+                            shrinkWrap: true, // <==== limit height. 리스트뷰 크기 고정
+                            primary: false,
+                            itemCount: 10,
+                            itemBuilder: (_, __) =>
+                                const ConfirmAttendanceButtonWidget(),
+                            separatorBuilder: (_, __) =>
+                                const VerticalGapWidget(
+                              gapHeight: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
-              PrimaryButtonWidget(
-                buttonText: '정산하러 가기',
-                onTap: () =>
-                    context.push('/promise/$promiseId/settlement/complete'),
-              ),
-            ],
-          ),
+            ),
+            PrimaryButtonWidget(
+              buttonText: '정산하러 가기',
+              onTap: () =>
+                  context.push('/promise/$promiseId/settlement/complete'),
+              hasHorizontalMargin: true,
+            ),
+          ],
         ),
       ),
     );

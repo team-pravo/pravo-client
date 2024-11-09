@@ -17,62 +17,66 @@ class DepositPaymentCompleteScreen extends StatelessWidget {
         actionOnPressed: () => context.pop(),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: kScreenPadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 50,
-              ),
-              const Row(
-                children: [
-                  Text(
-                    '10,000원',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                      color: kPrimaryColor,
+        child: Column(
+          children: [
+            const Expanded(
+              child: Padding(
+                padding: kScreenPadding,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 50,
                     ),
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    '결제가 완료되어',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
+                    Row(
+                      children: [
+                        Text(
+                          '10,000원',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryColor,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          '결제가 완료되어',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              const Text(
-                '약속이 생성되었습니다.',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
+                    Text(
+                      '약속이 생성되었습니다.',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      '약속 정보를 상세 페이지에서 확인해 보세요!',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: kBodyTextColor,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                '약속 정보를 상세 페이지에서 확인해 보세요!',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: kBodyTextColor,
-                ),
-              ),
-              const Spacer(
-                flex: 1,
-              ),
-              PrimaryButtonWidget(
-                buttonText: '약속 확인하기',
-                onTap: () => context.push('/promise/1'),
-              ),
-            ],
-          ),
+            ),
+            PrimaryButtonWidget(
+              buttonText: '약속 확인하기',
+              onTap: () => context.push('/promise/1'),
+              hasHorizontalMargin: true,
+            ),
+          ],
         ),
       ),
     );
