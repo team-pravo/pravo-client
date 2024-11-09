@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio();
@@ -12,6 +13,7 @@ final dioProvider = Provider<Dio>((ref) {
     ),
   );
   dio.options = BaseOptions(
+    baseUrl: dotenv.env['PRAVO_BASE_URL']!,
     sendTimeout: const Duration(seconds: 5),
   );
   return dio;
