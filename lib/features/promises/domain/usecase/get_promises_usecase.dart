@@ -6,7 +6,11 @@ class GetPromisesUseCase {
 
   GetPromisesUseCase(this.repository);
 
-  Future<List<Promise>> call() async {
-    return await repository.getPromises();
+  Future<List<Promise>> getUpcomingPromises(DateTime startDate) {
+    return repository.getUpcomingPromises(startDate);
+  }
+
+  Future<List<Promise>> getPastPromises(DateTime endDate) {
+    return repository.getPastPromises(endDate);
   }
 }

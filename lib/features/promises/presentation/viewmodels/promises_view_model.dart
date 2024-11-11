@@ -8,17 +8,18 @@ class PromisesViewModel extends StateNotifier<AsyncValue<List<Promise>>> {
   final GetPromisesUseCase _getPromisesUseCase;
 
   PromisesViewModel(this._getPromisesUseCase)
-      : super(const AsyncValue.loading()) {
-    fetchPromises();
+      : super(const AsyncValue.loading());
+
+  Future<List<Promise>> fetchUpcomingPromises(DateTime startDate) async {
+    final promises = await _getPromisesUseCase.getUpcomingPromises(startDate);
+    state = AsyncValue.data(promises);
+    return promises;
   }
 
-  Future<void> fetchPromises() async {
-    try {
-      final promises = await _getPromisesUseCase();
-      state = AsyncValue.data(promises);
-    } catch (e, st) {
-      state = AsyncValue.error(e, st);
-    }
+  Future<List<Promise>> fetchPastPromises(DateTime endDate) async {
+    final promises = await _getPromisesUseCase.getPastPromises(endDate);
+    state = AsyncValue.data(promises);
+    return promises;
   }
 }
 
