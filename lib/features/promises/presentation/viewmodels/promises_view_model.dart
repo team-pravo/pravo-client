@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pravo_client/features/promises/data/repository/promises_repository_impl.dart';
-import 'package:pravo_client/features/promises/domain/entity/promise.dart';
-import 'package:pravo_client/features/promises/domain/usecase/get_promises_usecase.dart';
+import 'package:pravo_client/features/promises/data/repositories/promises_repository_impl.dart';
+import 'package:pravo_client/features/promises/domain/entities/promise.dart';
+import 'package:pravo_client/features/promises/domain/usecases/get_promises_usecase.dart';
 
 class PromisesViewModel extends StateNotifier<AsyncValue<List<Promise>>> {
   final GetPromisesUseCase _getPromisesUseCase;
