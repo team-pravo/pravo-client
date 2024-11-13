@@ -20,23 +20,14 @@ class AuthRepository {
     Platform oauthPlatform,
   ) async {
     final request = {
-      'oauth_token': oauthToken,
-      'oauth_platform': oauthPlatform.name,
+      'socialToken': oauthToken,
     };
 
     final response = await dio.post(
-      'http://localhost:8080/api/auth/login', // FIXME: baseURL + '/login'
+      '/api/login/${oauthPlatform.name}',
       data: request,
     );
 
-    // FIXME: return TokenResponseModel.fromJson(response.data);
-
-    return LoginResponseModel(
-      jwtTokens: TokenResponseModel(
-        accessToken: 'sample access token',
-        grantType: 'grant type',
-        expiresIn: 1000,
-      ),
-    );
+    return LoginResponseModel.fromJson(response.data);
   }
 }
