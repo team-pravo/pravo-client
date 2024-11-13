@@ -3,16 +3,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/core/dio/dio_provider.dart';
 import 'package:pravo_client/features/promises/data/models/promise_model.dart';
 import 'package:pravo_client/features/promises/domain/entity/promise.dart';
+import 'package:pravo_client/features/promises/domain/repository/promises_repository.dart';
 
 final promisesRepositoryProvider = Provider<PromisesRepository>((ref) {
-  return PromisesRepository(ref.read(dioProvider));
+  return PromisesRepositoryImpl(ref.read(dioProvider));
 });
 
-class PromisesRepository {
+class PromisesRepositoryImpl implements PromisesRepository {
   final Dio dio;
 
-  PromisesRepository(this.dio);
+  PromisesRepositoryImpl(this.dio);
 
+  @override
   Future<List<Promise>> getUpcomingPromises(DateTime startDate) async {
     final response = await dio.get(
       '/api/promise',
@@ -23,6 +25,7 @@ class PromisesRepository {
     return _mapResponseToPromises(response);
   }
 
+  @override
   Future<List<Promise>> getPastPromises(DateTime endDate) async {
     final response = await dio.get(
       '/api/promise',
