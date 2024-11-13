@@ -33,15 +33,30 @@ class CustomInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
+    // TODO: Logging Framework로 대체
     final token = await storage.read(key: 'access_token');
-    options.headers.addAll({
-      'Authorization': 'Bearer $token',
-    });
+    // options.headers.addAll({
+    //   'Authorization': 'Bearer $token',
+    // });
+
+    print('${options.method} ${options.uri}');
+    print('${options.headers}');
+    print('${options.data}');
     return super.onRequest(options, handler);
   }
 
   @override
+  void onResponse(
+    Response response,
+    ResponseInterceptorHandler handler,
+  ) {
+    print(response.data); // TODO: Logging Framework로 대체
+    super.onResponse(response, handler);
+  }
+
+  @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
+    print('${err.response!.data}');
     return handler.reject(err);
   }
 }
