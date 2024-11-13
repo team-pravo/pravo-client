@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
+import 'dart:developer';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:pravo_client/features/core/data/models/api_response_model.dart';
 
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio();
@@ -33,15 +35,14 @@ class CustomInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    // TODO: Logging Framework로 대체
     final token = await storage.read(key: 'access_token');
-    // options.headers.addAll({
-    //   'Authorization': 'Bearer $token',
-    // });
+    options.headers.addAll({
+      'Authorization': 'Bearer $token',
+    });
 
-    print('${options.method} ${options.uri}');
-    print('${options.headers}');
-    print('${options.data}');
+    log('${options.method} ${options.uri}');
+    log('${options.headers}');
+    log('${options.data}');
     return super.onRequest(options, handler);
   }
 
@@ -50,13 +51,17 @@ class CustomInterceptor extends Interceptor {
     Response response,
     ResponseInterceptorHandler handler,
   ) {
-    print(response.data); // TODO: Logging Framework로 대체
+    log('${response.statusCode} - ${response.data}');
+
+    final body = ApiResponseModel.fromJson(response.data);
+    response.data = body.data; // 공통 Response에서 data 부분만 추출하여 가져옴
+
     super.onResponse(response, handler);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    print('${err.response!.data}');
+    log('${err.message} - ${err.response?.data}');
     return handler.reject(err);
   }
 }
