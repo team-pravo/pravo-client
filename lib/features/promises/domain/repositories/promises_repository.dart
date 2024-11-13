@@ -1,4 +1,4 @@
-import 'package:pravo_client/features/promises/domain/entity/promise.dart';
+import 'package:pravo_client/features/promises/domain/entities/promise.dart';
 
 abstract class PromisesRepository {
   Future<List<Promise>> getUpcomingPromises(DateTime startDate);
