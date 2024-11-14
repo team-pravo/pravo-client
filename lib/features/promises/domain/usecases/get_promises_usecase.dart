@@ -1,5 +1,5 @@
-import 'package:pravo_client/features/promises/data/repository/promise_repository.dart';
-import 'package:pravo_client/features/promises/domain/entity/promise.dart';
+import 'package:pravo_client/features/promises/domain/entities/promise.dart';
+import 'package:pravo_client/features/promises/domain/repositories/promises_repository.dart';
 
 class GetPromisesUseCase {
   final PromisesRepository repository;

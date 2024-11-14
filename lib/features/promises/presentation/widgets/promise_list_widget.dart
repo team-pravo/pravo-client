@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/promise_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/vertical_gap_widget.dart';
-import 'package:pravo_client/features/promises/domain/entity/promise.dart';
+import 'package:pravo_client/features/promises/domain/entities/promise.dart';
 
 class PromiseListWidget extends StatelessWidget {
   final List<Promise> promises;
