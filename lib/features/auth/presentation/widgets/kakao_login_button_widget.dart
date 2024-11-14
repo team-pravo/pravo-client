@@ -24,7 +24,7 @@ class KakaoLoginButtonWidget extends ConsumerWidget {
         SnackBar(content: Text(successMessage)),
       );
       await oauthNotifier.login(token.accessToken, Platform.kakao);
-      await authNotifier.login(token.accessToken, Platform.apple);
+      await authNotifier.login(token.accessToken, Platform.kakao);
     }
 
     // 로그인 오류 처리 함수

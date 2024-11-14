@@ -4,7 +4,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth1_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/navigation_bar_widget.dart';
-import 'package:pravo_client/features/promises/domain/entity/promise.dart';
+import 'package:pravo_client/features/promises/domain/entities/promise.dart';
 import 'package:pravo_client/features/promises/presentation/viewmodels/promises_view_model.dart';
 import 'package:pravo_client/features/promises/presentation/widgets/promise_list_widget.dart';
 
