@@ -6,6 +6,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/deposit_payment_provider.dart';
+import 'package:pravo_client/features/new/presentation/viewmodels/payment_view_model.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_provider.dart';
 import 'package:tosspayments_widget_sdk_flutter/widgets/agreement.dart';
 import 'package:tosspayments_widget_sdk_flutter/widgets/payment_method.dart';
@@ -36,7 +37,12 @@ class _DepositPaymentScreenState extends ConsumerState<DepositPaymentScreen> {
     final paymentNotifier = ref.read(depositPaymentProvider.notifier);
     final depositAmount = ref.watch(promiseDetailsProvider).deposit;
     final promiseName = ref.watch(promiseDetailsProvider).name;
-    const orderId = 'OrderId_123'; // 수정 예정
+    final orderId = ref
+        .watch(paymentViewModelProvider)
+        .whenData((payment) => payment)
+        .value!
+        .orderId;
+
     final formattedDepositAmount = NumberFormat('#,###').format(depositAmount);
 
     return Scaffold(
