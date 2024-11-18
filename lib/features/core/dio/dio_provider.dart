@@ -53,8 +53,13 @@ class CustomInterceptor extends Interceptor {
   ) {
     log('${response.statusCode} - ${response.data}');
 
-    final body = ApiResponseModel.fromJson(response.data);
-    response.data = body.data; // 공통 Response에서 data 부분만 추출하여 가져옴
+    try {
+      // FIXME: 모든 API가 공통 응답 포맷으로 주는 상황에서는 try ~ catch가 필요 없다
+      final body = ApiResponseModel.fromJson(response.data);
+      response.data = body.data; // 공통 Response에서 data 부분만 추출하여 가져옴
+    } catch (error) {
+      log('$error');
+    }
 
     super.onResponse(response, handler);
   }
