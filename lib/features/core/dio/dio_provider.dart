@@ -61,6 +61,7 @@ class CustomInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
+    log('${err.error}');
     log('${err.message} - ${err.response?.data}');
     return handler.reject(err);
   }
