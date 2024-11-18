@@ -7,7 +7,6 @@ import 'package:pravo_client/features/core/presentation/widgets/primary_button_w
 import 'package:pravo_client/features/new/domain/entities/payment.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/payment_view_model.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_provider.dart';
-import 'package:pravo_client/features/new/presentation/viewmodels/time_provider.dart';
 
 class GoToDepositScreenButtonWidget extends ConsumerWidget {
   const GoToDepositScreenButtonWidget({
@@ -17,12 +16,11 @@ class GoToDepositScreenButtonWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final promiseDetails = ref.watch(promiseDetailsProvider);
-    final selectedTime = ref.watch(timeProvider);
 
     final isButtonEnabled = promiseDetails.name.isNotEmpty &&
         promiseDetails.location.isNotEmpty &&
         promiseDetails.deposit > 0 &&
-        selectedTime != null;
+        promiseDetails.dateTime != null;
 
     ref.listen<AsyncValue<Payment>>(paymentViewModelProvider, (previous, next) {
       next.when(

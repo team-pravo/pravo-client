@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
-import 'package:pravo_client/features/new/presentation/viewmodels/date_provider.dart';
 import 'package:pravo_client/provider/navigation_provider.dart';
 
 class NavigationBarWidget extends ConsumerWidget {
@@ -18,10 +17,6 @@ class NavigationBarWidget extends ConsumerWidget {
 
     void onItemTapped(int index) {
       ref.read(navigationIndexProvider.notifier).state = index;
-
-      // 탭 이동 시 dateProvider 상태 초기화
-      ref.read(dateProvider.notifier).updateDate(null);
-
       context.go(routes[index]);
     }
 
