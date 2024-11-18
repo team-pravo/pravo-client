@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:pravo_client/app/formatter.dart';
 import 'package:pravo_client/features/core/presentation/widgets/currency_display_widget.dart';
 
 class DepositWidget extends StatelessWidget {
+  final int deposit;
   const DepositWidget({
     super.key,
+    required this.deposit,
   });
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
+        const Text(
           '예약금',
           style: TextStyle(
             fontSize: 16,
@@ -19,7 +22,7 @@ class DepositWidget extends StatelessWidget {
           ),
         ),
         CurrencyDisplayWidget(
-          value: '1,000',
+          value: Formatter.formatWithComma(deposit),
           unit: '원',
           fontWeight: FontWeight.w400,
         ),

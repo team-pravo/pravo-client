@@ -80,21 +80,36 @@ class PromiseDetailScreen extends ConsumerWidget {
                       final promiseAsync =
                           ref.watch(promiseProvider(promiseId));
                       return promiseAsync.when(
-                        data: (promise) => const Column(
+                        data: (promise) => Column(
                           children: [
-                            PromiseOverviewWidget(),
-                            DividerWithPaddingWidget(
+                            PromiseOverviewWidget(
+                              name: promise.name,
+                              location: promise.location,
+                              promiseDate: promise.promiseDate,
+                              organizer: promise.participants.firstWhere(
+                                (participant) =>
+                                    participant.role == 'ORGANIZER',
+                                orElse: () => throw Exception(
+                                  'No participant with role ORGANIZER found',
+                                ),
+                              ),
+                            ),
+                            const DividerWithPaddingWidget(
                               paddingHeight: 30,
                             ),
-                            ParticipantsAndStatusWidget(),
-                            DividerWithPaddingWidget(
+                            ParticipantsAndStatusWidget(
+                              participants: promise.participants,
+                            ),
+                            const DividerWithPaddingWidget(
                               paddingHeight: 30,
                             ),
-                            DepositWidget(),
-                            DividerWithPaddingWidget(
+                            DepositWidget(
+                              deposit: promise.deposit,
+                            ),
+                            const DividerWithPaddingWidget(
                               paddingHeight: 30,
                             ),
-                            PromiseStatusWidget(),
+                            const PromiseStatusWidget(),
                           ],
                         ),
                         loading: () => const CircularProgressIndicator(),

@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:pravo_client/features/promise/domain/entities/participant.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/participant_and_status_widget.dart';
 
 class ParticipantsAndStatusWidget extends StatelessWidget {
-  const ParticipantsAndStatusWidget({super.key});
+  final List<Participant> participants;
+
+  const ParticipantsAndStatusWidget({super.key, required this.participants});
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           '참여자',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 16,
         ),
-        ParticipantAndStatusWidget(
-          isAttending: true,
-        ),
-        SizedBox(
-          height: 12,
-        ),
-        ParticipantAndStatusWidget(
-          isAttending: false,
-        ),
+        ...participants.map((participant) {
+          return Column(
+            children: [
+              ParticipantAndStatusWidget(
+                name: participant.name,
+                profileImageUrl: participant.profileImageUrl,
+                status: participant.status,
+              ),
+              const SizedBox(height: 12),
+            ],
+          );
+        }),
       ],
     );
   }
