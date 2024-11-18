@@ -2,7 +2,7 @@ import 'package:dio/dio.dart' hide Headers;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/core/dio/dio_provider.dart';
 import 'package:pravo_client/features/promises/data/models/promise_model.dart';
-import 'package:pravo_client/features/promises/domain/entity/promise.dart';
+import 'package:pravo_client/features/promises/domain/entities/promise.dart';
 
 final promisesRepositoryProvider = Provider<PromisesRepository>((ref) {
   return PromisesRepository(ref.read(dioProvider));
