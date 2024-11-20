@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/app/formatter.dart';
+import 'package:pravo_client/features/core/presentation/widgets/divider_with_padding_widget.dart';
 import 'package:pravo_client/features/promise/domain/entities/participant.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/icon_and_text_widget.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/image_and_text_widget.dart';
@@ -56,6 +57,9 @@ class PromiseOverviewWidget extends StatelessWidget {
               title: Formatter.format(promiseDate),
             ),
           ],
+        ),
+        const DividerWithPaddingWidget(
+          paddingHeight: 30,
         ),
       ],
     );

@@ -6,14 +6,13 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/alert_dialog_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
-import 'package:pravo_client/features/core/presentation/widgets/divider_with_padding_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
+import 'package:pravo_client/features/promise/domain/entities/promise.dart';
 import 'package:pravo_client/features/promise/presentation/viewmodels/promise_view_model.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/deposit_widget.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/participants_and_status_widget.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/promise_overview_widget.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/promise_status_widget.dart';
-import 'package:pravo_client/features/promise/domain/entities/promise.dart';
 
 enum ButtonState {
   copyInvitationLink, // 초대 링크 복사 상태
@@ -94,25 +93,17 @@ class PromiseDetailScreen extends ConsumerWidget {
                                 ),
                               ),
                             ),
-                            const DividerWithPaddingWidget(
-                              paddingHeight: 30,
-                            ),
                             ParticipantsAndStatusWidget(
                               participants: promise.participants,
-                            ),
-                            const DividerWithPaddingWidget(
-                              paddingHeight: 30,
                             ),
                             DepositWidget(
                               deposit: promise.deposit,
                             ),
-                            const DividerWithPaddingWidget(
-                              paddingHeight: 30,
-                            ),
                             const PromiseStatusWidget(),
                           ],
                         ),
-                        loading: () => const CircularProgressIndicator(),
+                        loading: () =>
+                            const Center(child: CircularProgressIndicator()),
                         error: (error, stack) =>
                             Center(child: Text('Error: $error')),
                       );

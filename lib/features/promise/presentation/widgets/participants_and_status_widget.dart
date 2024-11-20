@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pravo_client/features/core/presentation/widgets/divider_with_padding_widget.dart';
 import 'package:pravo_client/features/promise/domain/entities/participant.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/participant_and_status_widget.dart';
 
@@ -34,6 +35,9 @@ class ParticipantsAndStatusWidget extends StatelessWidget {
             ],
           );
         }),
+        const DividerWithPaddingWidget(
+          paddingHeight: 30,
+        ),
       ],
     );
   }
