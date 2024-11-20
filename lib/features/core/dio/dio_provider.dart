@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'dart:developer';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
+import 'package:pravo_client/features/auth/presentation/viewmodels/oauth_provider.dart';
+import 'package:pravo_client/features/auth/presentation/viewmodels/router_provider.dart';
 import 'package:pravo_client/features/core/data/models/api_response_model.dart';
 
 final dioProvider = Provider<Dio>((ref) {
@@ -61,6 +66,11 @@ class CustomInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
+    if (err.response?.statusCode == HttpStatus.unauthorized) {
+      ref.read(authProvider).logout();
+      ref.read(oauthProvider).logout();
+      ref.read(routerProvider).go('/login');
+    }
     log('${err.message} - ${err.response?.data}');
     return handler.reject(err);
   }
