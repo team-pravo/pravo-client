@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
+import 'package:pravo_client/features/member/domain/entities/member.dart';
 
 class ProfilePreviewWidget extends StatelessWidget {
-  final String name;
-  final String? profileImageUrl;
+  final Member member;
   const ProfilePreviewWidget({
     super.key,
-    required this.name,
-    this.profileImageUrl,
+    required this.member,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.push('/profile/edit'),
+      onTap: () => context.push('/profile/edit', extra: member),
       child: Container(
         padding: kWidgetPadding,
         decoration: BoxDecoration(
@@ -29,10 +28,10 @@ class ProfilePreviewWidget extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundColor: kAvatarBackgroundColor,
-                  backgroundImage: profileImageUrl != null
-                      ? NetworkImage(profileImageUrl!)
+                  backgroundImage: member.profileImageUrl != null
+                      ? NetworkImage(member.profileImageUrl!)
                       : null,
-                  child: profileImageUrl == null
+                  child: member.profileImageUrl == null
                       ? Padding(
                           padding: const EdgeInsets.all(6),
                           child: Image.asset(
@@ -43,7 +42,7 @@ class ProfilePreviewWidget extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 Text(
-                  name,
+                  member.name,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,

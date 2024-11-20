@@ -43,8 +43,7 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
               children: [
                 memberState.when(
                   data: (member) => ProfilePreviewWidget(
-                    name: member.name,
-                    profileImageUrl: member.profileImageUrl,
+                    member: member,
                   ),
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
