@@ -17,10 +17,16 @@ class GoToDepositScreenButtonWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final promiseDetails = ref.watch(promiseDetailsProvider);
 
+    // 현재 시간과 비교하여 날짜와 시간이 유효한지 확인
+    bool isDateTimeValid = false;
+    if (promiseDetails.dateTime != null) {
+      isDateTimeValid = promiseDetails.dateTime!.isAfter(DateTime.now());
+    }
+
     final isButtonEnabled = promiseDetails.name.isNotEmpty &&
         promiseDetails.location.isNotEmpty &&
         promiseDetails.deposit > 0 &&
-        promiseDetails.dateTime != null;
+        isDateTimeValid;
 
     ref.listen<AsyncValue<Payment>>(paymentViewModelProvider, (previous, next) {
       next.when(
