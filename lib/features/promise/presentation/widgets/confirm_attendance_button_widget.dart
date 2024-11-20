@@ -59,7 +59,7 @@ class _ConfirmAttendanceButtonWidgetState
             const SizedBox(
               width: 16,
             ),
-            const ImageAndTextWidget(),
+            const ImageAndTextWidget(name: 'Mr. Avocado'), // FIXME
           ],
         ),
       ),

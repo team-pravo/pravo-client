@@ -6,8 +6,9 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/alert_dialog_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
-import 'package:pravo_client/features/core/presentation/widgets/divider_with_padding_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
+import 'package:pravo_client/features/promise/domain/entities/promise.dart';
+import 'package:pravo_client/features/promise/presentation/viewmodels/promise_view_model.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/deposit_widget.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/participants_and_status_widget.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/promise_overview_widget.dart';
@@ -18,6 +19,11 @@ enum ButtonState {
   goToAttendanceConfirmation, // 참석 확인하러 가기 상태
   hidden, // 버튼 숨김 상태
 }
+
+final promiseProvider =
+    FutureProvider.autoDispose.family<Promise, int>((ref, promiseId) {
+  return ref.read(promiseViewModelProvider.notifier).getPromise(promiseId);
+});
 
 class PromiseDetailScreen extends ConsumerWidget {
   final int promiseId;
@@ -64,26 +70,44 @@ class PromiseDetailScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Expanded(
+            Expanded(
               child: Padding(
                 padding: kScreenPadding,
                 child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      PromiseOverviewWidget(),
-                      DividerWithPaddingWidget(
-                        paddingHeight: 30,
-                      ),
-                      ParticipantsAndStatusWidget(),
-                      DividerWithPaddingWidget(
-                        paddingHeight: 30,
-                      ),
-                      DepositWidget(),
-                      DividerWithPaddingWidget(
-                        paddingHeight: 30,
-                      ),
-                      PromiseStatusWidget(),
-                    ],
+                  child: Consumer(
+                    builder: (context, ref, child) {
+                      final promiseAsync =
+                          ref.watch(promiseProvider(promiseId));
+                      return promiseAsync.when(
+                        data: (promise) => Column(
+                          children: [
+                            PromiseOverviewWidget(
+                              name: promise.name,
+                              location: promise.location,
+                              promiseDate: promise.promiseDate,
+                              organizer: promise.participants.firstWhere(
+                                (participant) =>
+                                    participant.role == 'ORGANIZER',
+                                orElse: () => throw Exception(
+                                  'No participant with role ORGANIZER found',
+                                ),
+                              ),
+                            ),
+                            ParticipantsAndStatusWidget(
+                              participants: promise.participants,
+                            ),
+                            DepositWidget(
+                              deposit: promise.deposit,
+                            ),
+                            const PromiseStatusWidget(),
+                          ],
+                        ),
+                        loading: () =>
+                            const Center(child: CircularProgressIndicator()),
+                        error: (error, stack) =>
+                            Center(child: Text('Error: $error')),
+                      );
+                    },
                   ),
                 ),
               ),

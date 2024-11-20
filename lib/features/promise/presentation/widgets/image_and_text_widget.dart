@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pravo_client/assets/constants.dart';
 
 class ImageAndTextWidget extends StatelessWidget {
-  const ImageAndTextWidget({super.key});
+  final String name;
+  final String? imageUrl;
+  const ImageAndTextWidget({
+    super.key,
+    required this.name,
+    this.imageUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,16 +17,25 @@ class ImageAndTextWidget extends StatelessWidget {
         CircleAvatar(
           backgroundColor: kAvatarBackgroundColor,
           radius: 12,
-          child: Image.asset(
-            'assets/images/avocado.png',
+          child: CircleAvatar(
+            backgroundColor: kAvatarBackgroundColor,
+            backgroundImage: imageUrl != null ? NetworkImage(imageUrl!) : null,
+            child: imageUrl == null
+                ? Padding(
+                    padding: const EdgeInsets.all(6),
+                    child: Image.asset(
+                      'assets/images/avocado.png',
+                    ),
+                  )
+                : null,
           ),
         ),
         const SizedBox(
           width: 12,
         ),
-        const Text(
-          'Mr. Avocado',
-          style: TextStyle(
+        Text(
+          name,
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
           ),
