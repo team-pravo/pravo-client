@@ -4,7 +4,13 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 
 class ProfilePreviewWidget extends StatelessWidget {
-  const ProfilePreviewWidget({super.key});
+  final String name;
+  final String? profileImageUrl;
+  const ProfilePreviewWidget({
+    super.key,
+    required this.name,
+    this.profileImageUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +29,22 @@ class ProfilePreviewWidget extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundColor: kAvatarBackgroundColor,
-                  radius: 24,
-                  child: Padding(
-                    padding: const EdgeInsets.all(7.0),
-                    child: Image.asset(
-                      'assets/images/avocado.png',
-                    ),
-                  ),
+                  backgroundImage: profileImageUrl != null
+                      ? NetworkImage(profileImageUrl!)
+                      : null,
+                  child: profileImageUrl == null
+                      ? Padding(
+                          padding: const EdgeInsets.all(6),
+                          child: Image.asset(
+                            'assets/images/avocado.png',
+                          ),
+                        )
+                      : null,
                 ),
                 const SizedBox(width: 12),
-                const Text(
-                  'Mr. Avocado',
-                  style: TextStyle(
+                Text(
+                  name,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
