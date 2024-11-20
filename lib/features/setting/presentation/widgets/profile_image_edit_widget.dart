@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:pravo_client/assets/constants.dart';
 
 class ProfileImageEditWidget extends StatelessWidget {
+  final String? profileImageUrl;
   const ProfileImageEditWidget({
     super.key,
+    this.profileImageUrl,
   });
 
   @override
@@ -14,12 +16,16 @@ class ProfileImageEditWidget extends StatelessWidget {
           CircleAvatar(
             backgroundColor: kAvatarBackgroundColor,
             radius: 42,
-            child: Padding(
-              padding: const EdgeInsets.all(7.0),
-              child: Image.asset(
-                'assets/images/avocado.png',
-              ),
-            ),
+            backgroundImage:
+                profileImageUrl != null ? NetworkImage(profileImageUrl!) : null,
+            child: profileImageUrl == null
+                ? Padding(
+                    padding: const EdgeInsets.all(7.0),
+                    child: Image.asset(
+                      'assets/images/avocado.png',
+                    ),
+                  )
+                : null,
           ),
           Positioned(
             bottom: 2,
