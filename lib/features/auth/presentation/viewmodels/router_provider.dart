@@ -4,6 +4,7 @@ import 'package:pravo_client/features/auth/presentation/screens/login_screen.dar
 import 'package:pravo_client/features/auth/presentation/viewmodels/oauth_provider.dart';
 import 'package:pravo_client/features/home/presentation/screens/home_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/deposit_payment_complete_screen.dart';
+import 'package:pravo_client/features/new/presentation/screens/deposit_payment_failure_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/deposit_payment_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/new_details_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/new_screen.dart';
@@ -69,6 +70,16 @@ final routerProvider = Provider<GoRouter>((ref) {
             GoRoute(
               path: 'complete',
               builder: (_, __) => const DepositPaymentCompleteScreen(),
+            ),
+            GoRoute(
+              path: 'failure',
+              builder: (_, state) {
+                final extra = state.extra as Map<String, dynamic>;
+                return DepositPaymentFailureScreen(
+                  errorCode: extra['errorCode'] as String,
+                  errorMessage: extra['errorMessage'] as String,
+                );
+              },
             ),
           ],
         ),
