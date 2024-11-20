@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pravo_client/features/auth/presentation/screens/login_screen.dart';
-import 'package:pravo_client/features/auth/presentation/viewmodels/oauth_provider.dart';
+import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
 import 'package:pravo_client/features/home/presentation/screens/home_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/deposit_payment_complete_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/deposit_payment_screen.dart';
@@ -16,7 +16,7 @@ import 'package:pravo_client/features/setting/presentation/screens/setting_scree
 import 'package:pravo_client/features/store/presentation/screens/store_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
-  final authNotifier = ref.read(oauthProvider);
+  final authNotifier = ref.read(authProvider);
 
   final routes = [
     GoRoute(
@@ -90,7 +90,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 
   // 로그인 상태에 따른 리디렉션 로직
   Future<String?> redirectLogic(
-    OAuthNotifier authNotifier,
+    AuthNotifier authNotifier,
     GoRouterState state,
   ) async {
     const loginPath = '/login';

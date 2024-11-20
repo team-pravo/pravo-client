@@ -16,6 +16,11 @@ class AuthNotifier extends ChangeNotifier {
   AuthNotifier({required this.ref})
       : authRepository = ref.read(authRepositoryProvider);
 
+  Future<bool> isTokenValid() async {
+    final token = await _secureStorage.read(key: 'access_token');
+    return token != null;
+  }
+
   Future<void> login(
     String oauthToken,
     Platform oauthPlatform,
