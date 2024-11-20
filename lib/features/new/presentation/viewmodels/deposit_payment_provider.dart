@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/deposit_payment_state.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_provider.dart';
 import 'package:tosspayments_widget_sdk_flutter/model/payment_info.dart';
@@ -68,7 +70,11 @@ class DepositPaymentNotifier extends StateNotifier<DepositPaymentState> {
     state = state.copyWith(isAgreementChecked: status);
   }
 
-  Future<void> requestPayment(String orderId, String orderName) async {
+  Future<void> requestPayment(
+    String orderId,
+    String orderName,
+    BuildContext context,
+  ) async {
     final paymentResult = await state.paymentWidget?.requestPayment(
       paymentInfo: PaymentInfo(
         orderId: orderId,
@@ -79,6 +85,10 @@ class DepositPaymentNotifier extends StateNotifier<DepositPaymentState> {
     if (paymentResult?.success != null) {
       print(
         '[결제 성공: 주문번호 ${paymentResult?.success?.orderId}] paymentKey - ${paymentResult?.success?.paymentKey}',
+      );
+      if (!context.mounted) return; // Navigator 사용 전 mounted 확인
+      context.push(
+        '/new/deposit/complete',
       );
     } else if (paymentResult?.fail != null) {
       print(

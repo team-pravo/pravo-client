@@ -14,7 +14,7 @@ class DepositPaymentCompleteScreen extends StatelessWidget {
       appBar: Depth2AppBarWidget(
         title: '결제 완료',
         actionIcon: PhosphorIcons.x(),
-        actionOnPressed: () => context.pop(),
+        actionOnPressed: () => context.go('/'),
       ),
       body: SafeArea(
         child: Column(
@@ -31,18 +31,7 @@ class DepositPaymentCompleteScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '10,000원',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                            color: kPrimaryColor,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          '결제가 완료되어',
+                          '🎉 새로운 약속이 생성되었습니다!',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.w600,
@@ -50,18 +39,11 @@ class DepositPaymentCompleteScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Text(
-                      '약속이 생성되었습니다.',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
                     SizedBox(
                       height: 20,
                     ),
                     Text(
-                      '약속 정보를 상세 페이지에서 확인해 보세요!',
+                      '이제 친구들을 초대하여 즐거운 약속을 시작해보세요!\n\n아래 버튼을 통해 약속을 관리하고 초대 링크를 공유할 수 있습니다.',
                       style: TextStyle(
                         fontSize: 14,
                         color: kBodyTextColor,
@@ -73,7 +55,7 @@ class DepositPaymentCompleteScreen extends StatelessWidget {
             ),
             PrimaryButtonWidget(
               buttonText: '약속 확인하기',
-              onTap: () => context.push('/promise/1'),
+              onTap: () => context.go('/promise/1'),
               hasHorizontalMargin: true,
             ),
           ],
