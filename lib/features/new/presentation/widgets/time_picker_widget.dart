@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/dialog_button_widget.dart';
-import 'package:pravo_client/features/new/presentation/viewmodels/time_provider.dart';
+import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_view_model.dart';
 import 'package:pravo_client/features/new/presentation/widgets/picker_widget.dart';
 import 'package:wheel_picker/wheel_picker.dart';
 
@@ -188,8 +188,9 @@ class TimePickerWidget extends ConsumerWidget {
                 minute: selectedMinute,
               );
 
-              // timeProvider로 업데이트
-              ref.read(timeProvider.notifier).updateTime(selectedTime);
+              ref
+                  .read(promiseDetailsViewModelProvider.notifier)
+                  .updatePromise(newTime: selectedTime);
 
               Navigator.of(context).pop();
             },
@@ -203,10 +204,8 @@ class TimePickerWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedTime = ref.watch(timeProvider);
-    final formattedTime = (selectedTime != null)
-        ? ref.watch(timeProvider.notifier).formattedTime(context)
-        : '약속 시간을 선택하세요.';
+    final promiseDetails = ref.watch(promiseDetailsViewModelProvider);
+    final formattedTime = promiseDetails.formattedTime(context);
 
     return PickerWidget(
       selectedValue: formattedTime,
