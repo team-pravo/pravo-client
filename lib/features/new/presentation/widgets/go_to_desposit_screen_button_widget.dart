@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/alert_dialog_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
-import 'package:pravo_client/features/new/domain/entities/payment.dart';
+import 'package:pravo_client/features/new/domain/entities/payment_response.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/payment_view_model.dart';
-import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_provider.dart';
+import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_view_model.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/time_provider.dart';
 
 class GoToDepositScreenButtonWidget extends ConsumerWidget {
@@ -16,7 +16,7 @@ class GoToDepositScreenButtonWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final promiseDetails = ref.watch(promiseDetailsProvider);
+    final promiseDetails = ref.watch(promiseDetailsViewModel);
     final selectedTime = ref.watch(timeProvider);
 
     final isButtonEnabled = promiseDetails.name.isNotEmpty &&
@@ -24,7 +24,8 @@ class GoToDepositScreenButtonWidget extends ConsumerWidget {
         promiseDetails.deposit > 0 &&
         selectedTime != null;
 
-    ref.listen<AsyncValue<Payment>>(paymentViewModelProvider, (previous, next) {
+    ref.listen<AsyncValue<PaymentResponse>>(paymentViewModelProvider,
+        (previous, next) {
       next.when(
         data: (payment) {
           context.push('/new/deposit');
@@ -37,7 +38,9 @@ class GoToDepositScreenButtonWidget extends ConsumerWidget {
               content: '네트워크 연결이 불안정하거나\n서버 요청에 실패했습니다.',
               actionOnPressed: () {
                 Navigator.of(context).pop();
-                ref.read(paymentViewModelProvider.notifier).fetchPayment();
+                ref
+                    .read(paymentViewModelProvider.notifier)
+                    .requestPayment(promiseDetails);
               },
               actionTitle: '다시 시도',
             ),
@@ -49,7 +52,9 @@ class GoToDepositScreenButtonWidget extends ConsumerWidget {
 
     return PrimaryButtonWidget(
       isEnabled: isButtonEnabled,
-      onTap: () => ref.read(paymentViewModelProvider.notifier).fetchPayment(),
+      onTap: () => ref
+          .read(paymentViewModelProvider.notifier)
+          .requestPayment(promiseDetails),
       buttonText: '예약금 결제하기',
       buttonColor: kPrimaryColor,
       textColor: Colors.white,
