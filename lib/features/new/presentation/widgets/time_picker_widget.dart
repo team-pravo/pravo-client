@@ -9,25 +9,25 @@ import 'package:wheel_picker/wheel_picker.dart';
 class TimePickerWidget extends ConsumerWidget {
   TimePickerWidget({super.key});
 
-  final now = TimeOfDay.now();
+  final initialTime = const TimeOfDay(hour: 9, minute: 0);
 
   /// 12시간제를 기준으로 시간 선택
   late final _hoursWheel = WheelPickerController(
     itemCount: 12,
-    initialIndex: now.hour % 12,
+    initialIndex: initialTime.hour % 12,
   );
 
   /// 분 선택
   late final _minutesWheel = WheelPickerController(
-    itemCount: 60,
-    initialIndex: now.minute,
+    itemCount: 12,
+    initialIndex: initialTime.minute ~/ 5,
     mounts: [_hoursWheel],
   );
 
   /// AM/PM 선택
   late final _amPmWheel = WheelPickerController(
     itemCount: 2,
-    initialIndex: (now.period == DayPeriod.am) ? 0 : 1,
+    initialIndex: (initialTime.period == DayPeriod.am) ? 0 : 1,
   );
 
   // 다이얼로그에서 시간 선택하는 메서드
@@ -94,7 +94,8 @@ class TimePickerWidget extends ConsumerWidget {
     }
 
     Widget minuteItemBuilder(BuildContext context, int index) {
-      return Text('$index'.padLeft(2, '0'), style: textStyle);
+      final minute = index * 5;
+      return Text('$minute'.padLeft(2, '0'), style: textStyle);
     }
 
     return [
@@ -175,7 +176,7 @@ class TimePickerWidget extends ConsumerWidget {
               // 선택한 시간과 분 가져오기
               final selectedHour =
                   _hoursWheel.selected == 0 ? 12 : _hoursWheel.selected;
-              final selectedMinute = _minutesWheel.selected;
+              final selectedMinute = _minutesWheel.selected * 5;
               final isAm = _amPmWheel.selected == 0;
 
               // AM/PM에 따라 시간을 조정
