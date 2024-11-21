@@ -1,40 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pravo_client/features/new/domain/entities/payment_request.dart';
+import 'package:pravo_client/features/new/domain/entities/promise_information.dart';
+import 'package:pravo_client/features/new/domain/usecases/update_promise_usecase.dart';
 
-final promiseDetailsViewModel =
-    StateNotifierProvider<PromiseDetailsViewModel, PaymentRequest>(
-  (ref) => PromiseDetailsViewModel(),
-);
+final promiseDetailsViewModelProvider =
+    StateNotifierProvider<PromiseDetailsViewModel, PromiseInformation>((ref) {
+  final initialPromise = PromiseInformation(
+    name: null,
+    location: null,
+    deposit: null,
+    date: null,
+    time: const TimeOfDay(hour: 9, minute: 0),
+  );
+  return PromiseDetailsViewModel(initialPromise: initialPromise);
+});
 
-class PromiseDetailsViewModel extends StateNotifier<PaymentRequest> {
-  PromiseDetailsViewModel()
-      : super(
-          PaymentRequest(
-            name: '',
-            location: '',
-            deposit: 0,
-            scheduledAt: DateTime.now(),
-          ),
-        );
+class PromiseDetailsViewModel extends StateNotifier<PromiseInformation> {
+  final UpdatePromiseUseCase updatePromiseUseCase;
 
-  void updateName(String name) {
-    state = state.copyWith(name: name);
-  }
+  PromiseDetailsViewModel({required PromiseInformation initialPromise})
+      : updatePromiseUseCase = UpdatePromiseUseCase(),
+        super(initialPromise);
 
-  void updateLocation(String location) {
-    state = state.copyWith(location: location);
-  }
-
-  void updateDeposit(int deposit) {
-    state = state.copyWith(deposit: deposit);
-  }
-
-  void updateDate(DateTime newDate) {
-    state = state.updateDate(newDate);
-  }
-
-  void updateTime(TimeOfDay newTime) {
-    state = state.updateTime(newTime);
+  void updatePromise({
+    String? newName,
+    String? newLocation,
+    int? newDeposit,
+    DateTime? newDate,
+    TimeOfDay? newTime,
+  }) {
+    state = updatePromiseUseCase(
+      promise: state,
+      name: newName,
+      location: newLocation,
+      deposit: newDeposit,
+      date: newDate,
+      time: newTime,
+    );
   }
 }
