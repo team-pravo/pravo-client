@@ -48,4 +48,11 @@ class PromiseRepositoryImpl implements PromiseRepository {
           .toList(),
     );
   }
+
+  @override
+  Future<void> deletePromise(int id) async {
+    await dio.delete(
+      '/api/promise/$id',
+    );
+  }
 }
