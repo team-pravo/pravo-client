@@ -3,7 +3,7 @@ import 'package:pravo_client/features/promise/data/repositories/promise_reposito
 import 'package:pravo_client/features/promise/domain/entities/promise.dart';
 import 'package:pravo_client/features/promise/domain/usecases/get_promise_usecase.dart';
 
-class PromiseViewModel extends StateNotifier<AsyncValue<Promise>> {
+class PromiseViewModel extends StateNotifier<AsyncValue<Promise?>> {
   final GetPromiseUseCase _getPromiseUseCase;
 
   PromiseViewModel(this._getPromiseUseCase) : super(const AsyncValue.loading());
@@ -13,10 +13,15 @@ class PromiseViewModel extends StateNotifier<AsyncValue<Promise>> {
     state = AsyncValue.data(promise);
     return promise;
   }
+
+  Future<void> deletePromise(int id) async {
+    await _getPromiseUseCase.deletePromise(id);
+    state = const AsyncValue.data(null);
+  }
 }
 
 final promiseViewModelProvider =
-    StateNotifierProvider<PromiseViewModel, AsyncValue<Promise>>(
+    StateNotifierProvider<PromiseViewModel, AsyncValue<Promise?>>(
   (ref) => PromiseViewModel(
     GetPromiseUseCase(ref.read(promiseRepositoryProvider)),
   ),
