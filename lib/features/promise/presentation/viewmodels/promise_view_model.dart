@@ -41,8 +41,7 @@ class PromiseViewModel extends StateNotifier<AsyncValue<PromiseState>> {
     if (isOrganizer) {
       await _getPromiseUseCase.deletePromise(promiseId);
     } else {
-      // TODO: 취소 API 연동
-      // await _getPromiseUseCase.cancelPromise(promiseId);
+      await _getPromiseUseCase.cancelPromise(promiseId);
     }
   }
 }
