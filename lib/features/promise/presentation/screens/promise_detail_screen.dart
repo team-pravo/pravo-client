@@ -59,8 +59,10 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
               showDialog(
                 context: context,
                 builder: (context) => AlertDialogWidget(
-                  title: '약속을 삭제할까요?',
-                  content: '이미 만들어진 약속을 삭제하면\n참여한 사람들이 당황할 수 있어요.',
+                  title: isOrganizer ? '약속을 삭제할까요?' : '약속을 취소할까요?',
+                  content: isOrganizer
+                      ? '약속을 삭제하면 모두의 예약금이 환급돼요.'
+                      : '약속을 취소하면 예약금이 환급되지 않아요.',
                   actionOnPressed: () async {
                     await ref
                         .read(promiseViewModelProvider.notifier)
@@ -70,7 +72,11 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
                         );
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('약속이 삭제되었습니다.')),
+                        SnackBar(
+                          content: Text(
+                            isOrganizer ? '약속이 삭제되었습니다.' : '약속이 취소되었습니다.',
+                          ),
+                        ),
                       );
                       context.go('/');
                     }
