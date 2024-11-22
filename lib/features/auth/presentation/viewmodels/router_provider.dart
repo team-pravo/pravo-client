@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pravo_client/features/auth/presentation/screens/login_screen.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
+import 'package:pravo_client/features/error/presentation/screens/error_screen.dart';
 import 'package:pravo_client/features/home/presentation/screens/home_screen.dart';
 import 'package:pravo_client/features/member/domain/entities/member.dart';
 import 'package:pravo_client/features/new/presentation/screens/deposit_payment_complete_screen.dart';
@@ -90,6 +91,17 @@ final routerProvider = Provider<GoRouter>((ref) {
         return ProfileEditScreen(member: member);
       },
     ),
+    GoRoute(
+      path: '/error',
+      builder: (_, state) {
+        final data = state.extra! as Map<String, dynamic>;
+        return ErrorScreen(
+          appBarTitle: data['appBarTitle'],
+          errorTitle: data['errorTitle'],
+          errorMessage: data['errorMessage'],
+        );
+      },
+    ),
   ];
 
   // 로그인 상태에 따른 리디렉션 로직
@@ -110,9 +122,14 @@ final routerProvider = Provider<GoRouter>((ref) {
 
   return GoRouter(
     routes: routes,
-    redirect: (_, state) =>
-        redirectLogic(authNotifier, state), // navigate될 때마다 호출
-    refreshListenable:
-        authNotifier, // authProvider 상태를 listen하여 상태가 변하면 redirect 실행
+    redirect: (_, state) => redirectLogic(authNotifier, state),
+    refreshListenable: authNotifier,
+    errorBuilder: (context, state) {
+      return const ErrorScreen(
+        appBarTitle: '페이지 오류',
+        errorTitle: '찾을 수 없는 페이지',
+        errorMessage: '요청하신 페이지가 존재하지 않습니다.',
+      );
+    },
   );
 });
