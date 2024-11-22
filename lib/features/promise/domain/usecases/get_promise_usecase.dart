@@ -13,4 +13,8 @@ class GetPromiseUseCase {
   Future<void> deletePromise(int id) {
     return repository.deletePromise(id);
   }
+
+  Future<void> cancelPromise(int id) {
+    return repository.cancelPromise(id);
+  }
 }
