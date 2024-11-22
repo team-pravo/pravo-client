@@ -1,27 +1,54 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:pravo_client/features/promise/data/repositories/promise_repository_impl.dart';
 import 'package:pravo_client/features/promise/domain/entities/promise.dart';
 import 'package:pravo_client/features/promise/domain/usecases/get_promise_usecase.dart';
 
-class PromiseViewModel extends StateNotifier<AsyncValue<Promise?>> {
+class PromiseState {
+  final Promise promise;
+  final bool isOrganizer;
+
+  PromiseState({
+    required this.promise,
+    required this.isOrganizer,
+  });
+}
+
+class PromiseViewModel extends StateNotifier<AsyncValue<PromiseState>> {
+  final _secureStorage = const FlutterSecureStorage();
   final GetPromiseUseCase _getPromiseUseCase;
 
   PromiseViewModel(this._getPromiseUseCase) : super(const AsyncValue.loading());
 
-  Future<Promise> getPromise(int id) async {
+  Future<void> getPromise(int id) async {
     final promise = await _getPromiseUseCase.getPromise(id);
-    state = AsyncValue.data(promise);
-    return promise;
+    final memberId = await _secureStorage.read(key: 'member_id');
+    final isOrganizer = promise.participants.any(
+      (participant) =>
+          participant.role == 'ORGANIZER' &&
+          participant.id.toString() == memberId,
+    );
+
+    state = AsyncValue.data(
+      PromiseState(
+        promise: promise,
+        isOrganizer: isOrganizer,
+      ),
+    );
   }
 
-  Future<void> deletePromise(int id) async {
-    await _getPromiseUseCase.deletePromise(id);
-    state = const AsyncValue.data(null);
+  Future<void> deleteOrCancelPromise(int promiseId, bool isOrganizer) async {
+    if (isOrganizer) {
+      await _getPromiseUseCase.deletePromise(promiseId);
+    } else {
+      // TODO: 취소 API 연동
+      // await _getPromiseUseCase.cancelPromise(promiseId);
+    }
   }
 }
 
 final promiseViewModelProvider =
-    StateNotifierProvider<PromiseViewModel, AsyncValue<Promise?>>(
+    StateNotifierProvider<PromiseViewModel, AsyncValue<PromiseState>>(
   (ref) => PromiseViewModel(
     GetPromiseUseCase(ref.read(promiseRepositoryProvider)),
   ),
