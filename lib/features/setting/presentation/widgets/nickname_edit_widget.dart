@@ -14,9 +14,9 @@ class NicknameEditWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          name,
-          style: const TextStyle(
+        const Text(
+          '닉네임',
+          style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
