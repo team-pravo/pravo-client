@@ -5,7 +5,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/app/formatter.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
-import 'package:pravo_client/features/new/presentation/viewmodels/deposit_payment_provider.dart';
+import 'package:pravo_client/features/new/presentation/viewmodels/deposit_payment_view_model.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/payment_view_model.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_view_model.dart';
 import 'package:tosspayments_widget_sdk_flutter/widgets/agreement.dart';
@@ -26,15 +26,16 @@ class _DepositPaymentScreenState extends ConsumerState<DepositPaymentScreen> {
 
     // 위젯이 빌드된 후에 renderWidgets 호출
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final paymentNotifier = ref.read(depositPaymentProvider.notifier);
+      final paymentNotifier =
+          ref.read(depositPaymentViewModelProvider.notifier);
       paymentNotifier.renderWidgets();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final paymentState = ref.watch(depositPaymentProvider);
-    final paymentNotifier = ref.read(depositPaymentProvider.notifier);
+    final paymentState = ref.watch(depositPaymentViewModelProvider);
+    final paymentNotifier = ref.read(depositPaymentViewModelProvider.notifier);
 
     final promiseDetails = ref.watch(promiseDetailsViewModelProvider);
     final depositAmount = promiseDetails.deposit!;
