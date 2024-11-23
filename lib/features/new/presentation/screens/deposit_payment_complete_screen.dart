@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
@@ -11,10 +10,8 @@ class DepositPaymentCompleteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Depth2AppBarWidget(
+      appBar: const Depth2AppBarWidget(
         title: '결제 완료',
-        actionIcon: PhosphorIcons.x(),
-        actionOnPressed: () => context.pop(),
       ),
       body: SafeArea(
         child: Column(
@@ -23,45 +20,31 @@ class DepositPaymentCompleteScreen extends StatelessWidget {
               child: Padding(
                 padding: kScreenPadding,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 50,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          '10,000원',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                            color: kPrimaryColor,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          '결제가 완료되어',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
+                      height: 70,
                     ),
                     Text(
-                      '약속이 생성되었습니다.',
+                      '🎉',
+                      style: TextStyle(fontSize: 50),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      '약속 생성 완료',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Text(
-                      '약속 정보를 상세 페이지에서 확인해 보세요!',
+                      '아래 버튼을 통해 약속을 관리하고\n초대 링크를 공유하여 친구들을 초대해보세요!',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 14,
                         color: kBodyTextColor,
@@ -73,7 +56,7 @@ class DepositPaymentCompleteScreen extends StatelessWidget {
             ),
             PrimaryButtonWidget(
               buttonText: '약속 확인하기',
-              onTap: () => context.push('/promise/1'),
+              onTap: () => context.go('/promise/1'),
               hasHorizontalMargin: true,
             ),
           ],
