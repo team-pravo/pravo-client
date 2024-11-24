@@ -1,7 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/deposit_payment_state.dart';
-import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_provider.dart';
+import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_view_model.dart';
 import 'package:tosspayments_widget_sdk_flutter/model/payment_info.dart';
 import 'package:tosspayments_widget_sdk_flutter/model/payment_widget_options.dart';
 import 'package:tosspayments_widget_sdk_flutter/payment_widget.dart';
@@ -28,7 +28,8 @@ class DepositPaymentNotifier extends StateNotifier<DepositPaymentState> {
   }
 
   void renderWidgets() {
-    final depositAmount = ref.read(promiseDetailsProvider).deposit;
+    final promiseDetails = ref.read(promiseDetailsViewModelProvider);
+    final depositAmount = promiseDetails.deposit!;
     final paymentWidget = state.paymentWidget!;
 
     paymentWidget

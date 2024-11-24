@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pravo_client/features/new/presentation/viewmodels/date_provider.dart';
+import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_view_model.dart';
 
 class DatePickerWidget extends ConsumerWidget {
   const DatePickerWidget({super.key});
@@ -8,11 +8,13 @@ class DatePickerWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CalendarDatePicker(
-      initialDate: ref.watch(dateProvider),
+      initialDate: null,
       firstDate: DateTime.now(),
       lastDate: DateTime(2101),
       onDateChanged: (pickedDate) {
-        ref.read(dateProvider.notifier).updateDate(pickedDate);
+        ref
+            .read(promiseDetailsViewModelProvider.notifier)
+            .updatePromise(newDate: pickedDate);
       },
     );
   }

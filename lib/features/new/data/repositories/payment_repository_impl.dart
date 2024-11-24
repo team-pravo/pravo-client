@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/core/dio/dio_provider.dart';
-import 'package:pravo_client/features/new/data/models/payment_model.dart';
-import 'package:pravo_client/features/new/domain/entities/payment.dart';
+import 'package:pravo_client/features/new/data/models/payment_request_model.dart';
+import 'package:pravo_client/features/new/data/models/payment_response_model.dart';
+import 'package:pravo_client/features/new/domain/entities/payment_request.dart';
+import 'package:pravo_client/features/new/domain/entities/payment_response.dart';
 import 'package:pravo_client/features/new/domain/repositories/payment_repository.dart';
 
 final paymentRepositoryProvider = Provider<PaymentRepositoryImpl>((ref) {
@@ -15,21 +17,24 @@ class PaymentRepositoryImpl implements PaymentRepository {
   PaymentRepositoryImpl(this.dio);
 
   @override
-  Future<Payment> getPayment() async {
-    return Future.delayed(const Duration(milliseconds: 500), () {
-      return Payment(orderId: 'OrderId_999');
-    });
+  Future<PaymentResponse> requestPayment(PaymentRequest request) async {
+    final requestModel = PaymentRequestModel(
+      name: request.name,
+      scheduledAt: request.scheduledAt,
+      location: request.location,
+      deposit: request.deposit,
+    );
 
-    // FIXME: API 개발 완료 시 연동
-    // final response = await dio.get(
-    //   '/api/payment',
-    // );
-    // return _mapResponseToPayment(response);
-  }
+    final response = await dio.post(
+      '/api/payment/request',
+      data: requestModel.toJson(),
+    );
 
-  Payment _mapResponseToPayment(Response response) {
-    return Payment(
-      orderId: PaymentModel.fromJson(response.data).orderId,
+    final responseModel = PaymentResponseModel.fromJson(response.data);
+
+    return PaymentResponse(
+      orderId: responseModel.orderId,
+      promiseId: responseModel.promiseId,
     );
   }
 }

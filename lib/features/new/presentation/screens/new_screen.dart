@@ -6,7 +6,7 @@ import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth1_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/navigation_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
-import 'package:pravo_client/features/new/presentation/viewmodels/date_provider.dart';
+import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_view_model.dart';
 import 'package:pravo_client/features/new/presentation/widgets/date_picker_widget.dart';
 
 class NewScreen extends ConsumerWidget {
@@ -14,8 +14,8 @@ class NewScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedDate = ref.watch(dateProvider);
-    final isButtonEnabled = selectedDate != null;
+    final promiseDetails = ref.watch(promiseDetailsViewModelProvider);
+    final isButtonEnabled = promiseDetails.date != null;
 
     return Scaffold(
       appBar: Depth1AppBarWidget(
