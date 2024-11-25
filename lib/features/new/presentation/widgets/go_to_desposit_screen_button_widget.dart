@@ -20,8 +20,9 @@ class GoToDepositScreenButtonWidget extends ConsumerWidget {
 
     final isButtonEnabled = (promiseDetails.name?.isNotEmpty ?? false) &&
         (promiseDetails.location?.isNotEmpty ?? false) &&
-        (promiseDetails.deposit != null && promiseDetails.deposit! > 0) &&
-        (promiseDetails.time != null);
+        (promiseDetails.deposit != null && promiseDetails.deposit! >= 0) &&
+        (promiseDetails.time != null) &&
+        promiseDetails.isAfterNow();
 
     ref.listen<AsyncValue<PaymentResponse>>(paymentViewModelProvider,
         (previous, next) {
