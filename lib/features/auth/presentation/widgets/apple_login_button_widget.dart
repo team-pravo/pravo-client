@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/auth/data/models/platform.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
@@ -39,6 +40,12 @@ class AppleLoginButtonWidget extends ConsumerWidget {
             AppleIDAuthorizationScopes.email,
             AppleIDAuthorizationScopes.fullName,
           ],
+          webAuthenticationOptions: WebAuthenticationOptions(
+            clientId: 'pravoClient.pravo.com',
+            redirectUri: Uri.parse(
+              dotenv.env['APPLE_WEB_AUTHENTICATION_REDIRECT_URI']!,
+            ),
+          ),
         );
 
         await handleLoginSuccess(credential.identityToken!);
