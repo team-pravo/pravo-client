@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:app_links/app_links.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -12,6 +13,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:pravo_client/app/theme.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/router_provider.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +22,31 @@ Future<void> main() async {
     nativeAppKey: dotenv.env['KAKAO_NATIVE_APP_KEY']!,
   ); // Flutter SDK 초기화
   await initializeDateFormatting('ko_KR', null); // 한국어 로케일 초기화
-  runApp(ProviderScope(child: _App()));
+
+  runZonedGuarded(() async {
+    await SentryFlutter.init(
+      (options) {
+        options.dsn = dotenv.env['SENTRY_DSN'];
+        options.attachStacktrace = true;
+      },
+      appRunner: () => runApp(ProviderScope(child: _App())),
+    );
+    // TODO: 개발 완료 시, Debug Mode가 아닐 때만 Sentry init하도록 수정하기
+    // if (!kDebugMode) {
+    //   await SentryFlutter.init(
+    //     (options) {
+    //       options.dsn =
+    //           dotenv.env['SENTRY_DSN'];
+    //       options.attachStacktrace = true;
+    //     },
+    //     appRunner: () => runApp(ProviderScope(child: _App())),
+    //   );
+    // } else {
+    //   runApp(ProviderScope(child: _App()));
+    // }
+  }, (exception, stackTrace) async {
+    Sentry.captureException(exception, stackTrace: stackTrace);
+  });
 }
 
 class _App extends ConsumerStatefulWidget {
