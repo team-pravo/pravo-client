@@ -2,9 +2,11 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/router_provider.dart';
 import 'package:pravo_client/features/new/data/repositories/payment_repository_impl.dart';
+import 'package:pravo_client/features/new/domain/usecases/change_promise_status_usecase.dart';
 import 'package:pravo_client/features/new/domain/usecases/confirm_payment_usecase.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/deposit_payment_state.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_view_model.dart';
+import 'package:pravo_client/features/new/presentation/viewmodels/promise_id_provider.dart';
 import 'package:tosspayments_widget_sdk_flutter/model/payment_info.dart';
 import 'package:tosspayments_widget_sdk_flutter/model/payment_widget_options.dart';
 import 'package:tosspayments_widget_sdk_flutter/payment_widget.dart';
@@ -12,10 +14,12 @@ import 'package:tosspayments_widget_sdk_flutter/payment_widget.dart';
 class DepositPaymentViewModel extends StateNotifier<DepositPaymentState> {
   final Ref ref;
   final ConfirmPaymentUseCase confirmPaymentUseCase;
+  final ChangePromiseStatusUseCase changePromiseStatusUseCase;
 
   DepositPaymentViewModel({
     required this.ref,
     required this.confirmPaymentUseCase,
+    required this.changePromiseStatusUseCase,
   }) : super(DepositPaymentState()) {
     _initializePaymentWidget();
   }
@@ -90,6 +94,8 @@ class DepositPaymentViewModel extends StateNotifier<DepositPaymentState> {
           amount: ref.watch(promiseDetailsViewModelProvider).deposit!,
         );
 
+        await changePromiseStatusUseCase.execute(ref.read(promiseIdProvider)!);
+
         ref.read(routerProvider).pushReplacement('/new/deposit/complete');
       } catch (e) {
         print('Payment confirmation failed: $e');
@@ -104,5 +110,7 @@ final depositPaymentViewModelProvider =
     ref: ref,
     confirmPaymentUseCase:
         ConfirmPaymentUseCase(ref.read(paymentRepositoryProvider)),
+    changePromiseStatusUseCase:
+        ChangePromiseStatusUseCase(ref.read(paymentRepositoryProvider)),
   ),
 );
