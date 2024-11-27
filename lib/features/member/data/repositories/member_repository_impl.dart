@@ -16,7 +16,7 @@ class MemberRepositoryImpl implements MemberRepository {
 
   @override
   Future<Member> getMember(int memberId) async {
-    final response = await dio.get('/api/member/$memberId');
+    final response = await dio.get('/api/member');
     final memberDto = MemberModel.fromJson(response.data);
     return memberDto.toEntity(memberId);
   }
