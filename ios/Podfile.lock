@@ -18,9 +18,16 @@ PODS:
   - OrderedSet (6.0.3)
   - os_info_plugin (0.0.1):
     - Flutter
+  - package_info_plus (0.4.5):
+    - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - Sentry/HybridSDK (8.40.1)
+  - sentry_flutter (8.10.1):
+    - Flutter
+    - FlutterMacOS
+    - Sentry/HybridSDK (= 8.40.1)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -42,7 +49,9 @@ DEPENDENCIES:
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - kakao_flutter_sdk_common (from `.symlinks/plugins/kakao_flutter_sdk_common/ios`)
   - os_info_plugin (from `.symlinks/plugins/os_info_plugin/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - sentry_flutter (from `.symlinks/plugins/sentry_flutter/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
   - tosspayments_webview_flutter (from `.symlinks/plugins/tosspayments_webview_flutter/ios`)
@@ -52,6 +61,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - OrderedSet
+    - Sentry
 
 EXTERNAL SOURCES:
   app_links:
@@ -68,8 +78,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/kakao_flutter_sdk_common/ios"
   os_info_plugin:
     :path: ".symlinks/plugins/os_info_plugin/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  sentry_flutter:
+    :path: ".symlinks/plugins/sentry_flutter/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sign_in_with_apple:
@@ -90,7 +104,10 @@ SPEC CHECKSUMS:
   kakao_flutter_sdk_common: 4f10f98226da5d0f7cbdeeaed5cc21f144515209
   OrderedSet: e539b66b644ff081c73a262d24ad552a69be3a94
   os_info_plugin: d89ddf87e910a0d598fc4fc69d2b8f0f8239314f
+  package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  Sentry: e9215d7b17f7902692b4f8700e061e4f853e3521
+  sentry_flutter: 927eed60d66951d1b0f1db37fe94ff5cb7c80231
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   tosspayments_webview_flutter: ceae304825a077de594d01ee39dd0ce2307adb4e

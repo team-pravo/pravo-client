@@ -52,6 +52,7 @@ dependencies:
   phosphor_flutter: ^2.1.0
   app_links: ^6.3.2
   dio: ^5.7.0
+  sentry_flutter: ^8.10.1
 
 dev_dependencies:
   flutter_test:
