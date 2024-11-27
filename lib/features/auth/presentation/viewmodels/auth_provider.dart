@@ -28,12 +28,15 @@ class AuthNotifier extends ChangeNotifier {
     LoginResponseModel response =
         await authRepository.login(oauthToken, oauthPlatform);
     final accessToken = response.jwtTokens.accessToken;
+    final memberId = response.memberId;
     await _secureStorage.write(key: 'access_token', value: accessToken);
+    await _secureStorage.write(key: 'member_id', value: memberId.toString());
     notifyListeners();
   }
 
   Future<void> logout() async {
     await _secureStorage.delete(key: 'access_token');
+    await _secureStorage.delete(key: 'member_id');
     notifyListeners();
   }
 }

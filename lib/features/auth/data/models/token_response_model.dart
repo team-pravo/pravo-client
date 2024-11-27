@@ -1,13 +1,16 @@
 class LoginResponseModel {
   TokenResponseModel jwtTokens;
+  int memberId;
 
   LoginResponseModel({
     required this.jwtTokens,
+    required this.memberId,
   });
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
     return LoginResponseModel(
       jwtTokens: TokenResponseModel.fromJson(json['jwtTokens']),
+      memberId: json['memberId'],
     );
   }
 }
