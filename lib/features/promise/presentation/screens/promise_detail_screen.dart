@@ -30,6 +30,11 @@ class PromiseDetailScreen extends ConsumerStatefulWidget {
 }
 
 class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
+  String generateInviteLink(int promiseId) {
+    final Uri inviteUri = Uri.parse('pravo://pravo.com/promise/$promiseId');
+    return inviteUri.toString();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -97,42 +102,44 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Padding(
+                  child: SingleChildScrollView(
                     padding: kScreenPadding,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          PromiseOverviewWidget(
-                            name: promise.name,
-                            location: promise.location,
-                            promiseDate: promise.promiseDate,
-                            organizer: promise.participants.firstWhere(
-                              (participant) => participant.role == 'ORGANIZER',
-                            ),
+                    child: Column(
+                      children: [
+                        PromiseOverviewWidget(
+                          name: promise.name,
+                          location: promise.location,
+                          promiseDate: promise.promiseDate,
+                          organizer: promise.participants.firstWhere(
+                            (participant) => participant.role == 'ORGANIZER',
                           ),
-                          ParticipantsAndStatusWidget(
-                            participants: promise.participants,
-                          ),
-                          DepositWidget(
-                            deposit: promise.deposit,
-                          ),
-                          const PromiseStatusWidget(),
-                        ],
-                      ),
+                        ),
+                        ParticipantsAndStatusWidget(
+                          participants: promise.participants,
+                        ),
+                        DepositWidget(
+                          deposit: promise.deposit,
+                        ),
+                        const PromiseStatusWidget(),
+                      ],
                     ),
                   ),
                 ),
-                if (buttonStatus != ButtonStatus.hidden)
+                if (buttonStatus != ButtonStatus.HIDDEN)
                   PrimaryButtonWidget(
                     isEnabled: true,
                     onTap: () {
-                      if (buttonStatus == ButtonStatus.copyInvitationLink) {
-                        Clipboard.setData(const ClipboardData(text: '초대 링크'));
+                      if (buttonStatus == ButtonStatus.COPY_INVITATION_LINK) {
+                        final String inviteLink =
+                            generateInviteLink(widget.promiseId);
+                        Clipboard.setData(
+                          ClipboardData(text: inviteLink),
+                        );
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('초대 링크가 복사되었습니다.')),
                         );
                       } else if (buttonStatus ==
-                          ButtonStatus.goToAttendanceConfirmation) {
+                          ButtonStatus.GO_TO_ATTENDANCE_CONFIRMATION) {
                         context.push(
                           '/promise/${widget.promiseId}/confirm-attendance',
                         );
@@ -141,7 +148,7 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
                     buttonColor: kPrimaryColor,
                     textColor: Colors.white,
                     buttonText: buttonStatus.text,
-                    icon: buttonStatus == ButtonStatus.copyInvitationLink
+                    icon: buttonStatus == ButtonStatus.COPY_INVITATION_LINK
                         ? PhosphorIcons.link(PhosphorIconsStyle.bold)
                         : null,
                     iconBeforeText: true,
