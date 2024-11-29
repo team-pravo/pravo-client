@@ -62,12 +62,18 @@ class _AppState extends ConsumerState<_App> {
     final router = ref.read(routerProvider);
     final path = uri.path;
 
-    /// 약속 상세 페이지만 공유 가능하므로 promise 아닌 경우에는 홈으로 리디렉션
-    if (path.contains('/promise')) {
-      router.push(path);
-    } else {
-      router.go('/');
+    final regex = RegExp(r'^/promise/(\d+)$'); // '/promise/{promiseId}' 형식
+    final match = regex.firstMatch(path);
+
+    if (match != null) {
+      final promiseId = int.tryParse(match.group(1)!);
+      if (promiseId != null) {
+        router.push('/promise/$promiseId');
+        return;
+      }
     }
+
+    router.go('/');
   }
 
   @override
