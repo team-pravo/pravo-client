@@ -34,8 +34,10 @@ class PromiseActionButtonWidget extends StatelessWidget {
                 );
               } else if (buttonStatus ==
                   ButtonStatus.GO_TO_ATTENDANCE_CONFIRMATION) {
-                context.push('/promise/$promiseId/confirm-attendance');
-              } else if (buttonStatus == ButtonStatus.JOIN_PROMISE) {}
+                context.push('/promise/$promiseId/settlement/attendance');
+              } else if (buttonStatus == ButtonStatus.JOIN_PROMISE) {
+                context.push('/promise/$promiseId/join/deposit');
+              }
             },
             hasHorizontalMargin: true,
             icon: buttonStatus == ButtonStatus.COPY_INVITATION_LINK
