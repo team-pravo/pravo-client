@@ -10,16 +10,24 @@ enum ButtonStatus {
 
   const ButtonStatus(this.text);
 
-  static ButtonStatus getButtonStatus(bool isOrganizer, DateTime scheduledAt) {
+  static ButtonStatus getButtonStatus(
+    bool isOrganizer,
+    bool isInvitedGuest,
+    DateTime scheduledAt,
+  ) {
     final currentTime = DateTime.now();
     final timeDifferenceInMinutes =
         scheduledAt.difference(currentTime).inMinutes;
 
-    if (isOrganizer) {
-      return timeDifferenceInMinutes <= 60
+    if (timeDifferenceInMinutes <= 60) {
+      return isOrganizer
           ? ButtonStatus.GO_TO_ATTENDANCE_CONFIRMATION
-          : ButtonStatus.COPY_INVITATION_LINK;
+          : ButtonStatus.HIDDEN;
     }
+
+    if (isOrganizer) return ButtonStatus.COPY_INVITATION_LINK;
+    if (isInvitedGuest) return ButtonStatus.JOIN_PROMISE;
+
     return ButtonStatus.HIDDEN;
   }
 }
