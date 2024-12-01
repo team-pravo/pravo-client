@@ -17,7 +17,7 @@ class JoinRepositoryImpl implements JoinRepository {
 
   @override
   Future<PaymentResponse> requestPayment(int promiseId) async {
-    final response = await dio.post('/api/promise/request/$promiseId');
+    final response = await dio.post('/api/payment/request/$promiseId');
     final responseModel = PaymentResponseModel.fromJson(response.data);
 
     return PaymentResponse(
