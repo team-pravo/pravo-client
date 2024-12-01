@@ -20,4 +20,20 @@ class MemberRepositoryImpl implements MemberRepository {
     final memberDto = MemberModel.fromJson(response.data);
     return memberDto.toEntity(memberId);
   }
+
+  @override
+  Future<void> editMember({
+    required String name,
+    MultipartFile? file,
+    required bool resetToDefaultImage,
+  }) async {
+    await dio.patch(
+      '/api/member/profile',
+      data: {
+        name,
+        file,
+        resetToDefaultImage,
+      },
+    );
+  }
 }
