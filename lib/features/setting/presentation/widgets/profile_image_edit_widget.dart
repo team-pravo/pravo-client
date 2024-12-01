@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pravo_client/assets/constants.dart';
 
-class ProfileImageEditWidget extends StatelessWidget {
+class ProfileImageEditWidget extends StatefulWidget {
   final String? profileImageUrl;
   final void Function(File file) onImageSelected;
   final VoidCallback onResetToDefault;
@@ -17,12 +17,23 @@ class ProfileImageEditWidget extends StatelessWidget {
     required this.onResetToDefault,
   });
 
+  @override
+  State<ProfileImageEditWidget> createState() => _ProfileImageEditWidgetState();
+}
+
+class _ProfileImageEditWidgetState extends State<ProfileImageEditWidget> {
+  File? _selectedImage;
+
   Future<void> _pickImage(BuildContext context) async {
     final picker = ImagePicker();
     try {
       final pickedFile = await picker.pickImage(source: ImageSource.gallery);
       if (pickedFile != null) {
-        onImageSelected(File(pickedFile.path));
+        final file = File(pickedFile.path);
+        setState(() {
+          _selectedImage = file;
+        });
+        widget.onImageSelected(file);
       }
     } catch (e) {
       log(e.toString(), error: e);
@@ -31,15 +42,21 @@ class ProfileImageEditWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ImageProvider? backgroundImage;
+    if (_selectedImage != null) {
+      backgroundImage = FileImage(_selectedImage!); // 선택된 로컬 이미지
+    } else if (widget.profileImageUrl != null) {
+      backgroundImage = NetworkImage(widget.profileImageUrl!); // 기존 등록된 이미지
+    }
+
     return Center(
       child: Stack(
         children: [
           CircleAvatar(
             backgroundColor: kAvatarBackgroundColor,
             radius: 42,
-            backgroundImage:
-                profileImageUrl != null ? NetworkImage(profileImageUrl!) : null,
-            child: profileImageUrl == null
+            backgroundImage: backgroundImage,
+            child: backgroundImage == null // 아무 이미지도 없을 때 기본 이미지 표시
                 ? Padding(
                     padding: const EdgeInsets.all(7.0),
                     child: Image.asset(
@@ -56,7 +73,7 @@ class ProfileImageEditWidget extends StatelessWidget {
                 if (value == 1) {
                   _pickImage(context);
                 } else if (value == 2) {
-                  onResetToDefault();
+                  widget.onResetToDefault();
                 }
               },
               icon: Container(
