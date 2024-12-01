@@ -27,13 +27,20 @@ class MemberRepositoryImpl implements MemberRepository {
     MultipartFile? file,
     required bool resetToDefaultImage,
   }) async {
+    final data = FormData.fromMap({
+      'name': name,
+      if (file != null) 'file': file,
+      'resetToDefaultImage': resetToDefaultImage,
+    });
+
     await dio.patch(
       '/api/member/profile',
-      data: {
-        name,
-        file,
-        resetToDefaultImage,
-      },
+      data: data,
+      options: Options(
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      ),
     );
   }
 }
