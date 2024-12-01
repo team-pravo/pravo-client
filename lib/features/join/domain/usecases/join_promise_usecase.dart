@@ -5,7 +5,7 @@ class JoinPromiseUseCase {
 
   JoinPromiseUseCase(this.repository);
 
-  Future<void> joinPromise(int promiseId) {
+  Future<void> execute(int promiseId) {
     return repository.joinPromise(promiseId);
   }
 }
