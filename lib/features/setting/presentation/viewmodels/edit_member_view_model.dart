@@ -37,6 +37,8 @@ class EditMemberViewModel extends StateNotifier<AsyncValue<void>> {
     } on DioException catch (e, st) {
       if (e.response?.data['code'] == 'E09') {
         errorMessage = '이미 사용 중인 닉네임이에요.';
+      } else if (e.response?.data['code'] == 'E07') {
+        errorMessage = '이미지 확장자는 jpg, png, webp만 가능합니다.';
       } else {
         errorMessage = '프로필 수정 중 문제가 발생했습니다.';
       }
