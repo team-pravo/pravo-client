@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/member/data/repositories/member_repository_impl.dart';
@@ -20,7 +22,7 @@ class EditMemberViewModel extends StateNotifier<AsyncValue<void>> {
 
   Future<void> editMember({
     required String name,
-    MultipartFile? file,
+    File? file,
     required bool resetToDefaultImage,
   }) async {
     state = const AsyncValue.loading();
