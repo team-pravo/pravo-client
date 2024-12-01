@@ -57,13 +57,9 @@ class ProfileEditScreen extends ConsumerWidget {
           children: [
             ProfileImageEditWidget(
               profileImageUrl: member.profileImageUrl,
-              onImageSelected: (file) async {
+              onImageChanged: (file, resetToDefault) {
                 profileImageFile = file;
-                resetToDefaultImage = false;
-              },
-              onResetToDefault: () {
-                profileImageFile = null;
-                resetToDefaultImage = true;
+                resetToDefaultImage = resetToDefault;
               },
             ),
             const SizedBox(

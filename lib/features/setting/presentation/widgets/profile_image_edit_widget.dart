@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -7,14 +6,12 @@ import 'package:pravo_client/assets/constants.dart';
 
 class ProfileImageEditWidget extends StatefulWidget {
   final String? profileImageUrl;
-  final void Function(File file) onImageSelected;
-  final VoidCallback onResetToDefault;
+  final void Function(File? file, bool resetToDefault) onImageChanged;
 
   const ProfileImageEditWidget({
     super.key,
     this.profileImageUrl,
-    required this.onImageSelected,
-    required this.onResetToDefault,
+    required this.onImageChanged,
   });
 
   @override
@@ -23,21 +20,27 @@ class ProfileImageEditWidget extends StatefulWidget {
 
 class _ProfileImageEditWidgetState extends State<ProfileImageEditWidget> {
   File? _selectedImage;
+  bool _resetToDefault = false;
 
   Future<void> _pickImage(BuildContext context) async {
     final picker = ImagePicker();
-    try {
-      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-      if (pickedFile != null) {
-        final file = File(pickedFile.path);
-        setState(() {
-          _selectedImage = file;
-        });
-        widget.onImageSelected(file);
-      }
-    } catch (e) {
-      log(e.toString(), error: e);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      final file = File(pickedFile.path);
+      setState(() {
+        _selectedImage = file;
+        _resetToDefault = false;
+      });
+      widget.onImageChanged(_selectedImage, _resetToDefault);
     }
+  }
+
+  void _resetImage() {
+    setState(() {
+      _selectedImage = null;
+      _resetToDefault = true;
+    });
+    widget.onImageChanged(_selectedImage, _resetToDefault);
   }
 
   @override
@@ -45,7 +48,7 @@ class _ProfileImageEditWidgetState extends State<ProfileImageEditWidget> {
     ImageProvider? backgroundImage;
     if (_selectedImage != null) {
       backgroundImage = FileImage(_selectedImage!); // 선택된 로컬 이미지
-    } else if (widget.profileImageUrl != null) {
+    } else if (widget.profileImageUrl != null && !_resetToDefault) {
       backgroundImage = NetworkImage(widget.profileImageUrl!); // 기존 등록된 이미지
     }
 
@@ -53,6 +56,7 @@ class _ProfileImageEditWidgetState extends State<ProfileImageEditWidget> {
       child: Stack(
         children: [
           CircleAvatar(
+            key: ValueKey(backgroundImage),
             backgroundColor: kAvatarBackgroundColor,
             radius: 42,
             backgroundImage: backgroundImage,
@@ -66,14 +70,14 @@ class _ProfileImageEditWidgetState extends State<ProfileImageEditWidget> {
                 : null,
           ),
           Positioned(
-            bottom: 2,
-            right: -2,
+            bottom: -10,
+            right: -10,
             child: PopupMenuButton<int>(
               onSelected: (value) {
                 if (value == 1) {
                   _pickImage(context);
                 } else if (value == 2) {
-                  widget.onResetToDefault();
+                  _resetImage();
                 }
               },
               icon: Container(
