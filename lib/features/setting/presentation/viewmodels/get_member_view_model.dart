@@ -2,19 +2,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:pravo_client/features/member/data/repositories/member_repository_impl.dart';
 import 'package:pravo_client/features/member/domain/entities/member.dart';
-import 'package:pravo_client/features/member/domain/repositories/member_repository.dart';
+import 'package:pravo_client/features/member/domain/usecases/get_member_usecase.dart';
 
-final memberViewModelProvider =
-    StateNotifierProvider<MemberViewModel, AsyncValue<Member>>((ref) {
-  return MemberViewModel(memberRepository: ref.watch(memberRepositoryProvider));
+final getMemberViewModelProvider =
+    StateNotifierProvider<GetMemberViewModel, AsyncValue<Member>>((ref) {
+  return GetMemberViewModel(
+    getMemberUseCase: GetMemberUseCase(ref.watch(memberRepositoryProvider)),
+  );
 });
 
-class MemberViewModel extends StateNotifier<AsyncValue<Member>> {
-  final MemberRepository memberRepository;
+class GetMemberViewModel extends StateNotifier<AsyncValue<Member>> {
+  final GetMemberUseCase getMemberUseCase;
   final _secureStorage = const FlutterSecureStorage();
 
-  MemberViewModel({
-    required this.memberRepository,
+  GetMemberViewModel({
+    required this.getMemberUseCase,
   }) : super(const AsyncValue.loading());
 
   Future<void> getMember() async {
@@ -26,7 +28,7 @@ class MemberViewModel extends StateNotifier<AsyncValue<Member>> {
       );
       return;
     }
-    final member = await memberRepository.getMember(int.parse(memberId));
+    final member = await getMemberUseCase.getMember(int.parse(memberId));
     state = AsyncValue.data(member);
   }
 }

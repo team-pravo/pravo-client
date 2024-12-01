@@ -4,7 +4,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth1_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/navigation_bar_widget.dart';
-import 'package:pravo_client/features/setting/presentation/viewmodels/member_view_model.dart';
+import 'package:pravo_client/features/setting/presentation/viewmodels/get_member_view_model.dart';
 import 'package:pravo_client/features/setting/presentation/widgets/profile_preview_widget.dart';
 import 'package:pravo_client/features/setting/presentation/widgets/text_buttons_widget.dart';
 
@@ -20,13 +20,13 @@ class _SettingScreenState extends ConsumerState<SettingScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(memberViewModelProvider.notifier).getMember();
+      ref.read(getMemberViewModelProvider.notifier).getMember();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final memberState = ref.watch(memberViewModelProvider);
+    final memberState = ref.watch(getMemberViewModelProvider);
 
     return Scaffold(
       appBar: Depth1AppBarWidget(
