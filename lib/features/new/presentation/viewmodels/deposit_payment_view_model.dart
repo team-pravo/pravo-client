@@ -1,20 +1,22 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pravo_client/features/auth/presentation/viewmodels/router_provider.dart';
+import 'package:pravo_client/features/new/data/repositories/payment_repository_impl.dart';
+import 'package:pravo_client/features/new/domain/usecases/confirm_payment_usecase.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/deposit_payment_state.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_view_model.dart';
 import 'package:tosspayments_widget_sdk_flutter/model/payment_info.dart';
 import 'package:tosspayments_widget_sdk_flutter/model/payment_widget_options.dart';
 import 'package:tosspayments_widget_sdk_flutter/payment_widget.dart';
 
-final depositPaymentProvider =
-    StateNotifierProvider<DepositPaymentNotifier, DepositPaymentState>(
-  (ref) => DepositPaymentNotifier(ref: ref),
-);
-
-class DepositPaymentNotifier extends StateNotifier<DepositPaymentState> {
+class DepositPaymentViewModel extends StateNotifier<DepositPaymentState> {
   final Ref ref;
+  final ConfirmPaymentUseCase confirmPaymentUseCase;
 
-  DepositPaymentNotifier({required this.ref}) : super(DepositPaymentState()) {
+  DepositPaymentViewModel({
+    required this.ref,
+    required this.confirmPaymentUseCase,
+  }) : super(DepositPaymentState()) {
     _initializePaymentWidget();
   }
 
@@ -78,13 +80,29 @@ class DepositPaymentNotifier extends StateNotifier<DepositPaymentState> {
     );
 
     if (paymentResult?.success != null) {
-      print(
-        '[결제 성공: 주문번호 ${paymentResult?.success?.orderId}] paymentKey - ${paymentResult?.success?.paymentKey}',
-      );
-    } else if (paymentResult?.fail != null) {
-      print(
-        '[결제 실패] 오류 코드: ${paymentResult?.fail?.errorCode}, 메시지: ${paymentResult?.fail?.errorMessage}',
-      );
+      final paymentKey = paymentResult!.success!.paymentKey;
+      final orderId = paymentResult.success!.orderId;
+
+      try {
+        await confirmPaymentUseCase.execute(
+          paymentKey: paymentKey,
+          orderId: orderId,
+          amount: ref.watch(promiseDetailsViewModelProvider).deposit!,
+        );
+
+        ref.read(routerProvider).pushReplacement('/new/deposit/complete');
+      } catch (e) {
+        print('Payment confirmation failed: $e');
+      }
     }
   }
 }
+
+final depositPaymentViewModelProvider =
+    StateNotifierProvider<DepositPaymentViewModel, DepositPaymentState>(
+  (ref) => DepositPaymentViewModel(
+    ref: ref,
+    confirmPaymentUseCase:
+        ConfirmPaymentUseCase(ref.read(paymentRepositoryProvider)),
+  ),
+);

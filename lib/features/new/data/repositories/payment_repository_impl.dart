@@ -37,4 +37,24 @@ class PaymentRepositoryImpl implements PaymentRepository {
       promiseId: responseModel.promiseId,
     );
   }
+
+  @override
+  Future<void> confirmPayment({
+    required String paymentKey,
+    required String orderId,
+    required int amount,
+  }) async {
+    final response = await dio.post(
+      '/api/payment/confirm',
+      data: {
+        'paymentKey': paymentKey,
+        'orderId': orderId,
+        'amount': amount,
+      },
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to confirm payment');
+    }
+  }
 }

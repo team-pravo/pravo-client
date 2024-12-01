@@ -53,7 +53,13 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
           appBar: Depth2AppBarWidget(
             title: '약속 상세',
             leadingIcon: PhosphorIcons.caretLeft(),
-            leadingOnPressed: () => context.pop(),
+            leadingOnPressed: () {
+              if (Navigator.canPop(context)) {
+                context.pop();
+              } else {
+                context.go('/');
+              }
+            },
             actionIcon: PhosphorIcons.trash(),
             actionOnPressed: () => {
               showDialog(
