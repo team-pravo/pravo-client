@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/join/data/repositories/join_repository_impl.dart';
 import 'package:pravo_client/features/join/domain/usecases/join_promise_usecase.dart';
 import 'package:pravo_client/features/join/domain/usecases/request_payment_usecase.dart';
-import 'package:pravo_client/features/new/domain/entities/payment_response.dart';
+import 'package:pravo_client/features/payment/domain/entities/payment_response.dart';
 
 class JoinViewModel extends StateNotifier<AsyncValue<PaymentResponse>> {
   final JoinPromiseUseCase _joinPromiseUseCase;
