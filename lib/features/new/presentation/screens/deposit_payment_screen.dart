@@ -89,7 +89,7 @@ class _DepositPaymentScreenState extends ConsumerState<DepositPaymentScreen> {
 
                 if (paymentKey != null) {
                   await ref
-                      .read(participantPaymentViewModelProvider)
+                      .read(organizerPaymentViewModelProvider)
                       .handlePayment(paymentKey);
                 }
               },

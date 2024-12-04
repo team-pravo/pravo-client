@@ -7,10 +7,10 @@ import 'package:pravo_client/features/new/presentation/viewmodels/payment_view_m
 import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_view_model.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/promise_id_provider.dart';
 
-class ParticipantPaymentViewModel {
+class OrganizerPaymentViewModel {
   final Ref ref;
 
-  ParticipantPaymentViewModel(this.ref);
+  OrganizerPaymentViewModel(this.ref);
 
   Future<void> handlePayment(String paymentKey) async {
     final confirmPaymentUseCase = ConfirmPaymentUseCase(
@@ -38,6 +38,6 @@ class ParticipantPaymentViewModel {
   }
 }
 
-final participantPaymentViewModelProvider = Provider(
-  (ref) => ParticipantPaymentViewModel(ref),
+final organizerPaymentViewModelProvider = Provider(
+  (ref) => OrganizerPaymentViewModel(ref),
 );
