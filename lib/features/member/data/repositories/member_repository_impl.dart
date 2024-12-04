@@ -20,4 +20,27 @@ class MemberRepositoryImpl implements MemberRepository {
     final memberDto = MemberModel.fromJson(response.data);
     return memberDto.toEntity(memberId);
   }
+
+  @override
+  Future<void> editMember({
+    required String name,
+    MultipartFile? file,
+    required bool resetToDefaultImage,
+  }) async {
+    final data = FormData.fromMap({
+      'name': name,
+      if (file != null) 'file': file,
+      'resetToDefaultImage': resetToDefaultImage,
+    });
+
+    await dio.patch(
+      '/api/member/profile',
+      data: data,
+      options: Options(
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      ),
+    );
+  }
 }

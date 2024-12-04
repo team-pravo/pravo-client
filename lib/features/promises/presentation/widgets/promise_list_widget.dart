@@ -22,7 +22,7 @@ class PromiseListWidget extends StatelessWidget {
         return PromiseWidget(
           promiseId: promise.id,
           promiseName: promise.name,
-          promiseDate: promise.promiseDate,
+          scheduledAt: promise.scheduledAt,
           location: promise.location,
           organizerName: promise.organizerName,
           organizerProfileImageUrl: promise.organizerProfileImageUrl,

@@ -8,7 +8,7 @@ class PromiseWidget extends StatelessWidget {
   final String? promiseName; // FIXME: 수정할 코드가 많아져서 임시로 nullable하게 처리 했음!!
   final String? organizerName;
   final String? location;
-  final DateTime? promiseDate;
+  final DateTime? scheduledAt;
   final String? organizerProfileImageUrl;
 
   const PromiseWidget({
@@ -17,7 +17,7 @@ class PromiseWidget extends StatelessWidget {
     this.promiseName,
     this.organizerName,
     this.location,
-    this.promiseDate,
+    this.scheduledAt,
     this.organizerProfileImageUrl,
   });
 
@@ -109,8 +109,8 @@ class PromiseWidget extends StatelessWidget {
                     width: 4,
                   ),
                   Text(
-                    promiseDate != null
-                        ? '${promiseDate!.month}월 ${promiseDate!.day}일 ${promiseDate!.hour}:${promiseDate!.minute.toString().padLeft(2, '0')}'
+                    scheduledAt != null
+                        ? '${scheduledAt!.month}월 ${scheduledAt!.day}일 ${scheduledAt!.hour}:${scheduledAt!.minute.toString().padLeft(2, '0')}'
                         : '10월 1일 12:00AM',
                     style: const TextStyle(
                       fontSize: 14,
