@@ -31,14 +31,13 @@ class _PromiseActionButtonWidgetState
 
   @override
   Widget build(BuildContext context) {
-    final joinState = ref.watch(joinViewModelProvider);
-
-    joinState.when(
-      data: (paymentResponse) =>
-          context.push('/promise/${widget.promiseId}/join/deposit'),
-      error: (error, stackTrace) {},
-      loading: () {},
-    );
+    ref.listen(joinViewModelProvider, (previous, next) {
+      if (next is AsyncData) {
+        if (context.mounted) {
+          context.push('/promise/${widget.promiseId}/join/deposit');
+        }
+      }
+    });
 
     return widget.buttonStatus != ButtonStatus.HIDDEN
         ? PrimaryButtonWidget(
