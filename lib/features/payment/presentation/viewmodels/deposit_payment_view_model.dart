@@ -4,9 +4,9 @@ import 'package:pravo_client/features/auth/presentation/viewmodels/router_provid
 import 'package:pravo_client/features/new/data/repositories/payment_repository_impl.dart';
 import 'package:pravo_client/features/new/domain/usecases/change_promise_status_usecase.dart';
 import 'package:pravo_client/features/new/domain/usecases/confirm_payment_usecase.dart';
-import 'package:pravo_client/features/new/presentation/viewmodels/deposit_payment_state.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_view_model.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/promise_id_provider.dart';
+import 'package:pravo_client/features/payment/presentation/viewmodels/deposit_payment_state.dart';
 import 'package:tosspayments_widget_sdk_flutter/model/payment_info.dart';
 import 'package:tosspayments_widget_sdk_flutter/model/payment_widget_options.dart';
 import 'package:tosspayments_widget_sdk_flutter/payment_widget.dart';
