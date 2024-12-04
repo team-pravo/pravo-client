@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:app_links/app_links.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -22,6 +24,30 @@ Future<void> main() async {
     nativeAppKey: dotenv.env['KAKAO_NATIVE_APP_KEY']!,
   ); // Flutter SDK 초기화
   await initializeDateFormatting('ko_KR', null); // 한국어 로케일 초기화
+
+  await Firebase.initializeApp(
+    name: 'pravo',
+    options: FirebaseOptions(
+      apiKey: dotenv.env['FIREBASE_API_KEY']!,
+      appId: dotenv.env['FIREBASE_APP_ID']!,
+      projectId: dotenv.env['FIREBASE_PROJECT_ID']!,
+      messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID']!,
+      iosBundleId: dotenv.env['FIREBASE_IOS_BUNDLE_ID']!,
+      storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET'],
+    ),
+  );
+
+  // You may set the permission requests to "provisional" which allows the user to choose what type
+  // of notifications they would like to receive once the user receives a notification.
+  await FirebaseMessaging.instance.requestPermission(provisional: true);
+
+  // For apple platforms, ensure the APNS token is available before making any FCM plugin API calls
+  await FirebaseMessaging.instance.getAPNSToken();
+  final fcmToken = await FirebaseMessaging.instance
+      .getToken(vapidKey: dotenv.env['FIREBASE_API_KEY']!);
+
+  log('fcmToken: $fcmToken');
+  await Sentry.captureMessage('fcmToken: $fcmToken');
 
   runZonedGuarded(() async {
     await SentryFlutter.init(
