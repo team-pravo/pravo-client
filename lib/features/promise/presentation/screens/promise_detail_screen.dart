@@ -49,7 +49,7 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
         final buttonStatus = ButtonStatus.getButtonStatus(
           isOrganizer,
           isInvitedGuest,
-          promise.promiseDate,
+          promise.scheduledAt,
         );
 
         return Scaffold(
@@ -111,7 +111,7 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
                         PromiseOverviewWidget(
                           name: promise.name,
                           location: promise.location,
-                          promiseDate: promise.promiseDate,
+                          scheduledAt: promise.scheduledAt,
                           organizer: promise.participants.firstWhere(
                             (participant) => participant.role == 'ORGANIZER',
                           ),
