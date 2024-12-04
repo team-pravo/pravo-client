@@ -17,4 +17,9 @@ class Formatter {
 
     return '$date ($weekDay) $time';
   }
+
+  static String formatWeekDay(DateTime dateTime) {
+    final weekDay = weekDayNames[dateTime.weekday % 7];
+    return '$weekDay요일';
+  }
 }

@@ -4,8 +4,11 @@ import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/currency_display_widget.dart';
 
 class CurrentPointWidget extends StatelessWidget {
+  final int points;
+
   const CurrentPointWidget({
     super.key,
+    required this.points,
   });
 
   @override
@@ -27,17 +30,17 @@ class CurrentPointWidget extends StatelessWidget {
           const SizedBox(
             width: 16,
           ),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 '현재 보유한 포인트',
                 style: TextStyle(
                   fontSize: 14,
                 ),
               ),
               CurrencyDisplayWidget(
-                value: '10,000',
+                value: points.toString(),
                 unit: 'P',
                 color: kPrimaryColor,
               ),
