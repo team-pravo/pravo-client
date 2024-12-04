@@ -15,6 +15,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:pravo_client/app/theme.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/router_provider.dart';
+import 'package:pravo_client/features/core/notification/presentation/viewmodels/fcm_view_model.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
@@ -25,8 +26,8 @@ Future<void> main() async {
   ); // Flutter SDK 초기화
   await initializeDateFormatting('ko_KR', null); // 한국어 로케일 초기화
 
+  // Firebase 초기화
   await Firebase.initializeApp(
-    name: 'pravo',
     options: FirebaseOptions(
       apiKey: dotenv.env['FIREBASE_API_KEY']!,
       appId: dotenv.env['FIREBASE_APP_ID']!,
@@ -36,18 +37,7 @@ Future<void> main() async {
       storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET'],
     ),
   );
-
-  // You may set the permission requests to "provisional" which allows the user to choose what type
-  // of notifications they would like to receive once the user receives a notification.
-  await FirebaseMessaging.instance.requestPermission(provisional: true);
-
-  // For apple platforms, ensure the APNS token is available before making any FCM plugin API calls
   await FirebaseMessaging.instance.getAPNSToken();
-  final fcmToken = await FirebaseMessaging.instance
-      .getToken(vapidKey: dotenv.env['FIREBASE_API_KEY']!);
-
-  log('fcmToken: $fcmToken');
-  await Sentry.captureMessage('fcmToken: $fcmToken');
 
   runZonedGuarded(() async {
     await SentryFlutter.init(
@@ -57,6 +47,7 @@ Future<void> main() async {
       },
       appRunner: () => runApp(ProviderScope(child: _App())),
     );
+
     // TODO: 개발 완료 시, Debug Mode가 아닐 때만 Sentry init하도록 수정하기
     // if (!kDebugMode) {
     //   await SentryFlutter.init(
@@ -90,12 +81,30 @@ class _AppState extends ConsumerState<_App> {
     super.initState();
     router = ref.read(routerProvider);
     _initializeDeepLinks();
+    _sendFcmToken();
   }
 
   @override
   void dispose() {
     _linkSubscription?.cancel();
     super.dispose();
+  }
+
+  Future<void> _sendFcmToken() async {
+    try {
+      final fcmToken = await FirebaseMessaging.instance
+          .getToken(vapidKey: dotenv.env['FIREBASE_API_KEY']!);
+
+      if (fcmToken == null) {
+        throw Exception('fcm token not found');
+      }
+
+      final fcmViewModel = ref.read(fcmViewModelProvider);
+      await fcmViewModel.sendFcmToken(fcmToken);
+    } catch (e) {
+      log(e.toString());
+      Sentry.captureException(e);
+    }
   }
 
   Future<void> _initializeDeepLinks() async {
@@ -134,7 +143,6 @@ class _AppState extends ConsumerState<_App> {
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-        // statusBarColor: Colors.transparent,
         systemNavigationBarColor: kBackgroundColor,
       ),
       child: MaterialApp.router(
