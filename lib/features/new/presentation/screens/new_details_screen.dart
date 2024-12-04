@@ -24,9 +24,7 @@ class NewDetailsScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Padding(
                   padding: kScreenPadding,
-                  child: Expanded(
-                    child: PromiseDetailsInputFieldsWidget(),
-                  ),
+                  child: PromiseDetailsInputFieldsWidget(),
                 ),
               ),
             ),
