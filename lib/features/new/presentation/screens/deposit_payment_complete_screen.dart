@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
+import 'package:pravo_client/features/new/presentation/viewmodels/promise_id_provider.dart';
 
-class DepositPaymentCompleteScreen extends StatelessWidget {
+class DepositPaymentCompleteScreen extends ConsumerWidget {
   const DepositPaymentCompleteScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: const Depth2AppBarWidget(
         title: '결제 완료',
@@ -56,7 +58,8 @@ class DepositPaymentCompleteScreen extends StatelessWidget {
             ),
             PrimaryButtonWidget(
               buttonText: '약속 확인하기',
-              onTap: () => context.go('/promise/1'),
+              onTap: () =>
+                  context.go('/promise/${ref.read(promiseIdProvider)}'),
               hasHorizontalMargin: true,
             ),
           ],

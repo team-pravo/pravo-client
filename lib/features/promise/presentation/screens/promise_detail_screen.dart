@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/alert_dialog_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
-import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
 import 'package:pravo_client/features/promise/domain/entities/button_status.dart';
 import 'package:pravo_client/features/promise/presentation/viewmodels/promise_view_model.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/deposit_widget.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/participants_and_status_widget.dart';
+import 'package:pravo_client/features/promise/presentation/widgets/promise_action_button_widget.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/promise_overview_widget.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/promise_status_widget.dart';
 
@@ -46,8 +45,12 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
       data: (state) {
         final promise = state.promise;
         final isOrganizer = state.isOrganizer;
-        final buttonStatus =
-            ButtonStatus.getButtonStatus(isOrganizer, promise.scheduledAt);
+        final isInvitedGuest = state.isInvitedGuest;
+        final buttonStatus = ButtonStatus.getButtonStatus(
+          isOrganizer,
+          isInvitedGuest,
+          promise.scheduledAt,
+        );
 
         return Scaffold(
           appBar: Depth2AppBarWidget(
@@ -60,7 +63,11 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
                 context.go('/');
               }
             },
-            actionIcon: PhosphorIcons.trash(),
+            actionIcon: isInvitedGuest
+                ? null
+                : isOrganizer
+                    ? PhosphorIcons.trash()
+                    : PhosphorIcons.signOut(),
             actionOnPressed: () => {
               showDialog(
                 context: context,
@@ -97,56 +104,33 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Padding(
+                  child: SingleChildScrollView(
                     padding: kScreenPadding,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          PromiseOverviewWidget(
-                            name: promise.name,
-                            location: promise.location,
-                            scheduledAt: promise.scheduledAt,
-                            organizer: promise.participants.firstWhere(
-                              (participant) => participant.role == 'ORGANIZER',
-                            ),
+                    child: Column(
+                      children: [
+                        PromiseOverviewWidget(
+                          name: promise.name,
+                          location: promise.location,
+                          scheduledAt: promise.scheduledAt,
+                          organizer: promise.participants.firstWhere(
+                            (participant) => participant.role == 'ORGANIZER',
                           ),
-                          ParticipantsAndStatusWidget(
-                            participants: promise.participants,
-                          ),
-                          DepositWidget(
-                            deposit: promise.deposit,
-                          ),
-                          const PromiseStatusWidget(),
-                        ],
-                      ),
+                        ),
+                        ParticipantsAndStatusWidget(
+                          participants: promise.participants,
+                        ),
+                        DepositWidget(
+                          deposit: promise.deposit,
+                        ),
+                        const PromiseStatusWidget(),
+                      ],
                     ),
                   ),
                 ),
-                if (buttonStatus != ButtonStatus.hidden)
-                  PrimaryButtonWidget(
-                    isEnabled: true,
-                    onTap: () {
-                      if (buttonStatus == ButtonStatus.copyInvitationLink) {
-                        Clipboard.setData(const ClipboardData(text: '초대 링크'));
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('초대 링크가 복사되었습니다.')),
-                        );
-                      } else if (buttonStatus ==
-                          ButtonStatus.goToAttendanceConfirmation) {
-                        context.push(
-                          '/promise/${widget.promiseId}/confirm-attendance',
-                        );
-                      }
-                    },
-                    buttonColor: kPrimaryColor,
-                    textColor: Colors.white,
-                    buttonText: buttonStatus.text,
-                    icon: buttonStatus == ButtonStatus.copyInvitationLink
-                        ? PhosphorIcons.link(PhosphorIconsStyle.bold)
-                        : null,
-                    iconBeforeText: true,
-                    hasHorizontalMargin: true,
-                  ),
+                PromiseActionButtonWidget(
+                  buttonStatus: buttonStatus,
+                  promiseId: widget.promiseId,
+                ),
               ],
             ),
           ),

@@ -4,7 +4,8 @@ enum ParticipantStatus {
   ATTENDED('참석'),
   CANCELED('취소'),
   NOT_ATTENDED('불참'),
-  READY('참석 예정');
+  READY('참석 예정'),
+  PENDING('대기');
 
   final String label;
 

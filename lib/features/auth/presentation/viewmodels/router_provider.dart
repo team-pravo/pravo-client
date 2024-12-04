@@ -4,6 +4,8 @@ import 'package:pravo_client/features/auth/presentation/screens/login_screen.dar
 import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
 import 'package:pravo_client/features/error/presentation/screens/error_screen.dart';
 import 'package:pravo_client/features/home/presentation/screens/home_screen.dart';
+import 'package:pravo_client/features/join/presentation/screens/join_complete_screen.dart';
+import 'package:pravo_client/features/join/presentation/screens/join_deposit_screen.dart';
 import 'package:pravo_client/features/member/domain/entities/member.dart';
 import 'package:pravo_client/features/new/presentation/screens/deposit_payment_complete_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/deposit_payment_screen.dart';
@@ -41,7 +43,15 @@ final routerProvider = Provider<GoRouter>((ref) {
       },
       routes: [
         GoRoute(
-          path: 'confirm-attendance',
+          path: 'join/deposit',
+          builder: (_, __) => const JoinDepositScreen(),
+        ),
+        GoRoute(
+          path: 'join/complete',
+          builder: (_, __) => const JoinCompleteScreen(),
+        ),
+        GoRoute(
+          path: 'settlement/attendance',
           builder: (_, state) {
             final promiseId = int.parse(state.pathParameters['promiseId']!);
             return ConfirmAttendanceScreen(promiseId: promiseId);

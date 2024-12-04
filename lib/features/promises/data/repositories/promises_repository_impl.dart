@@ -43,7 +43,7 @@ class PromisesRepositoryImpl implements PromisesRepository {
           (model) => Promise(
             id: model.id,
             name: model.name,
-            promiseDate: model.promiseDate,
+            scheduledAt: model.scheduledAt,
             location: model.location,
             status: model.status,
             organizerName: model.organizerName,

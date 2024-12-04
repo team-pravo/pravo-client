@@ -49,8 +49,6 @@ class DepositPaymentViewModel extends StateNotifier<DepositPaymentState> {
     )
         .then((control) {
       state = state.copyWith(paymentMethodWidgetControl: control);
-    }).catchError((error) {
-      print('Error rendering payment methods: $error');
     });
 
     paymentWidget.renderAgreement(selector: 'agreement').then(
@@ -58,9 +56,7 @@ class DepositPaymentViewModel extends StateNotifier<DepositPaymentState> {
         state = state.copyWith(agreementWidgetControl: control);
         _updateAgreementStatus();
       },
-    ).catchError((error) {
-      print('Error rendering agreement: $error');
-    });
+    );
   }
 
   Future<void> _updateAgreementStatus() async {
@@ -87,19 +83,15 @@ class DepositPaymentViewModel extends StateNotifier<DepositPaymentState> {
       final paymentKey = paymentResult!.success!.paymentKey;
       final orderId = paymentResult.success!.orderId;
 
-      try {
-        await confirmPaymentUseCase.execute(
-          paymentKey: paymentKey,
-          orderId: orderId,
-          amount: ref.watch(promiseDetailsViewModelProvider).deposit!,
-        );
+      await confirmPaymentUseCase.execute(
+        paymentKey: paymentKey,
+        orderId: orderId,
+        amount: ref.watch(promiseDetailsViewModelProvider).deposit!,
+      );
 
-        await changePromiseStatusUseCase.execute(ref.read(promiseIdProvider)!);
+      await changePromiseStatusUseCase.execute(ref.read(promiseIdProvider)!);
 
-        ref.read(routerProvider).pushReplacement('/new/deposit/complete');
-      } catch (e) {
-        print('Payment confirmation failed: $e');
-      }
+      ref.read(routerProvider).pushReplacement('/new/deposit/complete');
     }
   }
 }
