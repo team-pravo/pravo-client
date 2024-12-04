@@ -5,19 +5,19 @@ import 'package:pravo_client/assets/constants.dart';
 
 class PromiseWidget extends StatelessWidget {
   final int promiseId;
-  final String? promiseName; // FIXME: 수정할 코드가 많아져서 임시로 nullable하게 처리 했음!!
-  final String? organizerName;
-  final String? location;
-  final DateTime? scheduledAt;
+  final String promiseName;
+  final String organizerName;
+  final String location;
+  final DateTime scheduledAt;
   final String? organizerProfileImageUrl;
 
   const PromiseWidget({
     super.key,
     required this.promiseId,
-    this.promiseName,
-    this.organizerName,
-    this.location,
-    this.scheduledAt,
+    required this.promiseName,
+    required this.organizerName,
+    required this.location,
+    required this.scheduledAt,
     this.organizerProfileImageUrl,
   });
 
@@ -58,14 +58,14 @@ class PromiseWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            promiseName ?? '아보카도 농장 체험',
+                            promiseName,
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           Text(
-                            organizerName ?? 'Mr. Avocado',
+                            organizerName,
                             style: const TextStyle(
                               fontSize: 14,
                             ),
@@ -91,7 +91,7 @@ class PromiseWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    location ?? '아보카도 농장',
+                    location,
                     style: const TextStyle(
                       fontSize: 14,
                     ),
@@ -109,9 +109,7 @@ class PromiseWidget extends StatelessWidget {
                     width: 4,
                   ),
                   Text(
-                    scheduledAt != null
-                        ? '${scheduledAt!.month}월 ${scheduledAt!.day}일 ${scheduledAt!.hour}:${scheduledAt!.minute.toString().padLeft(2, '0')}'
-                        : '10월 1일 12:00AM',
+                    '${scheduledAt.month}월 ${scheduledAt.day}일 ${scheduledAt.hour}:${scheduledAt.minute.toString().padLeft(2, '0')}',
                     style: const TextStyle(
                       fontSize: 14,
                     ),
