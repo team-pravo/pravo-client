@@ -26,7 +26,7 @@ class PromiseRepositoryImpl implements PromiseRepository {
     return Promise(
       id: promiseModel.id,
       name: promiseModel.name,
-      promiseDate: promiseModel.promiseDate,
+      scheduledAt: promiseModel.scheduledAt,
       location: promiseModel.location,
       status: promiseModel.status,
       deposit: promiseModel.deposit,
