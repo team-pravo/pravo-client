@@ -80,5 +80,6 @@
 	<string>$(PRODUCT_NAME) needs permission to access photos on your device</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>$(PRODUCT_NAME) needs permission to access photos on your device</string>
+	<key>ITSAppUsesNonExemptEncryption</key> <No>
 </dict>
 </plist>
