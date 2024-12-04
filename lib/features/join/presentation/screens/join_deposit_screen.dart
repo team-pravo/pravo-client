@@ -61,7 +61,7 @@ class _JoinDepositScreenState extends ConsumerState<JoinDepositScreen> {
               buttonText: '$depositAmount원 결제하기',
               isEnabled: paymentState.isAgreementChecked,
               onTap: () async {
-                await paymentNotifier.requestPayment(orderId, promiseName);
+                await paymentNotifier.getPaymentKey(orderId, promiseName);
               },
               hasHorizontalMargin: true,
             ),
