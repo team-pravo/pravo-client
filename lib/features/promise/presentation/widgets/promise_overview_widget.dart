@@ -9,14 +9,14 @@ import 'package:pravo_client/features/promise/presentation/widgets/image_and_tex
 class PromiseOverviewWidget extends StatelessWidget {
   final String name;
   final String location;
-  final DateTime promiseDate;
+  final DateTime scheduledAt;
   final Participant organizer;
 
   const PromiseOverviewWidget({
     super.key,
     required this.name,
     required this.location,
-    required this.promiseDate,
+    required this.scheduledAt,
     required this.organizer,
   });
 
@@ -54,7 +54,7 @@ class PromiseOverviewWidget extends StatelessWidget {
             ),
             IconAndTextWidget(
               iconData: PhosphorIcons.calendarBlank(PhosphorIconsStyle.fill),
-              title: Formatter.format(promiseDate),
+              title: Formatter.format(scheduledAt),
             ),
           ],
         ),

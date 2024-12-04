@@ -47,7 +47,7 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
         final promise = state.promise;
         final isOrganizer = state.isOrganizer;
         final buttonStatus =
-            ButtonStatus.getButtonStatus(isOrganizer, promise.promiseDate);
+            ButtonStatus.getButtonStatus(isOrganizer, promise.scheduledAt);
 
         return Scaffold(
           appBar: Depth2AppBarWidget(
@@ -105,7 +105,7 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
                           PromiseOverviewWidget(
                             name: promise.name,
                             location: promise.location,
-                            promiseDate: promise.promiseDate,
+                            scheduledAt: promise.scheduledAt,
                             organizer: promise.participants.firstWhere(
                               (participant) => participant.role == 'ORGANIZER',
                             ),
