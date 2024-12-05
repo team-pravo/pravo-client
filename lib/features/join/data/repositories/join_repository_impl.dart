@@ -25,6 +25,27 @@ class JoinRepositoryImpl implements JoinRepository {
       promiseId: responseModel.promiseId,
     );
   }
+
+  @override
+  Future<void> confirmPayment({
+    required String paymentKey,
+    required String orderId,
+    required int amount,
+  }) async {
+    await dio.post(
+      '/api/payment/confirm',
+      data: {
+        'paymentKey': paymentKey,
+        'orderId': orderId,
+        'amount': amount,
+      },
+    );
+  }
+
+  @override
+  Future<void> changeParticipantStatus(int promiseId) async {
+    await dio.post('/api/promise/$promiseId/participant/change');
+  }
 }
 
 final joinRepositoryProvider = Provider<JoinRepository>(
