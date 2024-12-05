@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/core/dio/dio_provider.dart';
 import 'package:pravo_client/features/new/data/models/payment_request_model.dart';
-import 'package:pravo_client/features/new/data/models/payment_response_model.dart';
 import 'package:pravo_client/features/new/domain/entities/payment_request.dart';
 import 'package:pravo_client/features/new/domain/repositories/payment_repository.dart';
+import 'package:pravo_client/features/payment/data/models/payment_response_model.dart';
 import 'package:pravo_client/features/payment/domain/entities/payment_response.dart';
 
 final paymentRepositoryProvider = Provider<PaymentRepositoryImpl>((ref) {
