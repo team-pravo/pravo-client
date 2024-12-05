@@ -6,10 +6,10 @@ import 'package:pravo_client/app/formatter.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/router_provider.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
+import 'package:pravo_client/features/join/presentation/viewmodels/join_payment_view_model.dart';
 import 'package:pravo_client/features/join/presentation/viewmodels/join_promise_view_model.dart';
 import 'package:pravo_client/features/join/presentation/viewmodels/join_view_model.dart';
 import 'package:pravo_client/features/join/presentation/viewmodels/payment_response_provider.dart';
-import 'package:pravo_client/features/payment/presentation/viewmodels/deposit_payment_view_model.dart';
 import 'package:tosspayments_widget_sdk_flutter/widgets/agreement.dart';
 import 'package:tosspayments_widget_sdk_flutter/widgets/payment_method.dart';
 
@@ -22,9 +22,20 @@ class JoinDepositScreen extends ConsumerStatefulWidget {
 
 class _JoinDepositScreenState extends ConsumerState<JoinDepositScreen> {
   @override
+  void initState() {
+    super.initState();
+
+    // 위젯이 빌드된 후에 renderWidgets 호출
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final paymentNotifier = ref.read(joinPaymentViewModelProvider.notifier);
+      paymentNotifier.renderWidgets();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final paymentState = ref.watch(depositPaymentViewModelProvider);
-    final paymentNotifier = ref.read(depositPaymentViewModelProvider.notifier);
+    final paymentState = ref.watch(joinPaymentViewModelProvider);
+    final paymentNotifier = ref.read(joinPaymentViewModelProvider.notifier);
 
     final joinPromise = ref.watch(joinPromiseProvider)!;
     final promiseId = joinPromise.id;
