@@ -129,7 +129,7 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
                 ),
                 PromiseActionButtonWidget(
                   buttonStatus: buttonStatus,
-                  promiseId: widget.promiseId,
+                  promise: promise,
                 ),
               ],
             ),
