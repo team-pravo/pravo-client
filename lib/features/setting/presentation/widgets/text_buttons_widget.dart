@@ -4,6 +4,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:pravo_client/features/auth/data/models/platform.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/auth_provider.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/oauth_provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pravo_client/features/core/presentation/widgets/alert_dialog_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/divider_with_padding_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/vertical_gap_widget.dart';
@@ -58,7 +59,7 @@ class TextButtonsWidget extends ConsumerWidget {
         const DividerWithPaddingWidget(),
         TextButtonWidget(
           title: '결제 내역',
-          actionOnTap: () => {},
+          actionOnTap: () => context.push('/payment-log'),
         ),
         const VerticalGapWidget(),
         TextButtonWidget(
