@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pravo_client/features/settlement/data/models/settlement_request_model.dart';
 import 'package:pravo_client/features/settlement/data/models/settlement_response_model.dart';
-import 'package:pravo_client/features/settlement/domain/entites/participant.dart';
+import 'package:pravo_client/features/settlement/domain/entites/attendee.dart';
 import 'package:pravo_client/features/settlement/domain/entites/settlement.dart';
 import 'package:pravo_client/features/settlement/domain/repositories/settlement_repository.dart';
 
@@ -12,11 +12,11 @@ class SettlementRepositoryImpl implements SettlementRepository {
 
   @override
   Future<Settlement> confirmSettlement({
-    required List<Participant> participants,
+    required List<Attendee> attendees,
     required int promiseId,
   }) async {
     final requestBody = _toRequestModel(
-      participants: participants,
+      attendees: attendees,
       promiseId: promiseId,
     ).toJson();
     final response = await dio.post(
@@ -28,11 +28,11 @@ class SettlementRepositoryImpl implements SettlementRepository {
   }
 
   SettlementRequestModel _toRequestModel({
-    required List<Participant> participants,
+    required List<Attendee> attendees,
     required int promiseId,
   }) {
     return SettlementRequestModel(
-      memberIds: participants.map((p) => p.id).toList(),
+      memberIds: attendees.map((p) => p.id).toList(),
       promiseId: promiseId,
     );
   }
