@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pravo_client/features/core/dio/dio_provider.dart';
 import 'package:pravo_client/features/settlement/data/models/settlement_request_model.dart';
 import 'package:pravo_client/features/settlement/data/models/settlement_response_model.dart';
 import 'package:pravo_client/features/settlement/domain/entites/attendee.dart';
@@ -48,3 +50,7 @@ class SettlementRepositoryImpl implements SettlementRepository {
     );
   }
 }
+
+final settlementRepositoryProvider = Provider<SettlementRepository>((ref) {
+  return SettlementRepositoryImpl(ref.read(dioProvider));
+});
