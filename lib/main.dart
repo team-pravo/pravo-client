@@ -15,7 +15,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:pravo_client/app/theme.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/auth/presentation/viewmodels/router_provider.dart';
-import 'package:pravo_client/features/core/notification/presentation/viewmodels/fcm_view_model.dart';
+import 'package:pravo_client/features/notification/presentation/viewmodels/fcm_view_model.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
