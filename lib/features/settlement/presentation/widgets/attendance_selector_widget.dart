@@ -56,7 +56,10 @@ class AttendanceSelectorWidget extends StatelessWidget {
             const SizedBox(
               width: 16,
             ),
-            ImageAndTextWidget(name: attendee.name),
+            ImageAndTextWidget(
+              name: attendee.name,
+              imageUrl: attendee.profileImageUrl,
+            ),
           ],
         ),
       ),

@@ -10,6 +10,7 @@ class AttendeesViewModel extends StateNotifier<List<Attendee>> {
       return Attendee(
         id: participant.id,
         name: participant.name,
+        profileImageUrl: participant.profileImageUrl,
       );
     }).toList();
     state = attendees;
