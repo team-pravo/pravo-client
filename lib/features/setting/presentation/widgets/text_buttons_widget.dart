@@ -43,7 +43,7 @@ class TextButtonsWidget extends ConsumerWidget {
         const VerticalGapWidget(),
         TextButtonWidget(
           title: '포인트 내역',
-          actionOnTap: () => {},
+          actionOnTap: () => context.push('/point-log'),
         ),
         const DividerWithPaddingWidget(),
         TextButtonWidget(

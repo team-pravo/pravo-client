@@ -11,6 +11,7 @@ import 'package:pravo_client/features/new/presentation/screens/deposit_payment_c
 import 'package:pravo_client/features/new/presentation/screens/deposit_payment_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/new_details_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/new_screen.dart';
+import 'package:pravo_client/features/point-log/presentation/screens/point_log_screen.dart';
 import 'package:pravo_client/features/promise/presentation/screens/confirm_attendance_screen.dart';
 import 'package:pravo_client/features/promise/presentation/screens/promise_detail_screen.dart';
 import 'package:pravo_client/features/promise/presentation/screens/settlement_complete_screen.dart';
@@ -98,6 +99,10 @@ final routerProvider = Provider<GoRouter>((ref) {
     GoRoute(
       path: '/payment-log',
       builder: (_, __) => const PaymentLogScreen(),
+    ),
+    GoRoute(
+      path: '/point-log',
+      builder: (_, __) => const PointLogScreen(),
     ),
     GoRoute(
       path: '/profile/edit',
