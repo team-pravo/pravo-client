@@ -6,10 +6,10 @@ import 'package:pravo_client/app/formatter.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/divider_with_padding_widget.dart';
-import 'package:pravo_client/features/setting/domain/entities/payment_log.dart';
-import 'package:pravo_client/features/setting/domain/entities/payment_status.dart';
-import 'package:pravo_client/features/setting/presentation/viewmodels/get_payment_log_view_model.dart';
-import 'package:pravo_client/features/setting/presentation/widgets/log_widget.dart';
+import 'package:pravo_client/features/payment-log/domain/entities/payment_log.dart';
+import 'package:pravo_client/features/payment-log/domain/entities/payment_status.dart';
+import 'package:pravo_client/features/payment-log/presentation/viewmodels/get_payment_log_view_model.dart';
+import 'package:pravo_client/features/core/presentation/widgets/log_widget.dart';
 
 class PaymentLogScreen extends ConsumerStatefulWidget {
   const PaymentLogScreen({super.key});
@@ -31,9 +31,14 @@ class _PaymentLogScreenState extends ConsumerState<PaymentLogScreen> {
       (previous, next) {
         next.whenOrNull(
           error: (error, stackTrace) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              context.go('/error');
-            });
+            context.go(
+              '/error',
+              extra: {
+                'appBarTitle': '오류',
+                'errorTitle': '오류가 발생했습니다.',
+                'errorMessage': '결제 내역을 조회할 수 없습니다.',
+              },
+            );
           },
         );
       },

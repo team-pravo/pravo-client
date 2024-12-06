@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pravo_client/features/setting/domain/entities/payment_log.dart';
-import 'package:pravo_client/features/setting/domain/repositories/payment_log_repository.dart';
-import 'package:pravo_client/features/setting/data/repositories/payment_log_repository_impl.dart';
+import 'package:pravo_client/features/payment-log/domain/entities/payment_log.dart';
+import 'package:pravo_client/features/payment-log/domain/repositories/payment_log_repository.dart';
+import 'package:pravo_client/features/payment-log/data/repositories/payment_log_repository_impl.dart';
 
 class GetPaymentLogViewModel
     extends StateNotifier<AsyncValue<List<PaymentLog>>> {

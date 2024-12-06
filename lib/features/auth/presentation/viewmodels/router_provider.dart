@@ -15,7 +15,7 @@ import 'package:pravo_client/features/promise/presentation/screens/confirm_atten
 import 'package:pravo_client/features/promise/presentation/screens/promise_detail_screen.dart';
 import 'package:pravo_client/features/promise/presentation/screens/settlement_complete_screen.dart';
 import 'package:pravo_client/features/promises/presentation/screens/promises_screen.dart';
-import 'package:pravo_client/features/setting/presentation/screens/payment_log_screen.dart';
+import 'package:pravo_client/features/payment-log/presentation/screens/payment_log_screen.dart';
 import 'package:pravo_client/features/setting/presentation/screens/profile_edit_screen.dart';
 import 'package:pravo_client/features/setting/presentation/screens/setting_screen.dart';
 import 'package:pravo_client/features/store/presentation/screens/store_screen.dart';
