@@ -2,30 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/image_and_text_widget.dart';
+import 'package:pravo_client/features/settlement/domain/entites/attendee.dart';
 
-class AttendanceSelectorWidget extends StatefulWidget {
+class AttendanceSelectorWidget extends StatelessWidget {
+  final Attendee attendee;
+  final bool isSelected;
+  final ValueChanged<bool> onSelectionChanged;
+
   const AttendanceSelectorWidget({
     super.key,
+    required this.attendee,
+    required this.isSelected,
+    required this.onSelectionChanged,
   });
 
-  @override
-  State<AttendanceSelectorWidget> createState() =>
-      _AttendanceSelectorWidgetState();
-}
-
-class _AttendanceSelectorWidgetState extends State<AttendanceSelectorWidget> {
-  bool isSelected = false;
-
-  void toggleSelection() {
-    setState(() {
-      isSelected = !isSelected; // 클릭할 때마다 상태를 반전
-    });
+  void _handleTap() {
+    onSelectionChanged(!isSelected);
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: toggleSelection,
+      onTap: _handleTap,
       child: Container(
         decoration: BoxDecoration(
           color: isSelected ? kWidgetBackgroundColor : null,
@@ -58,7 +56,7 @@ class _AttendanceSelectorWidgetState extends State<AttendanceSelectorWidget> {
             const SizedBox(
               width: 16,
             ),
-            const ImageAndTextWidget(name: 'Mr. Avocado'), // FIXME
+            ImageAndTextWidget(name: attendee.name),
           ],
         ),
       ),

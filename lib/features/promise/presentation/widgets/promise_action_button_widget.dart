@@ -50,7 +50,7 @@ class _PromiseActionButtonWidgetState
                     .read(attendeesProvider.notifier)
                     .setAttendees(ref, widget.promise.participants);
                 context.push(
-                  '/promise/${widget.promise.id}/settlement/attendance',
+                  '/promise/${widget.promise.id}/settlement/confirm',
                 );
               } else if (widget.buttonStatus == ButtonStatus.JOIN_PROMISE) {
                 await ref
