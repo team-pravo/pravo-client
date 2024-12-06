@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/core/presentation/widgets/vertical_gap_widget.dart';
-import 'package:pravo_client/features/settlement/domain/entites/attendee.dart';
 import 'package:pravo_client/features/settlement/presentation/viewmodels/attendees_view_model.dart';
-import 'package:pravo_client/features/settlement/presentation/viewmodels/selected_attendees_provider.dart';
+import 'package:pravo_client/features/settlement/presentation/viewmodels/selected_attendees_view_model.dart';
 import 'package:pravo_client/features/settlement/presentation/widgets/attendance_selector_widget.dart';
 
 class AttendanceListWidget extends ConsumerWidget {
@@ -15,19 +14,6 @@ class AttendanceListWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final attendees = ref.watch(attendeesProvider);
     final selectedAttendees = ref.watch(selectedAttendeesProvider);
-
-    void handleSelectionChanged(Attendee attendee, bool isSelected) {
-      final notifier = ref.read(selectedAttendeesProvider.notifier);
-      if (isSelected) {
-        if (!notifier.state.contains(attendee)) {
-          notifier.update((state) => [...state, attendee]);
-        }
-      } else {
-        notifier.update(
-          (state) => state.where((a) => a.id != attendee.id).toList(),
-        );
-      }
-    }
 
     if (attendees.isEmpty) {
       return const Center(
@@ -48,7 +34,7 @@ class AttendanceListWidget extends ConsumerWidget {
               attendee: attendee,
               isSelected: isSelected,
               onSelectionChanged: (bool selected) {
-                handleSelectionChanged(attendee, selected);
+                ref.read(selectedAttendeesProvider.notifier).toggle(attendee);
               },
             );
           },
