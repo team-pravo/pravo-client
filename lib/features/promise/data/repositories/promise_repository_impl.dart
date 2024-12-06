@@ -2,9 +2,9 @@ import 'package:dio/dio.dart' hide Headers;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/core/dio/dio_provider.dart';
 import 'package:pravo_client/features/promise/data/models/promise_model.dart';
+import 'package:pravo_client/features/promise/domain/entities/participant.dart';
 import 'package:pravo_client/features/promise/domain/entities/participant_status.dart';
 import 'package:pravo_client/features/promise/domain/entities/promise.dart';
-import 'package:pravo_client/features/promise/domain/entities/participant.dart';
 import 'package:pravo_client/features/promise/domain/repositories/promise_repository.dart';
 
 final promiseRepositoryProvider = Provider<PromiseRepository>((ref) {

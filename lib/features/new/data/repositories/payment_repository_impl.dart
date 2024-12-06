@@ -44,7 +44,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
     required String orderId,
     required int amount,
   }) async {
-    final response = await dio.post(
+    await dio.post(
       '/api/payment/confirm',
       data: {
         'paymentKey': paymentKey,
@@ -52,26 +52,12 @@ class PaymentRepositoryImpl implements PaymentRepository {
         'amount': amount,
       },
     );
-
-    if (response.statusCode != 200) {
-      throw Exception('Failed to confirm payment');
-    }
   }
 
   @override
   Future<void> changePromiseStatus({required int promiseId}) async {
-    try {
-      final response = await dio.post(
-        '/api/promise/$promiseId/change',
-      );
-
-      if (response.statusCode != 200) {
-        throw Exception(
-          'Failed to change promise status: ${response.statusMessage}',
-        );
-      }
-    } catch (e) {
-      throw Exception('Error while changing promise status: $e');
-    }
+    await dio.post(
+      '/api/promise/$promiseId/change',
+    );
   }
 }

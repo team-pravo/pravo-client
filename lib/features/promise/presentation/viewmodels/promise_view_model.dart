@@ -7,10 +7,12 @@ import 'package:pravo_client/features/promise/domain/usecases/get_promise_usecas
 class PromiseState {
   final Promise promise;
   final bool isOrganizer;
+  final bool isInvitedGuest;
 
   PromiseState({
     required this.promise,
     required this.isOrganizer,
+    required this.isInvitedGuest,
   });
 }
 
@@ -28,11 +30,15 @@ class PromiseViewModel extends StateNotifier<AsyncValue<PromiseState>> {
           participant.role == 'ORGANIZER' &&
           participant.id.toString() == memberId,
     );
+    final isInvitedGuest = !promise.participants.any(
+      (participant) => participant.id.toString() == memberId,
+    );
 
     state = AsyncValue.data(
       PromiseState(
         promise: promise,
         isOrganizer: isOrganizer,
+        isInvitedGuest: isInvitedGuest, // 초대 링크를 타고 들어온 사용자
       ),
     );
   }
