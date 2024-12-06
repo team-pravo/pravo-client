@@ -1,4 +1,4 @@
-import 'package:pravo_client/features/core/notification/domain/repositories/notification_repository.dart';
+import 'package:pravo_client/features/notification/domain/repositories/notification_repository.dart';
 
 class SendFcmTokenUseCase {
   final NotificationRepository repository;
