@@ -3,18 +3,17 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/promise/presentation/widgets/image_and_text_widget.dart';
 
-class ConfirmAttendanceButtonWidget extends StatefulWidget {
-  const ConfirmAttendanceButtonWidget({
+class AttendanceSelectorWidget extends StatefulWidget {
+  const AttendanceSelectorWidget({
     super.key,
   });
 
   @override
-  State<ConfirmAttendanceButtonWidget> createState() =>
-      _ConfirmAttendanceButtonWidgetState();
+  State<AttendanceSelectorWidget> createState() =>
+      _AttendanceSelectorWidgetState();
 }
 
-class _ConfirmAttendanceButtonWidgetState
-    extends State<ConfirmAttendanceButtonWidget> {
+class _AttendanceSelectorWidgetState extends State<AttendanceSelectorWidget> {
   bool isSelected = false;
 
   void toggleSelection() {

@@ -5,7 +5,7 @@ import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/vertical_gap_widget.dart';
-import 'package:pravo_client/features/settlement/presentation/widgets/confirm_attendance_button_widget.dart';
+import 'package:pravo_client/features/settlement/presentation/widgets/attendance_selector_widget.dart';
 
 class ConfirmAttendanceScreen extends StatelessWidget {
   final int promiseId;
@@ -47,7 +47,7 @@ class ConfirmAttendanceScreen extends StatelessWidget {
                             primary: false,
                             itemCount: 10,
                             itemBuilder: (_, __) =>
-                                const ConfirmAttendanceButtonWidget(),
+                                const AttendanceSelectorWidget(),
                             separatorBuilder: (_, __) =>
                                 const VerticalGapWidget(
                               gapHeight: 12,
