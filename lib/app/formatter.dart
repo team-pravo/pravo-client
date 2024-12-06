@@ -12,8 +12,8 @@ class Formatter {
 
   static String format(DateTime dateTime) {
     final weekDay = weekDayNames[dateTime.weekday % 7];
-    final date = DateFormat('MM월 d일').format(dateTime);
-    final time = DateFormat('h:mm a', 'en_US').format(dateTime);
+    final date = DateFormat('M월 d일').format(dateTime);
+    final time = DateFormat('a h:mm', 'ko_KR').format(dateTime);
 
     return '$date ($weekDay) $time';
   }
