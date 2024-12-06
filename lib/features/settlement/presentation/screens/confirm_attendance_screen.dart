@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
@@ -7,13 +6,13 @@ import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_w
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
 import 'package:pravo_client/features/settlement/presentation/widgets/attendance_list_widget.dart';
 
-class ConfirmAttendanceScreen extends ConsumerWidget {
+class ConfirmAttendanceScreen extends StatelessWidget {
   final int promiseId;
 
   const ConfirmAttendanceScreen({super.key, required this.promiseId});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: Depth2AppBarWidget(
         title: '참석 확인',
