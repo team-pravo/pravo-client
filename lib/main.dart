@@ -27,17 +27,21 @@ Future<void> main() async {
   await initializeDateFormatting('ko_KR', null); // 한국어 로케일 초기화
 
   // Firebase 초기화
-  await Firebase.initializeApp(
-    options: FirebaseOptions(
-      apiKey: dotenv.env['FIREBASE_API_KEY']!,
-      appId: dotenv.env['FIREBASE_APP_ID']!,
-      projectId: dotenv.env['FIREBASE_PROJECT_ID']!,
-      messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID']!,
-      iosBundleId: dotenv.env['FIREBASE_IOS_BUNDLE_ID']!,
-      storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET'],
-    ),
-  );
-  await FirebaseMessaging.instance.getAPNSToken();
+  try {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+        apiKey: dotenv.env['FIREBASE_API_KEY']!,
+        appId: dotenv.env['FIREBASE_APP_ID']!,
+        projectId: dotenv.env['FIREBASE_PROJECT_ID']!,
+        messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID']!,
+        iosBundleId: dotenv.env['FIREBASE_IOS_BUNDLE_ID']!,
+        storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET'],
+      ),
+    );
+    await FirebaseMessaging.instance.getAPNSToken();
+  } catch (e) {
+    Sentry.captureException(e);
+  }
 
   runZonedGuarded(() async {
     await SentryFlutter.init(
