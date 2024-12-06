@@ -1,23 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/assets/constants.dart';
-import 'package:pravo_client/features/core/presentation/widgets/currency_display_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
+import 'package:pravo_client/features/settlement/domain/entites/settlement.dart';
+import 'package:pravo_client/features/settlement/presentation/viewmodels/settlement_view_model.dart';
+import 'package:pravo_client/features/settlement/presentation/widgets/payout_points_widget.dart';
+import 'package:pravo_client/features/settlement/presentation/widgets/refund_amount_widget.dart';
 
-class SettlementCompleteScreen extends StatelessWidget {
+class SettlementCompleteScreen extends ConsumerWidget {
   final int promiseId;
 
   const SettlementCompleteScreen({super.key, required this.promiseId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settlementState = ref.watch(settlementViewModelProvider);
+
+    ref.listen<AsyncValue<Settlement>>(settlementViewModelProvider,
+        (previous, next) {
+      next.whenOrNull(
+        error: (error, stack) {
+          context.go(
+            '/error',
+            extra: {
+              'appBarTitle': '오류',
+              'errorTitle': '정산 실패',
+              'errorMessage': '정산 처리 중 문제가 발생했어요. 다시 시도해주세요.',
+            },
+          );
+        },
+      );
+    });
+
     return Scaffold(
-      appBar: Depth2AppBarWidget(
+      appBar: const Depth2AppBarWidget(
         title: '정산 완료',
-        actionIcon: PhosphorIcons.x(),
-        actionOnPressed: () => context.go('/'),
       ),
       body: SafeArea(
         child: Column(
@@ -26,100 +45,55 @@ class SettlementCompleteScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Padding(
                   padding: kScreenPadding,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        '약속 정산이\n완료되었습니다.',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
+                  child: settlementState.when(
+                    data: (settlement) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          height: 30,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      Container(
-                        padding: kWidgetPadding,
-                        decoration: BoxDecoration(
-                          color: kWidgetBackgroundColor,
-                          borderRadius: kWidgetBorderRadius,
+                        const Text(
+                          '🎉',
+                          style: TextStyle(fontSize: 50),
                         ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '환불 예정 금액',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Text(
-                                    '3일 이내에 결제가 취소될 예정입니다.',
-                                    style: TextStyle(color: kBodyTextColor),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            CurrencyDisplayWidget(value: '1,000', unit: '원'),
-                          ],
+                        const SizedBox(
+                          height: 20,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        padding: kWidgetPadding,
-                        decoration: BoxDecoration(
-                          color: kWidgetBackgroundColor,
-                          borderRadius: kWidgetBorderRadius,
+                        const Text(
+                          '약속 정산이\n완료되었어요',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '지급 포인트',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Text(
-                                    '참석하지 않은 1명의 예약금 1,000원이 3명한테 333P씩 분배되었습니다.',
-                                    style: TextStyle(color: kBodyTextColor),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            CurrencyDisplayWidget(value: '+333', unit: 'P'),
-                          ],
+                        const SizedBox(
+                          height: 30,
                         ),
-                      ),
-                    ],
+                        RefundAmountWidget(
+                          deposit: settlement.deposit,
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        PayoutPointsWidget(
+                          absentCount: settlement.absentCount,
+                          deposit: settlement.deposit,
+                          attendanceCount: settlement.attendanceCount,
+                          earnedPoint: settlement.earnedPoint,
+                        ),
+                      ],
+                    ),
+                    error: (_, __) => const SizedBox.shrink(),
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator()),
                   ),
                 ),
               ),
             ),
             PrimaryButtonWidget(
               buttonText: '확인',
-              onTap: () => context.push('/promise/$promiseId'),
+              onTap: () => context.go('/promise/$promiseId'),
               hasHorizontalMargin: true,
             ),
           ],
