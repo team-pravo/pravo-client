@@ -1,4 +1,4 @@
-import 'package:pravo_client/features/setting/domain/entities/payment_status.dart';
+import 'package:pravo_client/features/payment-log/domain/entities/payment_status.dart';
 
 class PaymentLog {
   final String promiseName;

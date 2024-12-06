@@ -13,7 +13,7 @@ import 'package:pravo_client/features/new/presentation/screens/new_details_scree
 import 'package:pravo_client/features/new/presentation/screens/new_screen.dart';
 import 'package:pravo_client/features/promise/presentation/screens/promise_detail_screen.dart';
 import 'package:pravo_client/features/promises/presentation/screens/promises_screen.dart';
-import 'package:pravo_client/features/setting/presentation/screens/payment_log_screen.dart';
+import 'package:pravo_client/features/payment-log/presentation/screens/payment_log_screen.dart';
 import 'package:pravo_client/features/setting/presentation/screens/profile_edit_screen.dart';
 import 'package:pravo_client/features/setting/presentation/screens/setting_screen.dart';
 import 'package:pravo_client/features/settlement/presentation/screens/confirm_attendance_screen.dart';
