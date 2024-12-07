@@ -9,17 +9,16 @@ import 'package:pravo_client/features/new/presentation/viewmodels/promise_id_pro
 
 class OrganizerPaymentViewModel {
   final Ref ref;
+  final ConfirmPaymentUseCase confirmPaymentUseCase;
+  final ChangePromiseStatusUseCase changePromiseStatusUseCase;
 
-  OrganizerPaymentViewModel(this.ref);
+  OrganizerPaymentViewModel({
+    required this.ref,
+    required this.confirmPaymentUseCase,
+    required this.changePromiseStatusUseCase,
+  });
 
   Future<void> handlePayment(String paymentKey) async {
-    final confirmPaymentUseCase = ConfirmPaymentUseCase(
-      ref.read(paymentRepositoryProvider),
-    );
-    final changePromiseStatusUseCase = ChangePromiseStatusUseCase(
-      ref.read(paymentRepositoryProvider),
-    );
-
     final orderId = ref
         .watch(paymentViewModelProvider)
         .whenData((payment) => payment)
@@ -39,5 +38,11 @@ class OrganizerPaymentViewModel {
 }
 
 final organizerPaymentViewModelProvider = Provider(
-  (ref) => OrganizerPaymentViewModel(ref),
+  (ref) => OrganizerPaymentViewModel(
+    ref: ref,
+    confirmPaymentUseCase:
+        ConfirmPaymentUseCase(ref.read(paymentRepositoryProvider)),
+    changePromiseStatusUseCase:
+        ChangePromiseStatusUseCase(ref.read(paymentRepositoryProvider)),
+  ),
 );
