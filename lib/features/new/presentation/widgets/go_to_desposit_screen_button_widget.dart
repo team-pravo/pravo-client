@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:pravo_client/assets/constants.dart';
 import 'package:pravo_client/features/core/presentation/widgets/alert_dialog_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
-import 'package:pravo_client/features/new/domain/entities/payment_response.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/payment_view_model.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_view_model.dart';
+import 'package:pravo_client/features/payment/domain/entities/payment_response.dart';
 
 class GoToDepositScreenButtonWidget extends ConsumerWidget {
   const GoToDepositScreenButtonWidget({
