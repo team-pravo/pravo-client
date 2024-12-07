@@ -8,6 +8,7 @@ import 'package:pravo_client/features/join/presentation/viewmodels/join_promise_
 import 'package:pravo_client/features/join/presentation/viewmodels/join_view_model.dart';
 import 'package:pravo_client/features/promise/domain/entities/button_status.dart';
 import 'package:pravo_client/features/promise/domain/entities/promise.dart';
+import 'package:pravo_client/features/settlement/presentation/viewmodels/attendees_view_model.dart';
 
 class PromiseActionButtonWidget extends ConsumerStatefulWidget {
   final ButtonStatus buttonStatus;
@@ -45,8 +46,11 @@ class _PromiseActionButtonWidgetState
                 );
               } else if (widget.buttonStatus ==
                   ButtonStatus.GO_TO_ATTENDANCE_CONFIRMATION) {
+                ref
+                    .read(attendeesProvider.notifier)
+                    .setAttendees(ref, widget.promise.participants);
                 context.push(
-                  '/promise/${widget.promise.id}/settlement/attendance',
+                  '/promise/${widget.promise.id}/settlement/confirm',
                 );
               } else if (widget.buttonStatus == ButtonStatus.JOIN_PROMISE) {
                 await ref
