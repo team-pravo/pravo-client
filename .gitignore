@@ -48,3 +48,6 @@ app.*.map.json
 # Firebase Secret
 **/google-services.json
 **/GoogleService-Info.plist
+
+# iOS Environment Variables
+**/Environment.xcconfig
