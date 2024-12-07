@@ -8,4 +8,5 @@ abstract class MemberRepository {
     MultipartFile? file,
     required bool resetToDefaultImage,
   });
+  Future<void> withdrawMember();
 }
