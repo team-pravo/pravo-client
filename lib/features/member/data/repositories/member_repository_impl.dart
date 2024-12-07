@@ -43,4 +43,9 @@ class MemberRepositoryImpl implements MemberRepository {
       ),
     );
   }
+
+  @override
+  Future<void> withdrawMember() async {
+    await dio.delete('/api/withdraw');
+  }
 }

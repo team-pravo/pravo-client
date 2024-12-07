@@ -59,7 +59,7 @@ class PromiseRepositoryImpl implements PromiseRepository {
   @override
   Future<void> cancelPromise(int id) async {
     await dio.delete(
-      '/api/promise/$id/cancel',
+      '/api/promise/$id/participant',
     );
   }
 }

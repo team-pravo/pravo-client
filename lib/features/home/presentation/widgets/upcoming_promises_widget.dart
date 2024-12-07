@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:pravo_client/app/formatter.dart';
 import 'package:pravo_client/assets/constants.dart';
+import 'package:pravo_client/features/home/domain/entities/home.dart';
 
 class UpcomingPromisesWidget extends StatelessWidget {
+  final List<UpcomingPromise> upcomingPromises;
+
   const UpcomingPromisesWidget({
     super.key,
+    required this.upcomingPromises,
   });
 
   @override
@@ -15,46 +20,26 @@ class UpcomingPromisesWidget extends StatelessWidget {
         borderRadius: kWidgetBorderRadius,
       ),
       width: double.infinity,
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '다가오는 약속',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-            ),
+            upcomingPromises.isEmpty ? '이번 주 다가오는 약속이 없어요.' : '다가오는 약속',
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
-          Padding(
-            padding: EdgeInsets.only(
-              top: 16,
-            ),
-            child: Column(
+          if (upcomingPromises.isNotEmpty) const SizedBox(height: 16),
+          ...upcomingPromises.map((promise) {
+            return Row(
               children: [
-                Row(
-                  children: [
-                    Text('금요일'),
-                    SizedBox(
-                      width: 24,
-                    ),
-                    Text('아보카도 수확하기'),
-                  ],
+                Text(
+                  Formatter.formatWeekDay(promise.scheduledAt), // 요일
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  children: [
-                    Text('토요일'),
-                    SizedBox(
-                      width: 24,
-                    ),
-                    Text('아보카도 저녁 파티'),
-                  ],
-                ),
+                const SizedBox(width: 24),
+                Text(promise.name), // 약속 이름
               ],
-            ),
-          ),
+            );
+          }),
         ],
       ),
     );

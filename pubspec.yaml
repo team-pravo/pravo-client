@@ -58,6 +58,9 @@ dependencies:
   http_parser: ^4.0.2
   flutter_image_compress: ^2.3.0
   uuid: ^4.5.1
+  firebase_messaging: ^15.1.5
+  firebase_core: ^3.8.0
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
