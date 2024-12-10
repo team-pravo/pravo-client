@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pravo_client/features/core/presentation/widgets/alert_dialog_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/divider_with_padding_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/vertical_gap_widget.dart';
+import 'package:pravo_client/features/member/presentation/viewmodels/withdraw_member_view_model.dart';
 import 'package:pravo_client/features/setting/presentation/widgets/text_button_widget.dart';
 
 class TextButtonsWidget extends ConsumerWidget {
@@ -15,17 +16,37 @@ class TextButtonsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final oauthNotifier = ref.read(oauthProvider);
+    final authNotifier = ref.read(authProvider);
+    final withdrawNotifier = ref.read(withdrawMemberViewModelProvider.notifier);
+
     // 카카오톡 & 애플 로그아웃
     Future<void> logout() async {
-      final oauthNotifier = ref.read(oauthProvider);
-      final authNotifier = ref.read(authProvider);
-
       if (oauthNotifier.getPlatform() == Platform.kakao) {
         await UserApi.instance.logout();
       }
 
       await oauthNotifier.logout();
       await authNotifier.logout();
+    }
+
+    // 탈퇴하기
+    Future<void> withdraw() async {
+      try {
+        await withdrawNotifier.withdrawMember();
+
+        if (!context.mounted) return;
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('성공적으로 탈퇴되었습니다.')),
+        );
+        logout();
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
+      }
+      Navigator.of(context).pop();
     }
 
     return Column(
@@ -63,12 +84,7 @@ class TextButtonsWidget extends ConsumerWidget {
             builder: (context) => AlertDialogWidget(
               title: '정말 탈퇴하시겠습니까?',
               content: '탈퇴 버튼 선택 시, \n계정은 삭제되며 복구되지 않아요.',
-              actionOnPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('성공적으로 탈퇴되었습니다.')),
-                );
-                Navigator.of(context).pop();
-              },
+              actionOnPressed: withdraw,
               actionTitle: '탈퇴하기',
             ),
           ),
