@@ -14,7 +14,12 @@ enum ButtonStatus {
     bool isOrganizer,
     bool isInvitedGuest,
     DateTime scheduledAt,
+    bool isSettlementCompleted,
   ) {
+    if (isSettlementCompleted) {
+      return ButtonStatus.HIDDEN;
+    }
+
     final currentTime = DateTime.now();
     final timeDifferenceInMinutes =
         scheduledAt.difference(currentTime).inMinutes;

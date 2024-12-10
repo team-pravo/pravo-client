@@ -46,6 +46,7 @@ class PromiseRepositoryImpl implements PromiseRepository {
             ),
           )
           .toList(),
+      settlementAmount: promiseModel.settlementAmount,
     );
   }
 

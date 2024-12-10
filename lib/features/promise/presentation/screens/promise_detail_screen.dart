@@ -50,6 +50,7 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
           isOrganizer,
           isInvitedGuest,
           promise.scheduledAt,
+          promise.settlementAmount != null,
         );
 
         return Scaffold(
@@ -122,7 +123,9 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
                         DepositWidget(
                           deposit: promise.deposit,
                         ),
-                        const PromiseStatusWidget(),
+                        PromiseStatusWidget(
+                          settlementAmount: promise.settlementAmount,
+                        ),
                       ],
                     ),
                   ),
