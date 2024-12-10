@@ -1,5 +1,5 @@
 import 'package:pravo_client/features/join/domain/repositories/join_repository.dart';
-import 'package:pravo_client/features/new/domain/entities/payment_response.dart';
+import 'package:pravo_client/features/payment/domain/entities/payment_response.dart';
 
 class RequestPaymentUsecase {
   final JoinRepository repository;

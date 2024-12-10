@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pravo_client/features/new/data/repositories/payment_repository_impl.dart';
-import 'package:pravo_client/features/new/domain/entities/payment_response.dart';
 import 'package:pravo_client/features/new/domain/entities/promise_information.dart';
 import 'package:pravo_client/features/new/domain/usecases/request_payment_usecase.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/promise_id_provider.dart';
+import 'package:pravo_client/features/payment/domain/entities/payment_response.dart';
 
 final paymentViewModelProvider =
     StateNotifierProvider<PaymentViewModel, AsyncValue<PaymentResponse>>((ref) {

@@ -11,14 +11,18 @@ import 'package:pravo_client/features/new/presentation/screens/deposit_payment_c
 import 'package:pravo_client/features/new/presentation/screens/deposit_payment_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/new_details_screen.dart';
 import 'package:pravo_client/features/new/presentation/screens/new_screen.dart';
+<<<<<<< HEAD
 import 'package:pravo_client/features/point-log/presentation/screens/point_log_screen.dart';
 import 'package:pravo_client/features/promise/presentation/screens/confirm_attendance_screen.dart';
+=======
+>>>>>>> develop
 import 'package:pravo_client/features/promise/presentation/screens/promise_detail_screen.dart';
-import 'package:pravo_client/features/promise/presentation/screens/settlement_complete_screen.dart';
 import 'package:pravo_client/features/promises/presentation/screens/promises_screen.dart';
 import 'package:pravo_client/features/payment-log/presentation/screens/payment_log_screen.dart';
 import 'package:pravo_client/features/setting/presentation/screens/profile_edit_screen.dart';
 import 'package:pravo_client/features/setting/presentation/screens/setting_screen.dart';
+import 'package:pravo_client/features/settlement/presentation/screens/confirm_attendance_screen.dart';
+import 'package:pravo_client/features/settlement/presentation/screens/settlement_complete_screen.dart';
 import 'package:pravo_client/features/store/presentation/screens/store_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -53,7 +57,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           builder: (_, __) => const JoinCompleteScreen(),
         ),
         GoRoute(
-          path: 'settlement/attendance',
+          path: 'settlement/confirm',
           builder: (_, state) {
             final promiseId = int.parse(state.pathParameters['promiseId']!);
             return ConfirmAttendanceScreen(promiseId: promiseId);

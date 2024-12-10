@@ -5,9 +5,10 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:pravo_client/app/formatter.dart';
 import 'package:pravo_client/features/core/presentation/widgets/depth2_app_bar_widget.dart';
 import 'package:pravo_client/features/core/presentation/widgets/primary_button_widget.dart';
-import 'package:pravo_client/features/new/presentation/viewmodels/deposit_payment_view_model.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/payment_view_model.dart';
 import 'package:pravo_client/features/new/presentation/viewmodels/promise_details_view_model.dart';
+import 'package:pravo_client/features/payment/presentation/viewmodels/deposit_payment_view_model.dart';
+import 'package:pravo_client/features/payment/presentation/viewmodels/organizer_payment_view_model.dart';
 import 'package:tosspayments_widget_sdk_flutter/widgets/agreement.dart';
 import 'package:tosspayments_widget_sdk_flutter/widgets/payment_method.dart';
 
@@ -83,7 +84,14 @@ class _DepositPaymentScreenState extends ConsumerState<DepositPaymentScreen> {
               buttonText: '$formattedDepositAmount원 결제하기',
               isEnabled: paymentState.isAgreementChecked,
               onTap: () async {
-                await paymentNotifier.requestPayment(orderId, promiseName);
+                final paymentKey =
+                    await paymentNotifier.getPaymentKey(orderId, promiseName);
+
+                if (paymentKey != null) {
+                  await ref
+                      .read(organizerPaymentViewModelProvider)
+                      .handlePayment(paymentKey);
+                }
               },
               hasHorizontalMargin: true,
             ),

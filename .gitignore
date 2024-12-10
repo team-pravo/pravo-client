@@ -44,3 +44,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Firebase Secret
+**/google-services.json
+**/GoogleService-Info.plist
+
+# iOS Environment Variables
+**/Environment.xcconfig
