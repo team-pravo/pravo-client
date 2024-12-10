@@ -31,7 +31,7 @@ class PromiseStatusWidget extends StatelessWidget {
             ),
             CurrencyDisplayWidget(
               value: Formatter.formatWithComma(settlementAmount!),
-              unit: 'P',
+              unit: settlementAmount! < 0 ? '원' : 'P',
               fontWeight: FontWeight.w400,
             ),
           ],
