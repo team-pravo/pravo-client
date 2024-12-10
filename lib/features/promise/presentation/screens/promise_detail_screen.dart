@@ -122,7 +122,9 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
                         DepositWidget(
                           deposit: promise.deposit,
                         ),
-                        const PromiseStatusWidget(),
+                        PromiseStatusWidget(
+                          settlementAmount: promise.settlementAmount,
+                        ),
                       ],
                     ),
                   ),
