@@ -8,6 +8,7 @@ class Promise {
   final String status;
   final int deposit;
   final List<Participant> participants;
+  final int? settlementAmount;
 
   Promise({
     required this.id,
@@ -17,5 +18,6 @@ class Promise {
     required this.status,
     required this.deposit,
     required this.participants,
+    this.settlementAmount,
   });
 }

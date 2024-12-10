@@ -12,7 +12,9 @@
         android:label="PRAVO"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:allowBackup="false"
+        android:fullBackupContent="false">
 
         <!-- 카카오 로그인 커스텀 URL 스킴 설정 -->
         <activity 

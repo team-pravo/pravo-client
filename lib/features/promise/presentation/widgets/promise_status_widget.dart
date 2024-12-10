@@ -1,25 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:pravo_client/app/formatter.dart';
 import 'package:pravo_client/features/core/presentation/widgets/currency_display_widget.dart';
+import 'package:pravo_client/features/core/presentation/widgets/divider_with_padding_widget.dart';
 
 class PromiseStatusWidget extends StatelessWidget {
-  const PromiseStatusWidget({super.key});
+  final int? settlementAmount;
+
+  const PromiseStatusWidget({super.key, this.settlementAmount});
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    if (settlementAmount == null) {
+      return const SizedBox.shrink();
+    }
+
+    return Column(
       children: [
-        Text(
-          '정산 완료',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
+        const DividerWithPaddingWidget(
+          paddingHeight: 30,
         ),
-        CurrencyDisplayWidget(
-          value: '+333',
-          unit: 'P',
-          fontWeight: FontWeight.w400,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              '정산 완료',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            CurrencyDisplayWidget(
+              value: Formatter.formatWithComma(settlementAmount!),
+              unit: settlementAmount! < 0 ? '원' : 'P',
+              fontWeight: FontWeight.w400,
+            ),
+          ],
         ),
       ],
     );
