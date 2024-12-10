@@ -50,6 +50,7 @@ class _PromiseDetailScreenState extends ConsumerState<PromiseDetailScreen> {
           isOrganizer,
           isInvitedGuest,
           promise.scheduledAt,
+          promise.settlementAmount != null,
         );
 
         return Scaffold(
