@@ -8,6 +8,7 @@ class PromiseModel {
   final String status;
   final int deposit;
   final List<ParticipantModel> participants;
+  final int? settlementAmount;
 
   PromiseModel({
     required this.id,
@@ -17,6 +18,7 @@ class PromiseModel {
     required this.status,
     required this.deposit,
     required this.participants,
+    this.settlementAmount,
   });
 
   factory PromiseModel.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,7 @@ class PromiseModel {
           .cast<Map<String, dynamic>>()
           .map((participant) => ParticipantModel.fromJson(participant))
           .toList(),
+      settlementAmount: json['settlementAmount'],
     );
   }
 }
