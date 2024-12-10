@@ -2,14 +2,14 @@ import 'package:pravo_client/features/payment-log/domain/entities/payment_status
 
 class PaymentLog {
   final String promiseName;
-  final int promiseAmount;
+  final int paymentAmount;
   final PaymentStatus paymentStatus;
   final DateTime paymentDate;
   final DateTime updatedDate;
 
   PaymentLog({
     required this.promiseName,
-    required this.promiseAmount,
+    required this.paymentAmount,
     required this.paymentStatus,
     required this.paymentDate,
     required this.updatedDate,

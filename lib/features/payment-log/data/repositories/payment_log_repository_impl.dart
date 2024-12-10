@@ -29,7 +29,7 @@ class PaymentLogRepositoryImpl implements PaymentLogRepository {
   PaymentLog _mapModelToEntity(PaymentLogModel model) {
     return PaymentLog(
       promiseName: model.promiseName,
-      promiseAmount: model.promiseAmount,
+      paymentAmount: model.paymentAmount,
       paymentStatus: PaymentStatus.values.firstWhere(
         (e) => e.name == model.paymentStatus,
       ),
