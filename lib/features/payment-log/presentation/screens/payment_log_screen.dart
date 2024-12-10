@@ -69,7 +69,7 @@ class _PaymentLogScreenState extends ConsumerState<PaymentLogScreen> {
                 final log = paymentLogs[index];
                 return LogWidget(
                   title: log.promiseName,
-                  amount: '${Formatter.formatWithComma(log.promiseAmount)}원',
+                  amount: '${Formatter.formatWithComma(log.paymentAmount)}원',
                   type: log.paymentStatus.label,
                   loggedAt: Formatter.format(log.paymentDate),
                   isAmountPrimaryColor:
