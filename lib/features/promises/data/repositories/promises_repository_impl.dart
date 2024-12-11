@@ -22,7 +22,10 @@ class PromisesRepositoryImpl implements PromisesRepository {
         'startedAt': startDate.toIso8601String().split('T').first,
       },
     );
-    return _mapResponseToPromises(response);
+    final currentTime = DateTime.now();
+    return _mapResponseToPromises(response)
+        .where((promise) => promise.scheduledAt.isAfter(currentTime))
+        .toList();
   }
 
   @override
@@ -33,7 +36,10 @@ class PromisesRepositoryImpl implements PromisesRepository {
         'endedAt': endDate.toIso8601String().split('T').first,
       },
     );
-    return _mapResponseToPromises(response);
+    final currentTime = DateTime.now();
+    return _mapResponseToPromises(response)
+        .where((promise) => promise.scheduledAt.isBefore(currentTime))
+        .toList();
   }
 
   List<Promise> _mapResponseToPromises(Response response) {
